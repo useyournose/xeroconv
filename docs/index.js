@@ -1,7 +1,7 @@
 import { Stream, Decoder } from "https://cdn.jsdelivr.net/npm/@garmin/fitsdk@21.141.0/src/index.min.js";
 
-let inputElement = document.getElementById('fit2labradar');
-inputElement.addEventListener("change", handleFiles, false);
+let f2linputElement = document.getElementById('fit2labradar');
+f2linputElement.addEventListener("change", handleFiles, false);
 
 function handleFiles() {
   let fileList = this.files;
@@ -9,16 +9,14 @@ function handleFiles() {
 
   fileReader.onload = function(event) {
       let fitFileData = event.target.result;
-      fit2labradar(fitFileData);
+      let filename = event.target.fileName
+      fit2labradar(fitFileData,filename);
   };
-
+  fileReader.fileName = fileList[0].name
   fileReader.readAsArrayBuffer(fileList[0]);
 }
 
-function download(text) {
-  var fullPath = document.getElementById('fit2labradar').value;
-  var filename = fullPath.split(/(\\|\/)/g).pop();
-  filename = filename.replace(/\.fit$/, '.csv');
+function download(text,filename) {
 
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -28,7 +26,6 @@ function download(text) {
   document.body.appendChild(element);
   element.click();
   document.body.removeChild(element);
-  document.getElementById('fit2labradar').value = "";
   //alert("file saved");
 }
 
@@ -37,7 +34,10 @@ function get_ke(velocity_in_ms, weight_in_grains) {
     return (Math.round(0.5 * weight_in_kg * Math.pow(velocity_in_ms,2) * 100) / 100).toFixed(2);
 }
 
-function fit2labradar(fileData) {
+function fit2labradar(fileData,filename) {
+  filename = filename.split(/(\\|\/)/g).pop();
+  filename = filename.replace(/\.fit$/, '.csv');
+
   const streamfromFileSync = Stream.fromArrayBuffer(fileData);
   const decoder = new Decoder(streamfromFileSync);
   console.log("isFIT (instance method): " + decoder.isFIT());
@@ -78,5 +78,6 @@ function fit2labradar(fileData) {
       stream+=item.shotNum.toString().padStart(4, '0') + ";" + item.shotSpeed +";" + get_ke(item.shotSpeed,SessionData.grainWeight) + ";"+ SessionData.grainWeight + ";" + datestring +";" + timestring  + ";\n";
   })
   
-  download(stream)
+  download(stream,filename)
+  document.getElementById('fit2labradar').value = "";
 }
