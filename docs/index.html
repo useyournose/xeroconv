@@ -8,13 +8,20 @@
         <!--link rel="stylesheet" href="style.css"-->
     </head>
     <body>
-        <h1>Convert Garmin Xero Files</h1>
-        <h2>Convert a .fit file from the device to labradar format</h2>
-        <p>This uses the <a href="https://developer.garmin.com/fit/overview/" target="_blank">FIT SDK from Garmin(c)</a>. Just select the file, and you'll find it as csv in your download folder.</p>
-        <div class="field">
-            <label for="fit2labradar">Choose a garmin Xero .fit File:</label>
-            <div class="control">
-                <input type="file" id="fit2labradar" name="fit2labradar" accept=".fit" />
+        <section class="hero is-success">
+            <div class="hero-body">
+                <p class="title">Convert Garmin Xero Files</p>
+                <p class="subtitle">to something usable for GRT</p>
+            </div>
+        </section>
+        <div class="box">
+            <h2>Convert a .fit file from the device to labradar format</h2>
+            <p>This uses the <a href="https://developer.garmin.com/fit/overview/" target="_blank">FIT SDK from Garmin(c)</a>. Just select the file, and you'll find it as csv in your download folder.</p>
+            <div class="field">
+                <label for="fit2labradar">Choose a garmin Xero .fit File:</label>
+                <div class="control">
+                    <input type="file" id="fit2labradar" name="fit2labradar" accept=".fit" />
+                </div>
             </div>
         </div>
         <script src="index.js" type="module"></script>
