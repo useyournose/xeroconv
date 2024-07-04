@@ -29,7 +29,7 @@ function download(text) {
   element.click();
   document.body.removeChild(element);
   document.getElementById('fit2labradar').value = "";
-  alert("file saved");
+  //alert("file saved");
 }
 
 function get_ke(velocity_in_ms, weight_in_grains) {
