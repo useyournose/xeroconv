@@ -17,7 +17,7 @@ function handleFiles() {
 
 function download(text) {
   var fullPath = document.getElementById('fit2labradar').value;
-  filename = fullPath.split(/(\\|\/)/g).pop();
+  var filename = fullPath.split(/(\\|\/)/g).pop();
   filename = filename.replace(/\.fit$/, '.csv');
 
   var element = document.createElement('a');
