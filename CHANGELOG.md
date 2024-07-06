@@ -11,7 +11,9 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 
 - shotview csv to labradar csv converter
 
+### Fixed
 
+- Fixed Footer, so it doesn't hide the second box
 
 ## 2024-07-05
 
