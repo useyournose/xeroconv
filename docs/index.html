@@ -6,6 +6,7 @@
         <title>Convert Garmin Xero Stuff</title>
         <script src="https://kit.fontawesome.com/16e9b86517.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body id="page-container">
@@ -36,7 +37,26 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
+        <div class="container">
+            <div class="box">
+                <div class="content">
+                    <h2>Convert a .csv file from the Garmin Shotview app to the labradar format</h2>
+                </div>
+                <div class="file is-centered is-boxed">
+                    <label class="file-label">
+                        <input class="file-input" type="file" id="csv2labradar" name="csv2labradar" accept=".csv"  />
+                        <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fa-regular fa-file-code"></i>
+                        </span>
+                        <span class="file-label"> Choose a Garmin Shotview .csv File… </span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
         <footer class="footer" id="footer">
             <div class="content has-text-centered">
               <p>
