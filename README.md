@@ -9,8 +9,8 @@ You can use the tools on https://useyournose.github.io/xeroconv/.
 
 ## techstack
 
-https://github.com/
-https://pages.github.com/
-https://bulma.io/documentation
-https://fontawesome.com/
+https://github.com/  
+https://pages.github.com/  
+https://bulma.io/documentation  
+https://fontawesome.com/  
 https://www.papaparse.com/  

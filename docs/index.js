@@ -1,15 +1,10 @@
 import { Stream, Decoder } from "https://cdn.jsdelivr.net/npm/@garmin/fitsdk@21.141.0/src/index.min.js";
-//import {parse} from "https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"
-/*<link href="
-https://cdn.jsdelivr.net/npm/papaparse@5.4.1/player/player.min.css
-" rel="stylesheet"></link>
-*/
+
 let f2linputElement = document.getElementById('fit2labradar');
 f2linputElement.addEventListener("change", handleFiles, false);
 
 let c2linputElement = document.getElementById('csv2labradar');
 c2linputElement.addEventListener("change", handleFiles, false);
-
 
 function handleFiles() {
   let fileList = this.files;
@@ -42,30 +37,58 @@ function download(text,filename) {
   document.body.appendChild(element);
   element.click();
   document.body.removeChild(element);
-  //alert("file saved");
+  console.log("file "+ filename +" saved.");
 }
 
 function nnf(number) {
+  //parse a comma float string to a nice number float
   return parseFloat(number.replace(',','.'))
 }
 
 function get_ke(velocity_in_ms, weight_in_grains) {
-    const weight_in_kg = weight_in_grains / 15.432 / 1000
-    return (Math.round(0.5 * weight_in_kg * Math.pow(velocity_in_ms,2) * 100) / 100).toFixed(2);
+  //returns the kinetic energy
+  const weight_in_kg = weight_in_grains / 15.432 / 1000
+  return (Math.round(0.5 * weight_in_kg * Math.pow(velocity_in_ms,2) * 100) / 100).toFixed(2);
 }
 
-function fit2labradar(fileData,filename) {
-  filename = filename.split(/(\\|\/)/g).pop();
-  filename = filename.replace(/\.fit$/, '.csv');
+function StandardDeviation(arr) {
+  // thanks https://www.geeksforgeeks.org/how-to-get-the-standard-deviation-of-an-array-of-numbers-using-javascript/
+  // Creating the mean with Array.reduce
+  let mean = arr.reduce((acc, curr) => {
+      return acc + curr
+  }, 0) / arr.length;
+  // Assigning (value - mean) ^ 2 to
+  // every array item
+  arr = arr.map((k) => {
+      return (k - mean) ** 2
+  });
+  // Calculating the sum of updated array 
+  let sum = arr.reduce((acc, curr) => acc + curr, 0);
+  // Calculating the variance
+  let variance = sum / arr.length
+  // Returning the standard deviation
+  return Math.sqrt(sum / arr.length)
+}
+
+function fit2labradar(fileData,ofilename) {
+  const start = Date.now();
+
+  const filename = ofilename.replace(/\.fit$/, '-xeroconv.csv');
+  const units = document.querySelector('input[name="units"]:checked').value;
 
   const streamfromFileSync = Stream.fromArrayBuffer(fileData);
   const decoder = new Decoder(streamfromFileSync);
   console.log("isFIT (instance method): " + decoder.isFIT());
   console.log("checkIntegrity: " + decoder.checkIntegrity());
   if (!(decoder.isFIT() && decoder.checkIntegrity())) {
-    alert('not fit.');
+    alert('not a working fit file.');
     return;
   }
+  const unit_velocity = /metric/.test(units) ? "m/s":"fps";
+  const unit_distance = /metric/.test(units)  ? "m":"yrds";
+  const unit_energy = /metric/.test(units) ? "j": "ft-lbs";
+  const unit_weight = "grains (grs)"
+
   const { messages, errors } = decoder.read({
       //mesgListener: (messageNumber, message) => {},
       //applyScaleAndOffset: true,
@@ -78,22 +101,25 @@ function fit2labradar(fileData,filename) {
   });
   const DeviceData = messages.deviceInfoMesgs[0]
   const SessionData = messages.chronoShotSessionMesgs[0]
+  const speeds = messages.chronoShotDataMesgs.map(row => row.shotSpeed)
+  const sd = StandardDeviation(speeds);
+  const es = SessionData.maxSpeed - SessionData.minSpeed
   var stream = ""
   stream+="sep=;\n";
   stream+="Device ID;" + DeviceData.manufacturer +'-'+ DeviceData.serialNumber.toString() + ";;\n\n";
   stream+="Series No;0001;;\n";
   stream+="Total number of shots;" +SessionData.shotCount.toString().padStart(4, '0') + ";;\n\n";
 
-  stream+="Units velocity;m/s;;\n";
-  stream+="Units distances;m;;\n";
-  stream+="Units kinetic energy;j;;\n";
-  stream+="Units weight;grains (grs);;\n\n";
+  stream+="Units velocity;"+unit_velocity+";;\n";
+  stream+="Units distances;"+unit_distance+";;\n";
+  stream+="Units kinetic energy;"+unit_energy+";;\n";
+  stream+="Units weight;"+ unit_weight +";;\n\n";
 
-  stream+="Stats - Average;"+ SessionData.avgSpeed +";m/s;\n";
-  stream+="Stats - Highest;"+ SessionData.maxSpeed +";m/s;\n";
-  stream+="Stats - Lowest;"+ SessionData.minSpeed +";m/s;\n";
-  stream+="Stats - Ext. Spread;;m/s;\n";
-  stream+="Stats - Std. Dev;;m/s;\n\n";
+  stream+="Stats - Average;"+ SessionData.avgSpeed +";"+unit_velocity+";\n";
+  stream+="Stats - Highest;"+ SessionData.maxSpeed +""+unit_velocity+";\n";
+  stream+="Stats - Lowest;"+ SessionData.minSpeed +";"+unit_velocity+";\n";
+  stream+="Stats - Ext. Spread;"+es+";"+unit_velocity+";\n";
+  stream+="Stats - Std. Dev;"+sd+";"+unit_velocity+";\n\n";
 
   stream+="Shot ID;V0;Ke0;Proj. Weight;Date;Time\n";
   messages.chronoShotDataMesgs.forEach(function (item,index) {
@@ -101,24 +127,34 @@ function fit2labradar(fileData,filename) {
       const timestring = item.timestamp.getHours().toString().padStart(2,'0') + ":" + item.timestamp.getMinutes().toString().padStart(2,'0')+ ":" + item.timestamp.getSeconds().toString().padStart(2,'0')
       stream+=item.shotNum.toString().padStart(4, '0') + ";" + item.shotSpeed +";" + get_ke(item.shotSpeed,SessionData.grainWeight) + ";"+ SessionData.grainWeight + ";" + datestring +";" + timestring  + ";\n";
   })
-  
-  download(stream,filename)
+  console.log("parsed " + ofilename + " in " + (Date.now() - start) + " milliseconds." );
+  download(stream,filename);
   document.getElementById('fit2labradar').value = "";
 }
 
 function csv2labradar(fileData,filename) {
+  const start = Date.now();
+  filename = filename.replace(/\.csv$/, '-xeroconv.csv');
   const dec = new TextDecoder("utf-8")
   const source = dec.decode(fileData)
   const sourceparts = source.split(/-,{6}[\n]/)
+  if (sourceparts.length != 3){
+    alert('not a working csv file.');
+    return;
+  }
   var sourceparts0 = sourceparts[0].split('\n')
   const title = sourceparts0.shift()
   const header = sourceparts0.shift().split(',')
   const shots = Papa.parse((sourceparts0.join('\n')),{newline:"\n",skipEmtpyLines:true,dynamicTyping:true})
-  shots.data.pop()
+  var dump = "";
+  dump = shots.data.pop();
+  if (dump !== "") {shots.data.push()};
   const stats = Papa.parse(sourceparts[1],{newline:"\n"})
-  stats.data.pop()
+  dump = stats.data.pop();
+  if (dump !== "") {stats.data.push()};
   const dt = Papa.parse(sourceparts[2],{newline:"\n"})
-  dt.data.pop()
+  dump = dt.data.pop();
+  if (dump !== "") {dt.data.push()};
   const date = new Date(Date.parse(dt.data[0][1]))
   const datestring = date.getDate().toString().padStart(2,'0') + "-" + (date.getMonth()+1).toString().padStart(2,'0') + "-" + date.getFullYear();
 
@@ -136,7 +172,6 @@ function csv2labradar(fileData,filename) {
   stream+="Series No;0001;;\n";
   stream+="Total number of shots;" + shots.data.length.toString().padStart(4, '0') + ";;\n\n";
 
-
   stream+="Units velocity;"+unit_velocity+";;\n";
   stream+="Units distances;"+unit_distance+";;\n";
   stream+="Units kinetic energy;"+unit_energy+";;\n";
@@ -152,7 +187,7 @@ function csv2labradar(fileData,filename) {
   shots.data.forEach(function (item,index) { 
       stream+=item[0].toString().padStart(4, '0') + ";" + nnf(item[1]) +";" + nnf(item[3]) + ";" + nnf(item[4]) + ";"+ stats.data[4][1] + ";" + datestring +";" + item[5]  + ";\n";
   })
-
+  console.log("parsed " + title + " in " + (Date.now() - start) + " milliseconds.")
   download(stream,filename)
   document.getElementById('csv2labradar').value = "";
 }

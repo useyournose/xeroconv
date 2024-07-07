@@ -1,6 +1,6 @@
 # Todos
 
-- add toggle for imperial / metric switch
+- ~~add toggle for imperial / metric switch~~
 - ~~add shotview csv converter~~
 - add multifile handling (havn't seen that in bulma...)
 - drag and drop file sinks
