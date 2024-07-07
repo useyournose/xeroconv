@@ -6,6 +6,6 @@
 - drag and drop file sinks
 - check download function
 - check for other supported csv formats
-- favicon
+- ~~favicon~~
 - CNAME
 - 
