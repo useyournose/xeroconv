@@ -8,10 +8,15 @@ c2linputElement.addEventListener("change", handleFiles, false);
 
 function handleFiles() {
   let fileList = this.files;
-  let fileReader = new FileReader();
   let sourceid = this.id;
+  if (fileList.length == 0) {
+    console.log("no Files in " + source);
+    return
+  }
 
-  fileReader.onload = function(event) {
+  for (const file of fileList) {
+    let fileReader = new FileReader();
+    fileReader.onload = function(event) {
       let FileData = event.target.result;
       let filename = event.target.fileName
       if (event.target.sourceid == 'fit2labradar') {
@@ -21,10 +26,12 @@ function handleFiles() {
       } else {
         console.error('what is ' +  event.target.sourceid + ' doing here?')
       }
-  };
-  fileReader.fileName = fileList[0].name
-  fileReader.readAsArrayBuffer(fileList[0]);
-  fileReader.sourceid = sourceid
+    };
+    fileReader.fileName = file.name;
+    fileReader.readAsArrayBuffer(file);
+    fileReader.sourceid = sourceid
+  }
+  document.getElementById(sourceid).value = "";
 }
 
 function download(text,filename) {
@@ -38,6 +45,7 @@ function download(text,filename) {
   element.click();
   document.body.removeChild(element);
   console.log("file "+ filename +" saved.");
+  showSuccess("Saved " + filename + ".");
 }
 
 function nnf(number) {
@@ -72,15 +80,14 @@ function StandardDeviation(arr) {
 
 function fit2labradar(fileData,ofilename) {
   const start = Date.now();
-
   const filename = ofilename.replace(/\.fit$/, '-xeroconv.csv');
-
   const streamfromFileSync = Stream.fromArrayBuffer(fileData);
   const decoder = new Decoder(streamfromFileSync);
-  console.log("isFIT (instance method): " + decoder.isFIT());
-  console.log("checkIntegrity: " + decoder.checkIntegrity());
+  console.log(ofilename + " isFIT (instance method): " + decoder.isFIT());
+  console.log(ofilename + " checkIntegrity: " + decoder.checkIntegrity());
   if (!(decoder.isFIT() && decoder.checkIntegrity())) {
-    alert('not a working fit file.');
+    console.error('not a working fit file.');
+    showError("Error: " + ofilename + ' is not a working fit file.');
     return;
   }
   const unit_velocity = "m/s";
@@ -98,6 +105,11 @@ function fit2labradar(fileData,ofilename) {
       includeUnknownData: true,
       //mergeHeartRates: true
   });
+  if (!(Object.hasOwn(messages,'ChronoShotSessionMesgs') & Object.hasOwn(messages,'ChronoShotDataMesgs') & Object.hasOwn(messages,'deviceInfoMesgs'))) {
+    console.error(ofilename + 'does not contain shot sessions file.');
+    showError("Error: " + ofilename + ' does not contain shot sessions file.');
+    return;
+  }
   const DeviceData = messages.deviceInfoMesgs[0]
   const SessionData = messages.chronoShotSessionMesgs[0]
   const speeds = messages.chronoShotDataMesgs.map(row => row.shotSpeed)
@@ -128,17 +140,17 @@ function fit2labradar(fileData,ofilename) {
   })
   console.log("parsed " + ofilename + " in " + (Date.now() - start) + " milliseconds." );
   download(stream,filename);
-  document.getElementById('fit2labradar').value = "";
 }
 
-function csv2labradar(fileData,filename) {
+function csv2labradar(fileData,ofilename) {
   const start = Date.now();
-  filename = filename.replace(/\.csv$/, '-xeroconv.csv');
+  const filename = ofilename.replace(/\.csv$/, '-xeroconv.csv');
   const dec = new TextDecoder("utf-8")
   const source = dec.decode(fileData)
   const sourceparts = source.split(/-,{6}[\n]/)
   if (sourceparts.length != 3){
-    alert('not a working csv file.');
+    console.error(ofilename + 'not a working csv file.');
+    showError("Error: " +ofilename + ' is not a working csv file.');
     return;
   }
   var sourceparts0 = sourceparts[0].split('\n')
@@ -188,5 +200,31 @@ function csv2labradar(fileData,filename) {
   })
   console.log("parsed " + title + " in " + (Date.now() - start) + " milliseconds.")
   download(stream,filename)
-  document.getElementById('csv2labradar').value = "";
+}
+
+let timeoutid;
+
+function showNotification(message,classlist) {
+  // inspired from https://www.w3schools.com/howto/howto_js_snackbar.asp
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
+  var elem = document.createElement('div');
+  elem.classList=classlist;
+  elem.id=crypto.randomUUID();
+  elem.innerText=message
+  x.appendChild(elem)
+  setTimeout(function(){document.getElementById(elem.id).remove();}, 3000);
+  // Add the "show" class to DIV
+  x.className = "show";
+  clearTimeout(timeoutid)
+  // After 3 seconds, remove the show class from DIV
+  timeoutid = setTimeout(function(){ x.className = x.className.replace("show", "")}, 3000);
+}
+
+function showError(message) {
+  showNotification(message,'notification is-danger')
+}
+
+function showSuccess(message) {
+  showNotification(message,'notification is-success')
 }

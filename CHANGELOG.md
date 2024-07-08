@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2024-07-09
+
+### Added
+
+- multifile support: select one or more files at once
+- enhanced message handling
+
 ## 2024-07-08
 
 ### Added
