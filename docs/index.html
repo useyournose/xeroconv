@@ -20,57 +20,59 @@
                 <p class="subtitle">to something usable for GRT</p>
             </div>
         </section>
-        <div class="container">
-            <div class="box">
-                <div class="content">
-                    <h2>Convert a .fit file from the device to labradar format</h2>
-                    <p>This uses the <a href="https://developer.garmin.com/fit/overview/" target="_blank">FIT SDK from Garmin(c)</a>. Just select the file, and you'll find it as csv in your download folder.</p>
-                    <p>You can find the files directly in the "Garmin" > "Shot_Sessions" Folder. </p>
-                </div>
-                <div class="field is-centered is-horizontal">
-                    <div class="control">
-                        <label class="radio">
-                            <input type="radio" name="units" value="metric" checked/>
-                            Metric
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="units" value="imperial" />
-                            Imperial
+        <section>
+            <div class="container block">
+                <div class="box">
+                    <div class="content">
+                        <h2 class="title">Convert a .fit file from the Garmin Xero C1 Pro device to labradar format</h2>
+                        <p>This uses the <a href="https://developer.garmin.com/fit/overview/" target="_blank">FIT SDK from Garmin(c)</a>. Just select the file, and you'll find it as csv in your download folder, with <span class="tag is-primary">-xeroconv.csv</span> at the end.</p>
+                        <p>You can find the files directly in the "Garmin" > "Shot_Sessions" Folder. </p>
+                    </div>
+                    <div class="field is-centered is-horizontal">
+                        <div class="control">
+                            <label class="radio">
+                                <input type="radio" name="units" value="metric" checked/>
+                                Metric
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="units" value="imperial" />
+                                Imperial
+                            </label>
+                        </div>
+                    </div>
+                    <div class="file is-centered is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" id="fit2labradar" name="fit2labradar" accept=".fit" />
+                            <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fa-regular fa-file-code"></i>
+                            </span>
+                            <span class="file-label"> Choose a Garmin Xero .fit File… </span>
+                            </span>
                         </label>
                     </div>
                 </div>
-                <div class="file is-centered is-boxed">
-                    <label class="file-label">
-                        <input class="file-input" type="file" id="fit2labradar" name="fit2labradar" accept=".fit" />
-                        <span class="file-cta">
-                        <span class="file-icon">
-                            <i class="fa-regular fa-file-code"></i>
-                        </span>
-                        <span class="file-label"> Choose a Garmin Xero .fit File… </span>
-                        </span>
-                    </label>
+            </div>
+            <div class="container block">
+                <div class="box">
+                    <div class="content">
+                        <h2>Convert a .csv file from the Garmin Shotview app to labradar format</h2>
+                        <p>This converts the csv file, you can export in Garmins Shotview App. Just select the file, and you'll find it as csv in your download folder, with a <span class="tag is-primary">-xeroconv.csv</span> at the end.</p>
+                    </div>
+                    <div class="file is-centered is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" id="csv2labradar" name="csv2labradar" accept=".csv" />
+                            <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fa-regular fa-file-code"></i>
+                            </span>
+                            <span class="file-label"> Choose a Garmin Shotview .csv File… </span>
+                            </span>
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="box">
-                <div class="content">
-                    <h2>Convert a .csv file from the Garmin Shotview app to the labradar format</h2>
-                    <p>This converts the csv file, you can export in Garmins Shotview App. Just select the file, and you'll find it as csv in your download folder.</p>
-                </div>
-                <div class="file is-centered is-boxed">
-                    <label class="file-label">
-                        <input class="file-input" type="file" id="csv2labradar" name="csv2labradar" accept=".csv" />
-                        <span class="file-cta">
-                        <span class="file-icon">
-                            <i class="fa-regular fa-file-code"></i>
-                        </span>
-                        <span class="file-label"> Choose a Garmin Shotview .csv File… </span>
-                        </span>
-                    </label>
-                </div>
-            </div>
-        </div>
+        </section>
         <footer class="footer has-text-centered mt-auto" >
             <div class="content has-text-centered">
                 <p>

@@ -10,6 +10,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 ### Added
 
 - google site verification tag so people can find the page easier
+- enhanced user experience
 
 
 ## 2024-07-07
