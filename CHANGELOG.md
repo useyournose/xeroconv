@@ -12,6 +12,9 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 - google site verification tag so people can find the page easier
 - enhanced user experience
 
+### Removed
+
+- selector between metric and imperial, as fit shot_sessions is always metric.
 
 ## 2024-07-07
 
