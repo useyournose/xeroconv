@@ -14,3 +14,4 @@ https://pages.github.com/
 https://bulma.io/documentation  
 https://fontawesome.com/  
 https://www.papaparse.com/  
+https://jsdelivr.net
