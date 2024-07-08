@@ -74,7 +74,6 @@ function fit2labradar(fileData,ofilename) {
   const start = Date.now();
 
   const filename = ofilename.replace(/\.fit$/, '-xeroconv.csv');
-  const units = document.querySelector('input[name="units"]:checked').value;
 
   const streamfromFileSync = Stream.fromArrayBuffer(fileData);
   const decoder = new Decoder(streamfromFileSync);
@@ -84,9 +83,9 @@ function fit2labradar(fileData,ofilename) {
     alert('not a working fit file.');
     return;
   }
-  const unit_velocity = /metric/.test(units) ? "m/s":"fps";
-  const unit_distance = /metric/.test(units)  ? "m":"yrds";
-  const unit_energy = /metric/.test(units) ? "j": "ft-lbs";
+  const unit_velocity = "m/s";
+  const unit_distance = "m";
+  const unit_energy = "j";
   const unit_weight = "grains (grs)"
 
   const { messages, errors } = decoder.read({
