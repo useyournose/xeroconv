@@ -12,6 +12,13 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 - multifile support: select one or more files at once
 - enhanced message handling
 
+### Changed
+
+- moved the Labradarcsv format into own variable
+
+### Fixed
+- fixed fit2labradar validation
+
 ## 2024-07-08
 
 ### Added

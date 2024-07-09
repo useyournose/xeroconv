@@ -78,6 +78,40 @@ function StandardDeviation(arr) {
   return Math.sqrt(sum / arr.length)
 }
 
+function getLabradartemplate() {
+  /*just replace the following valiables
+  {DEVICEID}
+  {SHOTS_TOTAL}
+  {UNIT_VELOCITY}
+  {UNIT_DISTANCE}
+  {UNIT_ENERGY}
+  {UNIT_WEIGHT}
+  {SPEED_AVG}
+  {SPEED_MAX}
+  {SPEED_MIN}
+  {SPEED_ES}
+  {SPEED_SD}
+  */
+  return `sep=;
+Device ID;{DEVICEID};;
+
+Series No;0001;;
+Total number of shots;{SHOTS_TOTAL};;
+
+Units velocity;{UNIT_VELOCITY};;
+Units distances;{UNIT_DISTANCE};;
+Units kinetic energy;{UNIT_ENERGY};;
+Units weight;{UNIT_WEIGHT};;
+
+Stats - Average;{SPEED_AVG};{UNIT_VELOCITY};
+Stats - Highest;{SPEED_MAX};{UNIT_VELOCITY};
+Stats - Lowest;{SPEED_MIN};{UNIT_VELOCITY};
+Stats - Ext. Spread;{SPEED_ES};{UNIT_VELOCITY};
+Stats - Std. Dev;{SPEED_SD};{UNIT_VELOCITY};
+
+Shot ID;V0;Ke0;Proj. Weight;Date;Time\n`
+}
+
 function fit2labradar(fileData,ofilename) {
   const start = Date.now();
   const filename = ofilename.replace(/\.fit$/, '-xeroconv.csv');
@@ -105,8 +139,8 @@ function fit2labradar(fileData,ofilename) {
       includeUnknownData: true,
       //mergeHeartRates: true
   });
-  if (!(Object.hasOwn(messages,'ChronoShotSessionMesgs') & Object.hasOwn(messages,'ChronoShotDataMesgs') & Object.hasOwn(messages,'deviceInfoMesgs'))) {
-    console.error(ofilename + 'does not contain shot sessions file.');
+  if (!(Object.hasOwn(messages,'chronoShotSessionMesgs') & Object.hasOwn(messages,'chronoShotDataMesgs') & Object.hasOwn(messages,'deviceInfoMesgs'))) {
+    console.error(ofilename + ' does not contain shot sessions file.');
     showError("Error: " + ofilename + ' does not contain shot sessions file.');
     return;
   }
@@ -115,24 +149,19 @@ function fit2labradar(fileData,ofilename) {
   const speeds = messages.chronoShotDataMesgs.map(row => row.shotSpeed)
   const sd = StandardDeviation(speeds);
   const es = SessionData.maxSpeed - SessionData.minSpeed
-  var stream = ""
-  stream+="sep=;\n";
-  stream+="Device ID;" + DeviceData.manufacturer +'-'+ DeviceData.serialNumber.toString() + ";;\n\n";
-  stream+="Series No;0001;;\n";
-  stream+="Total number of shots;" +SessionData.shotCount.toString().padStart(4, '0') + ";;\n\n";
+  var stream = getLabradartemplate()
+  stream = stream.replace("{DEVICEID}", DeviceData.manufacturer +'-'+ DeviceData.serialNumber.toString());
+  stream = stream.replace("{SHOTS_TOTAL}",SessionData.shotCount.toString().padStart(4, '0'));
+  stream = stream.replaceAll("{UNIT_VELOCITY}",unit_velocity);
+  stream = stream.replace("{UNIT_DISTANCE}",unit_distance);
+  stream = stream.replace("{UNIT_ENERGY}",unit_energy);
+  stream = stream.replace("{UNIT_WEIGHT}",unit_weight);
+  stream = stream.replace("{SPEED_AVG}",SessionData.avgSpeed);
+  stream = stream.replace("{SPEED_MAX}",SessionData.maxSpeed);
+  stream = stream.replace("{SPEED_MIN}",SessionData.minSpeed);
+  stream = stream.replace("{SPEED_ES}",es);
+  stream = stream.replace("{SPEED_SD}",sd);
 
-  stream+="Units velocity;"+unit_velocity+";;\n";
-  stream+="Units distances;"+unit_distance+";;\n";
-  stream+="Units kinetic energy;"+unit_energy+";;\n";
-  stream+="Units weight;"+ unit_weight +";;\n\n";
-
-  stream+="Stats - Average;"+ SessionData.avgSpeed +";"+unit_velocity+";\n";
-  stream+="Stats - Highest;"+ SessionData.maxSpeed +""+unit_velocity+";\n";
-  stream+="Stats - Lowest;"+ SessionData.minSpeed +";"+unit_velocity+";\n";
-  stream+="Stats - Ext. Spread;"+es+";"+unit_velocity+";\n";
-  stream+="Stats - Std. Dev;"+sd+";"+unit_velocity+";\n\n";
-
-  stream+="Shot ID;V0;Ke0;Proj. Weight;Date;Time\n";
   messages.chronoShotDataMesgs.forEach(function (item,index) {
       const datestring = item.timestamp.getDate().toString().padStart(2,'0') + "-" + (item.timestamp.getMonth()+1).toString().padStart(2,'0') + "-" + item.timestamp.getFullYear() 
       const timestring = item.timestamp.getHours().toString().padStart(2,'0') + ":" + item.timestamp.getMinutes().toString().padStart(2,'0')+ ":" + item.timestamp.getSeconds().toString().padStart(2,'0')
@@ -177,24 +206,19 @@ function csv2labradar(fileData,ofilename) {
   const speed_max = Math.max(...speeds);
   const speed_min = Math.min(...speeds);
 
-  var stream = ""
-  stream+="sep=;\n";
-  stream+="Device ID;useyournose-xeroconv;;\n\n";
-  stream+="Series No;0001;;\n";
-  stream+="Total number of shots;" + shots.data.length.toString().padStart(4, '0') + ";;\n\n";
+  var stream = getLabradartemplate()
+  stream = stream.replace("{DEVICEID}", "useyournose-xeroconv");
+  stream = stream.replace("{SHOTS_TOTAL}",shots.data.length.toString().padStart(4, '0'));
+  stream = stream.replaceAll("{UNIT_VELOCITY}",unit_velocity);
+  stream = stream.replace("{UNIT_DISTANCE}",unit_distance);
+  stream = stream.replace("{UNIT_ENERGY}",unit_energy);
+  stream = stream.replace("{UNIT_WEIGHT}",unit_weight);
+  stream = stream.replace("{SPEED_AVG}",stats.data[0][1]);
+  stream = stream.replace("{SPEED_MAX}",speed_max);
+  stream = stream.replace("{SPEED_MIN}",speed_min);
+  stream = stream.replace("{SPEED_ES}",nnf(stats.data[3][1]));
+  stream = stream.replace("{SPEED_SD}",nnf(stats.data[2][1]));
 
-  stream+="Units velocity;"+unit_velocity+";;\n";
-  stream+="Units distances;"+unit_distance+";;\n";
-  stream+="Units kinetic energy;"+unit_energy+";;\n";
-  stream+="Units weight;"+ unit_weight +";;\n\n";
-
-  stream+="Stats - Average;"+ stats.data[0][1] +";"+unit_velocity+";\n";
-  stream+="Stats - Highest;"+ speed_max +";"+unit_velocity+";\n";
-  stream+="Stats - Lowest;"+ speed_min +";"+unit_velocity+";\n";
-  stream+="Stats - Ext. Spread;"+ nnf(stats.data[3][1]) + ";" +unit_velocity+ ";\n";
-  stream+="Stats - Std. Dev;"+ nnf(stats.data[2][1]) + ";"+unit_velocity+";\n\n";
-
-  stream+="Shot ID;V0;Ke0;PF10;Proj. Weight;Date;Time\n";
   shots.data.forEach(function (item,index) { 
       stream+=item[0].toString().padStart(4, '0') + ";" + nnf(item[1]) +";" + nnf(item[3]) + ";" + nnf(item[4]) + ";"+ stats.data[4][1] + ";" + datestring +";" + item[5]  + ";\n";
   })
