@@ -8,4 +8,4 @@
 - check for other supported csv formats
 - ~~favicon~~
 - CNAME
-- 
+- ~~put the labradarformat in a function and replace the contents properly.~~
