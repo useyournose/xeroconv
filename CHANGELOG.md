@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2024-07-10
+
+### Fixed
+
+- (Issue #4)[https://github.com/useyournose/xeroconv/issues/4]
+  - handling cases when the bullet weight was missing
+  - handling FPS and US date settings
+
 ## 2024-07-09
 
 ### Added
