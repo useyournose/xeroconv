@@ -49,14 +49,36 @@ function download(text,filename) {
 }
 
 function nnf(number) {
-  //parse a comma float string to a nice number float
-  return parseFloat(number.replace(',','.'))
+  if (!number) {
+    return 0
+  } else if (typeof number == 'number') {
+    return number
+   } else if (typeof number == 'string' ) {
+    if (number.replaceAll(' ','').length > 0) {
+      //parse a comma float string to a nice number float
+      return parseFloat(number.toString().replace(',','.'))
+    }
+  }
+  return 0
 }
 
 function get_ke(velocity_in_ms, weight_in_grains) {
   //returns the kinetic energy
   const weight_in_kg = weight_in_grains / 15.432 / 1000
   return (Math.round(0.5 * weight_in_kg * Math.pow(velocity_in_ms,2) * 100) / 100).toFixed(2);
+}
+
+function fs_to_ms(velocity_in_fs) {
+  return velocity_in_fs / 0.3048
+}
+
+function getdatestring(datestring) {
+  //clean it
+  datestring = datestring.replace('at','');
+  // convert it
+  const date = new Date(Date.parse(datestring));
+  //return it
+  return date.getDate().toString().padStart(2,'0') + "-" + (date.getMonth()+1).toString().padStart(2,'0') + "-" + date.getFullYear();
 }
 
 function StandardDeviation(arr) {
@@ -144,31 +166,36 @@ function fit2labradar(fileData,ofilename) {
     showError("Error: " + ofilename + ' does not contain shot sessions file.');
     return;
   }
-  const DeviceData = messages.deviceInfoMesgs[0]
-  const SessionData = messages.chronoShotSessionMesgs[0]
-  const speeds = messages.chronoShotDataMesgs.map(row => row.shotSpeed)
-  const sd = StandardDeviation(speeds);
-  const es = SessionData.maxSpeed - SessionData.minSpeed
-  var stream = getLabradartemplate()
-  stream = stream.replace("{DEVICEID}", DeviceData.manufacturer +'-'+ DeviceData.serialNumber.toString());
-  stream = stream.replace("{SHOTS_TOTAL}",SessionData.shotCount.toString().padStart(4, '0'));
-  stream = stream.replaceAll("{UNIT_VELOCITY}",unit_velocity);
-  stream = stream.replace("{UNIT_DISTANCE}",unit_distance);
-  stream = stream.replace("{UNIT_ENERGY}",unit_energy);
-  stream = stream.replace("{UNIT_WEIGHT}",unit_weight);
-  stream = stream.replace("{SPEED_AVG}",SessionData.avgSpeed);
-  stream = stream.replace("{SPEED_MAX}",SessionData.maxSpeed);
-  stream = stream.replace("{SPEED_MIN}",SessionData.minSpeed);
-  stream = stream.replace("{SPEED_ES}",es);
-  stream = stream.replace("{SPEED_SD}",sd);
+  try {
+    const DeviceData = messages.deviceInfoMesgs[0]
+    const SessionData = messages.chronoShotSessionMesgs[0]
+    const speeds = messages.chronoShotDataMesgs.map(row => row.shotSpeed)
+    const sd = StandardDeviation(speeds);
+    const es = SessionData.maxSpeed - SessionData.minSpeed
+    var stream = getLabradartemplate()
+    stream = stream.replace("{DEVICEID}", DeviceData.manufacturer +'-'+ DeviceData.serialNumber.toString());
+    stream = stream.replace("{SHOTS_TOTAL}",SessionData.shotCount.toString().padStart(4, '0'));
+    stream = stream.replaceAll("{UNIT_VELOCITY}",unit_velocity);
+    stream = stream.replace("{UNIT_DISTANCE}",unit_distance);
+    stream = stream.replace("{UNIT_ENERGY}",unit_energy);
+    stream = stream.replace("{UNIT_WEIGHT}",unit_weight);
+    stream = stream.replace("{SPEED_AVG}",SessionData.avgSpeed);
+    stream = stream.replace("{SPEED_MAX}",SessionData.maxSpeed);
+    stream = stream.replace("{SPEED_MIN}",SessionData.minSpeed);
+    stream = stream.replace("{SPEED_ES}",es);
+    stream = stream.replace("{SPEED_SD}",sd);
 
-  messages.chronoShotDataMesgs.forEach(function (item,index) {
-      const datestring = item.timestamp.getDate().toString().padStart(2,'0') + "-" + (item.timestamp.getMonth()+1).toString().padStart(2,'0') + "-" + item.timestamp.getFullYear() 
-      const timestring = item.timestamp.getHours().toString().padStart(2,'0') + ":" + item.timestamp.getMinutes().toString().padStart(2,'0')+ ":" + item.timestamp.getSeconds().toString().padStart(2,'0')
-      stream+=item.shotNum.toString().padStart(4, '0') + ";" + item.shotSpeed +";" + get_ke(item.shotSpeed,SessionData.grainWeight) + ";"+ SessionData.grainWeight + ";" + datestring +";" + timestring  + ";\n";
-  })
-  console.log("parsed " + ofilename + " in " + (Date.now() - start) + " milliseconds." );
-  download(stream,filename);
+    messages.chronoShotDataMesgs.forEach(function (item,index) {
+        const datestring = item.timestamp.getDate().toString().padStart(2,'0') + "-" + (item.timestamp.getMonth()+1).toString().padStart(2,'0') + "-" + item.timestamp.getFullYear() 
+        const timestring = item.timestamp.getHours().toString().padStart(2,'0') + ":" + item.timestamp.getMinutes().toString().padStart(2,'0')+ ":" + item.timestamp.getSeconds().toString().padStart(2,'0')
+        stream+=item.shotNum.toString().padStart(4, '0') + ";" + item.shotSpeed +";" + get_ke(item.shotSpeed,SessionData.grainWeight) + ";"+ SessionData.grainWeight + ";" + datestring +";" + timestring  + ";\n";
+    })
+    console.log("parsed " + ofilename + " in " + (Date.now() - start) + " milliseconds." );
+    download(stream,filename);
+  } catch(err) {
+    console.error(err)
+    showError(err.message);
+  } 
 }
 
 function csv2labradar(fileData,ofilename) {
@@ -176,54 +203,66 @@ function csv2labradar(fileData,ofilename) {
   const filename = ofilename.replace(/\.csv$/, '-xeroconv.csv');
   const dec = new TextDecoder("utf-8")
   const source = dec.decode(fileData)
-  const sourceparts = source.split(/-,{6}[\n]/)
+  const cleansource = source.replaceAll(', ',',')
+  const sourceparts = cleansource.split(/-,{6}[\n]/)
   if (sourceparts.length != 3){
     console.error(ofilename + 'not a working csv file.');
     showError("Error: " +ofilename + ' is not a working csv file.');
     return;
   }
-  var sourceparts0 = sourceparts[0].split('\n')
-  const title = sourceparts0.shift()
-  const header = sourceparts0.shift().split(',')
-  const shots = Papa.parse((sourceparts0.join('\n')),{newline:"\n",skipEmtpyLines:true,dynamicTyping:true})
-  var dump = "";
-  dump = shots.data.pop();
-  if (dump !== "") {shots.data.push()};
-  const stats = Papa.parse(sourceparts[1],{newline:"\n"})
-  dump = stats.data.pop();
-  if (dump !== "") {stats.data.push()};
-  const dt = Papa.parse(sourceparts[2],{newline:"\n"})
-  dump = dt.data.pop();
-  if (dump !== "") {dt.data.push()};
-  const date = new Date(Date.parse(dt.data[0][1]))
-  const datestring = date.getDate().toString().padStart(2,'0') + "-" + (date.getMonth()+1).toString().padStart(2,'0') + "-" + date.getFullYear();
+  try {
+    var sourceparts0 = sourceparts[0].split('\n')
+    const title = sourceparts0.shift()
+    const header = sourceparts0.shift().split(',')
+    const shots = Papa.parse((sourceparts0.join('\n')),{newline:"\n",skipEmtpyLines:true,dynamicTyping:true})
+    var dump = "";
+    dump = shots.data.pop();
+    if (dump !== "") {shots.data.push()};
+    const stats = Papa.parse(sourceparts[1],{newline:"\n"})
+    dump = stats.data.pop();
+    if (dump !== "") {stats.data.push()};
+    const dt = Papa.parse(sourceparts[2],{newline:'\n',quoteChar:'"'})
+    dump = dt.data.pop();
+    if (dump !== "") {dt.data.push()};
+    const datestring = getdatestring(dt.data[0][1]);
 
-  const unit_velocity = /\(MPS\)/.test(header[1]) ? "m/s":"fps";
-  const unit_distance = /\(MPS\)/.test(header[1])  ? "m":"yrds";
-  const unit_energy = /\(J\)/.test(header[3]) ? "j": "ft-lbs";
-  const unit_weight = /\(GRAN\)/.test(stats.data[4][0]) ? "grains (grs)":"gram (g)";
-  const speeds = shots.data.map(row => parseFloat(row[1].replace(',','.')));
-  const speed_max = Math.max(...speeds);
-  const speed_min = Math.min(...speeds);
+    //extending the stats array for missing values when no bullet weight is available
+    if (5 > stats.data.length) {
+      stats.data.splice(1,0,["AVERAGE POWER FACTOR",'','','','','',]);
+      stats.data.splice(4,0,["Gewicht des Projektils (GRAN)",'','','','','']);
+    }
+    
+    const unit_velocity = /\(MPS\)/.test(header[1]) ? "m/s":"fps";
+    const unit_distance = /\(MPS\)/.test(header[1])  ? "m":"yrds";
+    const unit_energy = /\(J\)/.test(header[3]) ? "j": "ft-lbs";
+    const unit_weight = /\(GRAN\)/.test(stats.data[4][0]) ? "grains (grs)":"gram (g)";
+    
+    const speeds = shots.data.map(row => nnf(row[1]));
+    const speed_max = Math.max(...speeds);
+    const speed_min = Math.min(...speeds);
 
-  var stream = getLabradartemplate()
-  stream = stream.replace("{DEVICEID}", "useyournose-xeroconv");
-  stream = stream.replace("{SHOTS_TOTAL}",shots.data.length.toString().padStart(4, '0'));
-  stream = stream.replaceAll("{UNIT_VELOCITY}",unit_velocity);
-  stream = stream.replace("{UNIT_DISTANCE}",unit_distance);
-  stream = stream.replace("{UNIT_ENERGY}",unit_energy);
-  stream = stream.replace("{UNIT_WEIGHT}",unit_weight);
-  stream = stream.replace("{SPEED_AVG}",stats.data[0][1]);
-  stream = stream.replace("{SPEED_MAX}",speed_max);
-  stream = stream.replace("{SPEED_MIN}",speed_min);
-  stream = stream.replace("{SPEED_ES}",nnf(stats.data[3][1]));
-  stream = stream.replace("{SPEED_SD}",nnf(stats.data[2][1]));
+    var stream = getLabradartemplate()
+    stream = stream.replace("{DEVICEID}", "useyournose-xeroconv");
+    stream = stream.replace("{SHOTS_TOTAL}",shots.data.length.toString().padStart(4, '0'));
+    stream = stream.replaceAll("{UNIT_VELOCITY}",unit_velocity);
+    stream = stream.replace("{UNIT_DISTANCE}",unit_distance);
+    stream = stream.replace("{UNIT_ENERGY}",unit_energy);
+    stream = stream.replace("{UNIT_WEIGHT}",unit_weight);
+    stream = stream.replace("{SPEED_AVG}",stats.data[0][1]);
+    stream = stream.replace("{SPEED_MAX}",speed_max);
+    stream = stream.replace("{SPEED_MIN}",speed_min);
+    stream = stream.replace("{SPEED_ES}",nnf(stats.data[3][1]));
+    stream = stream.replace("{SPEED_SD}",nnf(stats.data[2][1]));
 
-  shots.data.forEach(function (item,index) { 
-      stream+=item[0].toString().padStart(4, '0') + ";" + nnf(item[1]) +";" + nnf(item[3]) + ";" + nnf(item[4]) + ";"+ stats.data[4][1] + ";" + datestring +";" + item[5]  + ";\n";
-  })
-  console.log("parsed " + title + " in " + (Date.now() - start) + " milliseconds.")
-  download(stream,filename)
+    shots.data.forEach(function (item,index) { 
+        stream+=item[0].toString().padStart(4, '0') + ";" + nnf(item[1]) +";" + nnf(item[3]) + ";" + nnf(item[4]) + ";"+ stats.data[4][1] + ";" + datestring +";" + item[5]  + ";\n";
+    })
+    console.log("parsed " + title + " in " + (Date.now() - start) + " milliseconds.")
+    download(stream,filename)
+  } catch(err) {
+    console.error(err)
+    showError(err.message);
+  } 
 }
 
 let timeoutid;
