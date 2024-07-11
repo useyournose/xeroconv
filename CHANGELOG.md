@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2024-07-12
+
+### Added
+
+- (Issue #5)[https://github.com/useyournose/xeroconv/issues/5]
+  - added support for xls files from Shotview for Android
+  - added support for xlsx files from Shotview for iOS
+
 ## 2024-07-10
 
 ### Fixed
