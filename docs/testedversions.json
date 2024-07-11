@@ -19,19 +19,19 @@
     },
     "fitsdk": {
         "label": "version",
-        "inuse": "21.141.0",
+        "version": "21.141.0",
         "link": "https://forums.garmin.com/developer/fit-sdk/b/news-announcements"
     },
     "papaparse": {
         "label": "version",
-        "inuse": "5.4.1"
+        "version": "5.4.1"
     },
     "sheetjs": {
         "label": "version",
-        "inuse": "0.20.2"
+        "version": "0.20.2"
     },
     "bulma": {
         "label": "version",
-        "inuse": "1.0.1"
+        "version": "1.0.1"
     }
 }
