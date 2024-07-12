@@ -41,6 +41,15 @@ https://jsdelivr.net
 
 ## building and updating
 
+1. install node.js https://nodejs.org/en/download/package-manager/current
+1. do the `npm install`
+  1. install parcel `npm -g --instal` https://parceljs.org/getting-started/webapp/
+  1. install garmin fitsdk `npm install @garmin/fitsdk`
+  1. install bulma `npm install bulma`
+  1. install papaparse `npm install papaparse`
+  1. install fontawesome free `npm install --save @fortawesome/fontawesome-free`
+  1. install sheetjs `npm i --save https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`
+
 ### bulma
 
 https://bulma.io/documentation/start/installation/ 
@@ -49,7 +58,7 @@ https://bulma.io/documentation/start/installation/
 
 [Install](https://github.com/mholt/PapaParse?tab=readme-ov-file#install) references [unpkg](https://unpkg.com/papaparse@latest/papaparse.min.js)
 
-### sheets.js
+### sheetjs
 
 [cdn.sheetsjs.com](https://cdn.sheetjs.com/)
 
