@@ -11,6 +11,7 @@
     "build": "parcel build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "rm -rf dist && rm -rf .parcel-cache && parcel build src/index.html --public-url https://useyournose.github.io/xeroconf/",
+    "predeploy-win": "rmdir dist /s /q && rmdir .parcel-cache /s /q  && parcel build src/index.html --public-url https://useyournose.github.io/xeroconf/",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
