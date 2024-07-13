@@ -8,14 +8,6 @@ on:
   push:
     branches: [$default-branch,trying-parcel]
     paths: ['src/*',.github/*]
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
