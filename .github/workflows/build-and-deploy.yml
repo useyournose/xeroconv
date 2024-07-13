@@ -1,16 +1,13 @@
-name: build and test
+name: build and deploy
 on:
-  pull_request_target: 
-    types:
-      - opened
-      - synchronize
-      - reopened
-    branches:
-      [$default-branch]
-    paths:
-      - 'src/*'
+  pull_request: 
+    types: [opened,synchronize,reopened]
+    paths: ['src/*']
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  push:
+    branches: [$default-branch]
+    paths: ['src/*']
 permissions:
   contents: read
   pages: write
