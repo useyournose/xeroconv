@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     branches: [$default-branch,trying-parcel]
-    paths: ['src/*',.github/*]
+    paths: ['src/*',.github/workflows/*]
 jobs:
   build:
     runs-on: ubuntu-latest
