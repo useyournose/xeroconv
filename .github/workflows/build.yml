@@ -29,10 +29,10 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
 #    - name: setup pages
-#      if: github.ref  == 'refs/heads/main'
+#      if: github.ref  == 'refs/heads/trying-parcel'
 #      uses: actions/setup-pages@v5
     - name: Upload artifact
-      if: github.ref  == 'refs/heads/main'
+      if: github.ref  == 'refs/heads/trying-parcel'
       uses: actions/upload-pages-artifact@v3
       with:
         path: dist/
