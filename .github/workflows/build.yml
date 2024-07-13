@@ -29,7 +29,8 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: Upload artifact
-      if: github.ref  == 'refs/heads/main'
+      ## 'refs/heads/main'
+      if: github.ref  == 'refs/pull/10/merge'
       uses: actions/upload-pages-artifact@v3
       with:
         path: dist/

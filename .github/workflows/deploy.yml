@@ -4,7 +4,7 @@ on:
     workflows: [build]
     types:
       - completed
-    branches: [$default-branch]
+    branches: [$default-branch,trying-parcel]
 permissions:
   contents: read
   pages: write
