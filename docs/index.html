@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google" content="nositelinkssearchbox">
+        <meta name="google-site-verification" content="qBVIJ43d0aUA3G6WnmGA7zVlDajaCGUmaq3yD9RK5KE" />
+        <meta name="description" content="Converts files from Garmin Xero od shotview to Labradar csv">
+        <title>Convert Garmin Xero Stuff</title>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <script src="https://kit.fontawesome.com/16e9b86517.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+        <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <section class="hero is-success">
+            <div class="hero-body">
+                <p class="title">Convert Garmin Xero Files</p>
+                <p class="subtitle">to something usable for GRT</p>
+            </div>
+        </section>
+        <section>
+            <div class="container block">
+                <div class="box">
+                    <div class="content">
+                        <h2 class="title">Convert a .fit file from the Garmin Xero C1 Pro device to labradar format</h2>
+                        <p>This uses the <a href="https://developer.garmin.com/fit/overview/" target="_blank">FIT SDK from Garmin(c)</a>. Just select the file, and you'll find it as csv in your download folder, with <span class="tag is-primary">-xeroconv.csv</span> at the end.</p>
+                        <p>The files are located in the <span class="tag is-primary is-light">Garmin</span> <span class="icon">
+                            <i class="fas fa-arrow-right"></i>
+                          </span> <span class="tag is-primary is-light">Shot_Sessions</span> Folder on the Xero C1.</p>
+                    </div>
+                    <div class="file is-centered is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" id="fit2labradar" name="fit2labradar" accept=".fit" multiple/>
+                            <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fa-regular fa-file-code"></i>
+                            </span>
+                            <span class="file-label"> Choose one or more Garmin Xero .fit File(s)… </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="container block">
+                <div class="box">
+                    <div class="content">
+                        <h2>Convert a .csv file from the Garmin Shotview app to labradar format</h2>
+                        <p>This converts the csv file, you can export in Garmins Shotview App. Just select the file, and you'll find it as csv in your download folder, with a <span class="tag is-primary">-xeroconv.csv</span> at the end.</p>
+                    </div>
+                    <div class="file is-centered is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" id="csv2labradar" name="csv2labradar" accept=".csv" multiple/>
+                            <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fa-regular fa-file-code"></i>
+                            </span>
+                            <span class="file-label"> Choose one or more Garmin Shotview .csv File(s)… </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="container block">
+                <div class="box">
+                    <div class="content">
+                        <h2>Convert a .xls / .xlsx file from the Garmin Shotview app to labradar format</h2>
+                        <p>This converts the xls(x) file, you can export in Garmins Shotview App. Just select the file, and you'll find it as separate csv in your download folder, with a <span class="tag is-primary">-xeroconv.csv</span> at the end.</p>
+                    </div>
+                    <div class="file is-centered is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" id="xls2labradar" name="xls2labradar" accept=".xls,.xlsx" multiple/>
+                            <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fa-regular fa-file-code"></i>
+                            </span>
+                            <span class="file-label"> Choose one or more Garmin Shotview .xls / .xlsx File(s)… </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer has-text-centered mt-auto" >
+            <div class="columns">
+                <div class="column is-4"></div>
+                <div class="column is-4">
+                    <h4 class="footer-title">Contribute on Github</h4>
+                    <span class="icon">
+                        <a href="https://github.com/useyournose/xeroconv/issues" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    </span>
+                </div>
+                <div class="column is-4"></div>
+            </div>
+            <div class="content has-text-centered">
+                <p>
+                This page is hosted on github pages.
+                The <a href="https://github.com/useyournose/xeroconv">source code</a> is licensed
+                <a href="https://opensource.org/license/mit">MIT</a>. The
+                website content is licensed
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//">CC BY NC SA 4.0</a>.
+                All trademarks are property of their respective owners.
+                </p>
+            </div>
+        </footer>
+        <container id="snackbar"></container>
+        <script src="index.js" type="module"></script>
+    </body>
+</html>
