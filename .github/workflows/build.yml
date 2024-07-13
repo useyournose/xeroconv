@@ -1,4 +1,4 @@
-name: build and deploy
+name: build
 on:
   pull_request: 
     types: [opened,synchronize,reopened]
@@ -28,3 +28,11 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
+#    - name: setup pages
+#      if: github.ref  == 'refs/heads/main'
+#      uses: actions/setup-pages@v5
+    - name: Upload artifact
+      if: github.ref  == 'refs/heads/main'
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: dist/
