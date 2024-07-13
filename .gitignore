@@ -1,1 +1,5 @@
 docs/js
+node_modules/
+.parcel-cache
+dist
+.cache
