@@ -9,6 +9,7 @@ html, body { height: 100vh;}
   background-color: rgb(68 113 86 / 33%);
 }
 
+
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
     visibility: hidden; /* Hidden by default. Visible on click */
