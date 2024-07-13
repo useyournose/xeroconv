@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     branches: [$default-branch,trying-parcel]
-    paths: ['src/*']
+    paths: ['src/*',.github/*]
 permissions:
   contents: read
   pages: write
