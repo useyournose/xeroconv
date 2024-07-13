@@ -13,7 +13,7 @@ As Garmin is a big and funny company and my code is fragile, here are the tested
 
 | filetype | version |
 | :---: | :---: |
-| `*.fit` | ![Endpoint Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Ftrying%2Dparcel%2Fshotview%5Fa.json) |
+| `*.fit` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Ftrying%2Dparcel%2Fshotview%5Fa.json) |
 | `*.csv` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_a.version&label=Shotview+on+Android) |
 | `*.csv` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_i.version&label=Shotview+on+iOS) |
 | `*.xls` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_a.version&label=Shotview+on+Android) |
