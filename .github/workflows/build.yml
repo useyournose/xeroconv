@@ -19,7 +19,7 @@ jobs:
         node-version-file: '.node-version'
         cache: 'npm'
     - run: npm ci
-    - run: npm run build --if-present
+    - run: npm run predeploy --if-present
     - name: Upload artifact
       ## 'refs/pull/10/merge'
       if: github.ref  == 'refs/heads/main'
@@ -35,7 +35,7 @@ jobs:
     if: github.ref  == 'refs/heads/main'
     # Deploy to the github-pages environment
     environment:
-      name: github-pages-dev
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
