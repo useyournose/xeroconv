@@ -2,11 +2,11 @@ name: build
 on:
   pull_request: 
     types: [opened,synchronize,reopened]
-    paths: ['src/*']
+    paths: ['src/*',.github/workflows/*]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   push:
-    branches: [$default-branch,trying-parcel]
+    branches: [$default-branch]
     paths: ['src/*',.github/workflows/*]
 jobs:
   build:
@@ -21,9 +21,40 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: Upload artifact
-      ## 'refs/heads/main'
       ## 'refs/pull/10/merge'
-      if: github.ref  == 'refs/heads/trying-parcel'
+      if: github.ref  == 'refs/heads/main' || 'refs/pull/**'
       uses: actions/upload-pages-artifact@v3
       with:
         path: dist/
+  deploy:
+    needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    if: github.ref  == 'refs/heads/main'
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages-dev
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+  deploy-dev:
+    needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    if: github.ref  == 'refs/pull/**'
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages-dev
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

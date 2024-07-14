@@ -9,9 +9,11 @@
         <title>Convert Garmin Xero Stuff</title>
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
         <script src="https://kit.fontawesome.com/16e9b86517.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-        <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+        <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css"-->
+        <!--script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script-->
+        <!--script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script-->
+        <!--link rel="stylesheet" href="index.scss"-->
+        <script src="index.js" type="module"></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -21,7 +23,31 @@
                 <p class="subtitle">to something usable for GRT</p>
             </div>
         </section>
-        <section>
+        <nav class="navbar" role="navigation" aria-label="main navigation" style="display: none;">
+            <div id="navbar" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item is-active">Xero2Labradar</a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">More</a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">Documentation</a>
+                            <a class="navbar-item"href="https://github.com/useyournose/xeroconv" target="_blank">Source Code</a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item" href="https://github.com/useyournose/xeroconv/issues" target="_blank">Report an issue</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section id="documentation" style="display:none">
+            <div class="container block">
+                <div class="box">
+                    <div class="content">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="x2l">
             <div class="container block">
                 <div class="box">
                     <div class="content">
@@ -106,6 +132,5 @@
             </div>
         </footer>
         <container id="snackbar"></container>
-        <script src="index.js" type="module"></script>
     </body>
 </html>
