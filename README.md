@@ -13,19 +13,19 @@ As Garmin is a big and funny company and my code is fragile, here are the tested
 
 | filetype | version |
 | :---: | :---: |
-| `*.fit` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Ftrying-parcel%2Fshotview_a.json) |
-| `*.csv` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Ftrying-parcel%2Fshotview_a.json)|
-| `*.csv` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_i.version&label=Shotview+on+iOS) |
-| `*.xls` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_a.version&label=Shotview+on+Android) |
-| `*.xlsx` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_i.version&label=Shotview+on+iOS) |
+| `*.fit` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Fmain%2Fversion_xero.json) |
+| `*.csv` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Fmain%2Fversion_shotview_a.json)|
+| `*.csv` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Fmain%2Fversion_shotview_i.json)| |
+| `*.xls` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Fmain%2Fversion_shotview_a.json)| |
+| `*.xlsx` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Fmain%2Fversion_shotview_i.json)| |
 
 
 ## techstack
 
 https://github.com/  
 https://pages.github.com/  
-https://jsdelivr.net
-
+https://docs.github.com/en/actions  
+https://parceljs.org/
 
 ## third party tools
 
@@ -33,10 +33,10 @@ https://jsdelivr.net
 
 | tool | latest release | version in use |
 | --- | --- | --- |
-| https://www.papaparse.com/ | ![GitHub Release](https://img.shields.io/github/v/release/mholt/papaparse?sort=date) | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.papaparse.version&label=version) |
-| https://docs.sheetjs.com/docs/  | https://cdn.sheetjs.com/ | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.sheetjs.version&label=version) |
-| https://github.com/garmin/fit-javascript-sdk?tab=License-1-ov-file  | ![GitHub Release](https://img.shields.io/github/v/release/garmin/fit-javascript-sdk?sort=date) | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.fitsdk.version&label=version) |
-| https://bulma.io/documentation  | ![GitHub Release](https://img.shields.io/github/v/release/jgthms/bulma?sort=date) | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.bulma.version&label=version) |
+| https://www.papaparse.com/ | ![GitHub Release](https://img.shields.io/github/v/release/mholt/papaparse?sort=date) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/papaparse) |
+| https://docs.sheetjs.com/docs/  | https://cdn.sheetjs.com/ | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/xlsx) |
+| https://github.com/garmin/fit-javascript-sdk?tab=License-1-ov-file  | ![GitHub Release](https://img.shields.io/github/v/release/garmin/fit-javascript-sdk?sort=date) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/%40garmin%2Ffitsdk) |
+| https://bulma.io/documentation  | ![GitHub Release](https://img.shields.io/github/v/release/jgthms/bulma?sort=date) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/bulma) |
 | https://fontawesome.com/ |  |  |
 
 ## building and updating
