@@ -1,10 +1,13 @@
 name: build
 on:
   pull_request: 
-    types: [opened,synchronize,reopened,closed]
+    types: [opened,synchronize,reopened]
     paths: ['src/*',.github/workflows/*]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['src/*',.github/workflows/*]
 jobs:
   build:
     runs-on: ubuntu-latest
