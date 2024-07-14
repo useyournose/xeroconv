@@ -10,7 +10,7 @@
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "predeploy": "rm -rf dist && rm -rf .parcel-cache && parcel build src/index.html --public-url https://useyournose.github.io/xeroconf/",
+    "predeploy": "rm -rf dist && rm -rf .parcel-cache && parcel build src/index.html --public-url ./",
     "predeploy-win": "rmdir dist /s /q && rmdir .parcel-cache /s /q  && parcel build src/index.html --public-url https://useyournose.github.io/xeroconf/",
     "deploy": "gh-pages -d dist"
   },
