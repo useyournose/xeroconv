@@ -1,0 +1,41 @@
+{
+  "name": "xeroconv",
+  "version": "1.0.0",
+  "description": "converts garmin xero and garmin shotview files",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "rm -rf dist && rm -rf .parcel-cache && parcel build src/index.html --public-url https://useyournose.github.io/xeroconf/",
+    "predeploy-win": "rmdir dist /s /q && rmdir .parcel-cache /s /q  && parcel build src/index.html --public-url https://useyournose.github.io/xeroconf/",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/useyournose/xeroconv.git"
+  },
+  "keywords": [
+    "garmin",
+    "xero"
+  ],
+  "author": "Oliver Berger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/useyournose/xeroconv/issues"
+  },
+  "homepage": "https://github.com/useyournose/xeroconv#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.12.0",
+    "parcel": "^2.12.0"
+  },
+  "dependencies": {
+    "@garmin/fitsdk": "^21.141.0",
+    "bulma": "^1.0.1",
+    "papaparse": "^5.4.1",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}

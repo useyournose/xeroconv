@@ -1,4 +1,6 @@
-import { Stream, Decoder } from "https://cdn.jsdelivr.net/npm/@garmin/fitsdk@21.141.0/src/index.min.js";
+import { Stream, Decoder } from "@garmin/fitsdk";
+import * as XLSX from "xlsx";
+import * as Papa from "papaparse";
 
 let f2linputElement = document.getElementById('fit2labradar');
 f2linputElement.addEventListener("change", handleFiles, false);
@@ -253,7 +255,7 @@ function csv2labradar(fileData,ofilename) {
     if (ofilename.includes(datestring)) {
       filename = ofilename.replace(/\.csv$/, '-xeroconv.csv');
     } else {
-      filename = ofilename.replace(/\.csv$/,'')+'_'+datestring + '_' + hourstring + '-xerocpnv.csv'
+      filename = ofilename.replace(/\.csv$/,'')+'_'+datestring + '_' + hourstring + '-xeroconv.csv'
     }
     //extending the stats array for missing values when no bullet weight is available
     if (5 > stats.data.length) {

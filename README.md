@@ -13,8 +13,8 @@ As Garmin is a big and funny company and my code is fragile, here are the tested
 
 | filetype | version |
 | :---: | :---: |
-| `*.fit` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.xero.version&label=firmware+version) |
-| `*.csv` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_a.version&label=Shotview+on+Android) |
+| `*.fit` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Ftrying-parcel%2Fshotview_a.json) |
+| `*.csv` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Ftrying-parcel%2Fshotview_a.json)|
 | `*.csv` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_i.version&label=Shotview+on+iOS) |
 | `*.xls` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_a.version&label=Shotview+on+Android) |
 | `*.xlsx` | ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2Fuseyournose%2Fxeroconv%2Fraw%2Fmain%2Fdocs%2Ftestedversions.json&query=%24.shotview_i.version&label=Shotview+on+iOS) |
@@ -41,6 +41,15 @@ https://jsdelivr.net
 
 ## building and updating
 
+1. install node.js https://nodejs.org/en/download/package-manager/current
+1. do the `npm install`
+  1. install parcel `npm -g --instal` https://parceljs.org/getting-started/webapp/
+  1. install garmin fitsdk `npm install @garmin/fitsdk`
+  1. install bulma `npm install bulma`
+  1. install papaparse `npm install papaparse`
+  1. install fontawesome free `npm install --save @fortawesome/fontawesome-free`
+  1. install sheetjs `npm i --save https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`
+
 ### bulma
 
 https://bulma.io/documentation/start/installation/ 
@@ -49,7 +58,7 @@ https://bulma.io/documentation/start/installation/
 
 [Install](https://github.com/mholt/PapaParse?tab=readme-ov-file#install) references [unpkg](https://unpkg.com/papaparse@latest/papaparse.min.js)
 
-### sheets.js
+### sheetjs
 
 [cdn.sheetsjs.com](https://cdn.sheetjs.com/)
 
