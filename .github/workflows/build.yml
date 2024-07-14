@@ -1,13 +1,10 @@
 name: build
 on:
   pull_request: 
-    types: [opened,synchronize,reopened]
+    types: [opened,synchronize,reopened,closed]
     paths: ['src/*',.github/workflows/*]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  push:
-    branches: [$default-branch]
-    paths: ['src/*',.github/workflows/*]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,22 +30,6 @@ jobs:
       pages: write
       id-token: write
     if: github.ref  == 'refs/heads/main'
-    # Deploy to the github-pages environment
-    environment:
-      name: github-pages-dev
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-  deploy-dev:
-    needs: build
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    if: github.ref  == 'refs/pull/**'
     # Deploy to the github-pages environment
     environment:
       name: github-pages-dev
