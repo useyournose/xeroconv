@@ -19,6 +19,7 @@ function handleFiles() {
     return
   }
 
+  
   for (const file of fileList) {
     let fileReader = new FileReader();
     fileReader.onload = function(event) {
