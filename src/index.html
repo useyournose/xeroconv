@@ -19,15 +19,17 @@
                 <p class="subtitle">to something usable for GRT</p>
             </div>
         </section>
-        <nav class="navbar" role="navigation" aria-label="main navigation" style="display: none;">
+        <nav class="navbar" role="navigation" aria-label="main navigation" style="display: block;">
             <div id="navbar" class="navbar-menu">
                 <div class="navbar-start">
                     <a class="navbar-item is-active">Xero2Labradar</a>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">More</a>
                         <div class="navbar-dropdown">
-                            <a class="navbar-item">Documentation</a>
-                            <a class="navbar-item"href="https://github.com/useyournose/xeroconv" target="_blank">Source Code</a>
+                            <a class="navbar-item js-modal-trigger" id="help_button" data-target="modal-help">Help</a>
+                            <a class="navbar-item js-modal-trigger" id="versions_button" data-target="modal-versions">Tested Versions</a>
+                            <a class="navbar-item" href="https://github.com/useyournose/xeroconv/blob/main/CHANGELOG.md" target="_blank">Change Log</a>
+                            <a class="navbar-item" href="https://github.com/useyournose/xeroconv" target="_blank">Source Code</a>
                             <hr class="navbar-divider">
                             <a class="navbar-item" href="https://github.com/useyournose/xeroconv/issues" target="_blank">Report an issue</a>
                         </div>
@@ -35,14 +37,43 @@
                 </div>
             </div>
         </nav>
-        <section id="documentation" style="display:none">
-            <div class="container block">
-                <div class="box">
+        <div class="modal" id="modal-help">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Help</p>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
                     <div class="content">
+                        <div class="block">This is a Web App and there is no "Backend". All data and files will stay on your device. The conversion is solely done by your computers resources.</div>
+                        <div class="block">Just click on the button to upload the files you want to convert, select the files and pick them up from your download directory.</div>
+                        <div class="block">Due to the nature of software development, and that I'm not related to Garmin in any way, it might happen, that future Xero Firmwares or Shotview versions will produce incompatible files. If you have created files with a newer version, or your file just doesn't work, just let me know on <a href="https://github.com/useyournose/xeroconv/issues" target="_blank">Github: Report an issue</a>.</div>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
+        </div>
+        <div class="modal" id="modal-versions">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Tested versions</p>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="content">
+                        <div class="block">The conversion was tested with the following versions</div>
+                        <div class="block">
+                            <ul>
+                                <li>Garmin Xero Firmware: <span class="tag is-primary is-light">v1.33</span></li>
+                                <li>Garmin Shotview for Android: <span class="tag is-primary is-light">v1.1.3</span></li>
+                                <li>Garmin Shotview for iOS : <span class="tag is-primary is-light">v1.1.0</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
         <section id="x2l">
             <div class="container block">
                 <div class="box">
@@ -107,7 +138,7 @@
         </section>
         <footer class="footer has-text-centered mt-auto" >
             <div class="columns">
-                <div class="column is-4"></div>
+                <div class="column is-4"><h4>arranged by Oliver Berger 2024</h4></div>
                 <div class="column is-4">
                     <h4 class="footer-title">Contribute on Github</h4>
                     <span class="icon">
