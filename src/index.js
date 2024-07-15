@@ -3,14 +3,6 @@ import * as XLSX from "xlsx";
 import * as Papa from "papaparse";
 
 document.addEventListener('DOMContentLoaded', () => {
-  const f2linputElement = document.getElementById('fit2labradar');
-  f2linputElement.addEventListener("change", handleFiles, false);
-
-  const c2linputElement = document.getElementById('csv2labradar');
-  c2linputElement.addEventListener("change", handleFiles, false);
-
-  const e2linputElement = document.getElementById('xls2labradar');
-  e2linputElement.addEventListener("change", handleFiles, false);
 
   // Functions to open and close a modal
   function openModal($el) {
@@ -54,6 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+let f2linputElement = document.getElementById('fit2labradar');
+f2linputElement.addEventListener("change", handleFiles, false);
+
+let c2linputElement = document.getElementById('csv2labradar');
+c2linputElement.addEventListener("change", handleFiles, false);
+
+let e2linputElement = document.getElementById('xls2labradar');
+e2linputElement.addEventListener("change", handleFiles, false);
 
 function handleFiles() {
   let fileList = this.files;
