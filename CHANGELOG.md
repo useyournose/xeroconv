@@ -9,6 +9,13 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 
 ### Added
 
+- added jest for testing
+
+
+## 2024-07-16
+
+### Added
+
 - added navbar
 - added help modal
 - added supported versions modal
