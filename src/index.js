@@ -1,6 +1,7 @@
 import { Stream, Decoder } from "@garmin/fitsdk";
 import * as XLSX from "xlsx";
 import * as Papa from "papaparse";
+import nnf from "./js/nnf";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -99,19 +100,7 @@ function download(text,filename) {
   showSuccess("Saved " + filename + ".");
 }
 
-function nnf(number) {
-  if (!number) {
-    return 0
-  } else if (typeof number == 'number') {
-    return number
-   } else if (typeof number == 'string' ) {
-    if (number.replaceAll(' ','').length > 0) {
-      //parse a comma float string to a nice number float
-      return parseFloat(number.toString().replace(',','.'))
-    }
-  }
-  return 0
-}
+
 
 function get_ke(velocity_in_ms, weight_in_grains) {
   //returns the kinetic energy
