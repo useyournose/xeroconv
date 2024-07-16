@@ -3,6 +3,7 @@ import * as XLSX from "xlsx";
 import * as Papa from "papaparse";
 
 import nnf from "./js/nnf";
+import get_ke from "./js/get_ke";
 import getLabradartemplate from "./js/getLabradarTemplate";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -100,14 +101,6 @@ function download(text,filename) {
   document.body.removeChild(element);
   console.log("file "+ filename +" saved.");
   showSuccess("Saved " + filename + ".");
-}
-
-
-
-function get_ke(velocity_in_ms, weight_in_grains) {
-  //returns the kinetic energy
-  const weight_in_kg = weight_in_grains / 15.432 / 1000
-  return (Math.round(0.5 * weight_in_kg * Math.pow(velocity_in_ms,2) * 100) / 100).toFixed(2);
 }
 
 function fs_to_ms(velocity_in_fs) {
