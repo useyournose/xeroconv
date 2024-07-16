@@ -12,6 +12,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 - added navbar
 - added help modal
 - added supported versions modal
+- switched from fontawesome kit to fontawesome free
 
 ### Fixed
 

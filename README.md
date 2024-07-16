@@ -33,11 +33,11 @@ https://parceljs.org/
 
 | tool | latest release | version in use |
 | --- | --- | --- |
-| https://www.papaparse.com/ | ![GitHub Release](https://img.shields.io/github/v/release/mholt/papaparse?sort=date) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/papaparse) |
+| https://www.papaparse.com/ | ![NPM Version](https://img.shields.io/npm/v/papaparse) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/papaparse) |
 | https://docs.sheetjs.com/docs/  | https://cdn.sheetjs.com/ | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/xlsx) |
-| https://github.com/garmin/fit-javascript-sdk?tab=License-1-ov-file  | ![GitHub Release](https://img.shields.io/github/v/release/garmin/fit-javascript-sdk?sort=date) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/%40garmin%2Ffitsdk) |
-| https://bulma.io/documentation  | ![GitHub Release](https://img.shields.io/github/v/release/jgthms/bulma?sort=date) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/bulma) |
-| https://fontawesome.com/ |  |  |
+| https://github.com/garmin/fit-javascript-sdk?tab=License-1-ov-file  | ![NPM Version](https://img.shields.io/npm/v/%40garmin%2Ffitsdk) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/%40garmin%2Ffitsdk) |
+| https://bulma.io/documentation  | ![NPM Version](https://img.shields.io/npm/v/bulma) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/bulma) |
+| https://fontawesome.com/ | ![NPM Version](https://img.shields.io/npm/v/%40fortawesome%2Ffontawesome-free) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/%40fortawesome%2Ffontawesome-free) |
 
 ## building and updating
 
@@ -49,20 +49,4 @@ https://parceljs.org/
   1. install papaparse `npm install papaparse`
   1. install fontawesome free `npm install --save @fortawesome/fontawesome-free`
   1. install sheetjs `npm i --save https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`
-
-### bulma
-
-https://bulma.io/documentation/start/installation/ 
-
-### papaparse
-
-[Install](https://github.com/mholt/PapaParse?tab=readme-ov-file#install) references [unpkg](https://unpkg.com/papaparse@latest/papaparse.min.js)
-
-### sheetjs
-
-[cdn.sheetsjs.com](https://cdn.sheetjs.com/)
-
-### fitsdk
-
-download in the release section [garmin/fitsdk](https://github.com/garmin/fit-javascript-sdk)
 
