@@ -1,9 +1,9 @@
-import * as Papa from "papaparse";
-import download from "./download";
-import { showError, showSuccess } from "./messages";
-import getLabradartemplate from "./getLabradarTemplate";
-import nnf from "./nnf";
-import getdatestring from "./getdatestring";
+const Papa = require("papaparse");
+const download = require("./download");
+const { showError, showSuccess } = require("./messages");
+const getLabradartemplate = require("./getLabradarTemplate");
+const nnf = require("./nnf");
+const getdatestring = require("./getdatestring");
 
 
 function csv2labradar(fileData,ofilename) {

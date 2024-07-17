@@ -1,4 +1,4 @@
-import { showSuccess } from "./messages";
+const { showSuccess } = require("./messages");
 
 function download(text,filename) {
     //inspired from https://stackoverflow.com/a/18197341
