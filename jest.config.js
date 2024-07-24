@@ -12,7 +12,7 @@ const config = {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ["**/src/index.js","**/src/js/*.js"],
+  collectCoverageFrom: ["**/src/index.js","**/src/js/*.mjs"],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
@@ -30,7 +30,7 @@ const config = {
   //   "json",
   //   "text",
      "lcov",
-  //   "clover"
+     "clover"
    ],
 
   // A path to a custom dependency extractor

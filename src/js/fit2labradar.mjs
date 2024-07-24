@@ -5,7 +5,7 @@ import getLabradartemplate from "./getLabradarTemplate.mjs";
 import StandardDeviation from "./StandardDeviation.mjs";
 import get_ke from "./get_ke.mjs";
 
-export default function fit2labradar(fileData,ofilename) {
+export default async function fit2labradar(fileData,ofilename) {
     const start = Date.now();
     const filename = ofilename.replace(/\.fit$/, '-xeroconv.csv');
     const streamfromFileSync = Stream.fromArrayBuffer(fileData);
@@ -63,8 +63,10 @@ export default function fit2labradar(fileData,ofilename) {
       })
       console.log("parsed " + ofilename + " in " + (Date.now() - start) + " milliseconds." );
       download(stream,filename);
+      return
     } catch(err) {
       console.error(err)
       showError(err.message);
+      return
     } 
   }
