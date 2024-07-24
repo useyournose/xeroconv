@@ -1,11 +1,11 @@
 import { Stream, Decoder } from "@garmin/fitsdk";
-import download from "./download";
-import { showError, showSuccess } from "./messages";
-import getLabradartemplate from "./getLabradarTemplate";
-import { StandardDeviation } from "./StandardDeviation";
-import get_ke from "./get_ke";
+import download from "./download.mjs";
+import { showError, showSuccess } from "./messages.mjs";
+import getLabradartemplate from "./getLabradarTemplate.mjs";
+import StandardDeviation from "./StandardDeviation.mjs";
+import get_ke from "./get_ke.mjs";
 
-function fit2labradar(fileData,ofilename) {
+export default function fit2labradar(fileData,ofilename) {
     const start = Date.now();
     const filename = ofilename.replace(/\.fit$/, '-xeroconv.csv');
     const streamfromFileSync = Stream.fromArrayBuffer(fileData);
@@ -68,5 +68,3 @@ function fit2labradar(fileData,ofilename) {
       showError(err.message);
     } 
   }
-
-  module.exports = fit2labradar;

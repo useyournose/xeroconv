@@ -1,12 +1,12 @@
-const Papa = require("papaparse");
-const download = require("./download");
-const { showError, showSuccess } = require("./messages");
-const getLabradartemplate = require("./getLabradarTemplate");
-const nnf = require("./nnf");
-const getdatestring = require("./getdatestring");
+import Papa from "papaparse";
+import download from "./download.mjs";
+import {showError, showSuccess } from "./messages.mjs";
+import getLabradartemplate from "./getLabradarTemplate.mjs";
+import nnf from "./nnf.mjs";
+import getdatestring from "./getdatestring.mjs";
 
 
-function csv2labradar(fileData,ofilename) {
+export default function csv2labradar(fileData,ofilename) {
     const start = Date.now();
     
     const dec = new TextDecoder("utf-8")
@@ -96,5 +96,3 @@ function csv2labradar(fileData,ofilename) {
       showError(err.message);
     } 
   }
-
-  module.exports = csv2labradar;

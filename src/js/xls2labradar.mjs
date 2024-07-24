@@ -1,7 +1,7 @@
-import * as XLSX from "xlsx";
-import csv2labradar from "./csv2labradar";
+import XLSX from "xlsx";
+import csv2labradar from "./csv2labradar.mjs";
 
-function xls2labradar(fileData,ofilename) {
+export default function xls2labradar(fileData,ofilename) {
     const xlsfile = XLSX.read(fileData, {type:"array"});
     for (const sheetname of xlsfile.SheetNames) {
       var worksheet = xlsfile.Sheets[sheetname]
@@ -11,5 +11,3 @@ function xls2labradar(fileData,ofilename) {
       console.log(sheetname);
     }
 }
-
-module.exports = xls2labradar;

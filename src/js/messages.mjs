@@ -17,12 +17,10 @@ function showNotification(message,classlist) {
   timeoutid = setTimeout(function(){ x.className = x.className.replace("show", "")}, 3000);
 }
 
-function showError(message) {
+export function showError(message) {
   showNotification(message,'notification is-danger')
 }
 
-function showSuccess(message) {
+export function showSuccess(message) {
   showNotification(message,'notification is-success')
 }
-
-module.exports = {showError, showSuccess};

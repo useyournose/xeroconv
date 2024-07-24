@@ -1,18 +1,5 @@
-function getLabradartemplate() {
-    /*just replace the following valiables
-    {DEVICEID}
-    {SHOTS_TOTAL}
-    {UNIT_VELOCITY}
-    {UNIT_DISTANCE}
-    {UNIT_ENERGY}
-    {UNIT_WEIGHT}
-    {SPEED_AVG}
-    {SPEED_MAX}
-    {SPEED_MIN}
-    {SPEED_ES}
-    {SPEED_SD}
-    */
-    return `sep=;
+import getLabradartemplate from '../js/getLabradarTemplate';
+const expectation=`sep=;
 Device ID;{DEVICEID};;
 
 Series No;0001;;
@@ -30,6 +17,7 @@ Stats - Ext. Spread;{SPEED_ES};{UNIT_VELOCITY};
 Stats - Std. Dev;{SPEED_SD};{UNIT_VELOCITY};
 
 Shot ID;V0;Ke0;Proj. Weight;Date;Time\n`
-  }
 
-  module.exports = getLabradartemplate;
+test('Labradartemplate shuold be good', () => {
+  expect(getLabradartemplate()).toBe(expectation);
+});

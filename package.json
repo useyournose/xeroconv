@@ -9,7 +9,7 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "test": "jest src",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js src",
     "predeploy": "rm -rf dist && rm -rf .parcel-cache && parcel build src/index.html --public-url ./",
     "predeploy-win": "rmdir dist /s /q && rmdir .parcel-cache /s /q  && parcel build src/index.html --public-url https://useyournose.github.io/xeroconf/",
     "deploy": "gh-pages -d dist"
@@ -29,7 +29,9 @@
   },
   "homepage": "https://github.com/useyournose/xeroconv#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.24.8",
     "@parcel/transformer-sass": "^2.12.0",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
     "parcel": "^2.12.0"
   },

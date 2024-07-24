@@ -1,8 +1,8 @@
-import fit2labradar from "./fit2labradar";
-import csv2labradar from "./csv2labradar";
-import xls2labradar from "./xls2labradar";
+import fit2labradar from "./fit2labradar.mjs";
+import csv2labradar from "./csv2labradar.mjs";
+import xls2labradar from "./xls2labradar.mjs";
 
-export function handleFiles() {
+export default function handleFiles() {
   let fileList = this.files;
   let sourceid = this.id;
   if (fileList.length == 0) {

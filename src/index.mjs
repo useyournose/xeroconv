@@ -1,4 +1,4 @@
-import { handleFiles } from "./js/handleFiles";
+import handleFiles from "./js/handleFiles";
 import { openModal, closeModal, closeAllModals } from "./js/modals";
 
 document.addEventListener('DOMContentLoaded', () => {

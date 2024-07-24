@@ -1,4 +1,4 @@
-const { showSuccess } = require("./messages");
+import { showSuccess } from "./messages.mjs";
 
 function download(text,filename) {
     //inspired from https://stackoverflow.com/a/18197341
@@ -14,4 +14,4 @@ function download(text,filename) {
     showSuccess("Saved " + filename + ".");
   }
 
-module.exports = download;
+export default download;

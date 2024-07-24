@@ -12,4 +12,4 @@ function nnf(number) {
     return 0
   }
 
-  module.exports = nnf;
+export default nnf;
