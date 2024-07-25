@@ -39,6 +39,7 @@ https://parceljs.org/
 | https://bulma.io/documentation  | ![NPM Version](https://img.shields.io/npm/v/bulma) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/bulma) |
 | https://fontawesome.com/ | ![NPM Version](https://img.shields.io/npm/v/%40fortawesome%2Ffontawesome-free) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/%40fortawesome%2Ffontawesome-free) |
 | https://parceljs.org/ | ![NPM Version](https://img.shields.io/npm/v/parcel) | ![GitHub package.json dev/peer/optional dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/dev/parcel) |
+| https://github.com/iamkun/dayjs | ![NPM Version](https://img.shields.io/npm/v/dayjs) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/dayjs) |
 
 ## building and updating
 
@@ -50,4 +51,5 @@ https://parceljs.org/
   1. install papaparse `npm install papaparse`
   1. install fontawesome free `npm install --save @fortawesome/fontawesome-free`
   1. install sheetjs `npm i --save https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`
+  1. install dayjs `npm install dayjs`
 

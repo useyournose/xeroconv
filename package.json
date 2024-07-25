@@ -40,6 +40,7 @@
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@garmin/fitsdk": "^21.141.0",
     "bulma": "^1.0.1",
+    "dayjs": "^1.11.12",
     "papaparse": "^5.4.1",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }

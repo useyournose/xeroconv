@@ -4,6 +4,7 @@ import { showError, showSuccess } from "./messages.mjs";
 import getLabradartemplate from "./getLabradarTemplate.mjs";
 import StandardDeviation from "./StandardDeviation.mjs";
 import get_ke from "./get_ke.mjs";
+import getdatestring from "./getdatestring.mjs";
 
 export default async function fit2labradar(fileData,ofilename) {
     const start = Date.now();
@@ -57,8 +58,9 @@ export default async function fit2labradar(fileData,ofilename) {
       stream = stream.replace("{SPEED_SD}",sd);
   
       messages.chronoShotDataMesgs.forEach(function (item,index) {
-          const datestring = item.timestamp.getDate().toString().padStart(2,'0') + "-" + (item.timestamp.getMonth()+1).toString().padStart(2,'0') + "-" + item.timestamp.getFullYear() 
-          const timestring = item.timestamp.getHours().toString().padStart(2,'0') + ":" + item.timestamp.getMinutes().toString().padStart(2,'0')+ ":" + item.timestamp.getSeconds().toString().padStart(2,'0')
+          const [datestring,timestring] = getdatestring(item.timestamp);
+          //const datestring = item.timestamp.getDate().toString().padStart(2,'0') + "-" + (item.timestamp.getMonth()+1).toString().padStart(2,'0') + "-" + item.timestamp.getFullYear() 
+          //const timestring = item.timestamp.getHours().toString().padStart(2,'0') + ":" + item.timestamp.getMinutes().toString().padStart(2,'0')+ ":" + item.timestamp.getSeconds().toString().padStart(2,'0')
           stream+=item.shotNum.toString().padStart(4, '0') + ";" + item.shotSpeed +";" + get_ke(item.shotSpeed,SessionData.grainWeight) + ";"+ SessionData.grainWeight + ";" + datestring +";" + timestring  + ";\n";
       })
       console.log("parsed " + ofilename + " in " + (Date.now() - start) + " milliseconds." );

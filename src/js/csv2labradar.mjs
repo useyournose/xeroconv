@@ -56,7 +56,7 @@ export default function csv2labradar(fileData,ofilename) {
       if (ofilename.includes(datestring)) {
         filename = ofilename.replace(/\.csv$/, '-xeroconv.csv');
       } else {
-        filename = ofilename.replace(/\.csv$/,'')+'_'+datestring + '_' + hourstring + '-xeroconv.csv'
+        filename = ofilename.replace(/\.csv$/,'')+'_'+datestring + '_' + hourstring.replaceAll(':','-') + '-xeroconv.csv'
       }
       //extending the stats array for missing values when no bullet weight is available
       if (5 > stats.data.length) {
