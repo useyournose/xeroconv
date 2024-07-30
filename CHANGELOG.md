@@ -5,11 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
-## 2024-07-16
+## 2024-07-30
 
 ### Added
 
 - added jest for testing
+- split functions into own files
+- added test files, assets, and mocks
 
 
 ## 2024-07-16
@@ -61,6 +63,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 - moved the Labradarcsv format into own variable
 
 ### Fixed
+
 - fixed fit2labradar validation
 
 ## 2024-07-08

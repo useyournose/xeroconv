@@ -16,7 +16,7 @@ export default function handleFiles() {
       let FileData = event.target.result;
       let filename = event.target.fileName;
       if (event.target.sourceid == 'fit2labradar') {
-        fit2labradar(FileData, filename);
+        fit2labradar(FileData, filename);        
       } else if (event.target.sourceid == 'csv2labradar') {
         csv2labradar(FileData, filename);
       } else if (event.target.sourceid == 'xls2labradar') {

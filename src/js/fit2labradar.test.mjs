@@ -1,8 +1,8 @@
 import {jest,test,expect} from '@jest/globals';
 import fit2labradar from './fit2labradar.mjs';
 import fs from 'node:fs';
-import { promises as fsPromises } from 'fs';
 import download from './download.mjs';
+import { showError } from './messages.mjs';
 
 
 
@@ -25,6 +25,16 @@ test('file should be nice', async () => {
     await fit2labradar(arrayBuffer.buffer,filename);
     expect(download).toHaveBeenCalled();
     expect(download.mock.calls[0][1]).toBe('06-18-2024_15-47-11-xeroconv.csv');
-    //expect(download.mock.calls[0][0]).toBe(expected);
+  }
+});
+
+test('file should fail', async () => {
+  const filename = 'noshots.fit';
+  const arrayBuffer = await readFileAsync('src/_tests/assets/noshots.fit')
+  if (arrayBuffer) {
+    await fit2labradar(arrayBuffer.buffer,filename);
+    expect(download).not.toHaveBeenCalled();
+    expect(showError).toBeCalled();
+    expect(showError.mock.calls[0][0]).toBe("Error: noshots.fit does not contain shot sessions file.")
   }
 });
