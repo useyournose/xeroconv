@@ -9,7 +9,7 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js src",
     "predeploy": "rm -rf dist && rm -rf .parcel-cache && parcel build src/index.html --public-url ./",
     "predeploy-win": "rmdir dist /s /q && rmdir .parcel-cache /s /q  && parcel build src/index.html --public-url https://useyournose.github.io/xeroconf/",
     "deploy": "gh-pages -d dist"
@@ -29,13 +29,18 @@
   },
   "homepage": "https://github.com/useyournose/xeroconv#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.24.8",
     "@parcel/transformer-sass": "^2.12.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "parcel": "^2.12.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@garmin/fitsdk": "^21.141.0",
     "bulma": "^1.0.1",
+    "dayjs": "^1.11.12",
     "papaparse": "^5.4.1",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }

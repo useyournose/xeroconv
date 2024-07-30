@@ -19,6 +19,7 @@ jobs:
         node-version-file: '.node-version'
         cache: 'npm'
     - run: npm ci
+    - run: npm run test
     - run: npm run predeploy --if-present
     - name: Upload artifact
       ## 'refs/pull/10/merge'
