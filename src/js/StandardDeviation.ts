@@ -1,4 +1,4 @@
-export default function StandardDeviation(arr) {
+export default function StandardDeviation(arr:number[]):number {
   // thanks https://www.geeksforgeeks.org/how-to-get-the-standard-deviation-of-an-array-of-numbers-using-javascript/
   // Creating the mean with Array.reduce
   let mean = arr.reduce((acc, curr) => {

@@ -1,9 +1,41 @@
-import {expect, test} from '@jest/globals';
-import getdatestring from '../js/getdatestring.mjs';
+import {expect, test} from "bun:test";
+import getdatestring from '../js/getdatestring';
 
 test('convert western time, capital month', () => {
     const probe = "JULI 02,2024 17:08";
     const expected = ["02-07-2024","17:08:00"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+
+test('convert western time, capital month Oktober', () => {
+    const probe = "OKTOBER 02,2024 17:08";
+    const expected = ["02-10-2024","17:08:00"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+
+test('convert western time, month Oktober', () => {
+    const probe = "Oktober 02,2024 17:08";
+    const expected = ["02-10-2024","17:08:00"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+
+test('convert western time, month oktober', () => {
+    const probe = "oktober 02,2024 17:08";
+    const expected = ["02-10-2024","17:08:00"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+
+test('convert western time, capital month October', () => {
+    const probe = "OCTOBER 02,2024 17:08";
+    const expected = ["02-10-2024","17:08:00"];
     const [resultdate,resulttime] = getdatestring(probe);
     expect(resultdate).toBe(expected[0]);
     expect(resulttime).toBe(expected[1]);

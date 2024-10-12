@@ -1,12 +1,12 @@
 import { Stream, Decoder } from "@garmin/fitsdk";
-import download from "./download.mjs";
-import { showError, showSuccess } from "./messages.mjs";
-import getLabradartemplate from "./getLabradarTemplate.mjs";
-import StandardDeviation from "./StandardDeviation.mjs";
-import get_ke from "./get_ke.mjs";
-import getdatestring from "./getdatestring.mjs";
+import download from "./download";
+import { showError, showSuccess } from "./messages";
+import getLabradartemplate from "./getLabradarTemplate";
+import StandardDeviation from "./StandardDeviation";
+import get_ke from "./get_ke";
+import getdatestring from "./getdatestring";
 
-export default async function fit2labradar(fileData,ofilename) {
+export default async function fit2labradar(fileData:ArrayBuffer,ofilename:string) {
     const start = Date.now();
     const filename = ofilename.replace(/\.fit$/, '-xeroconv.csv');
     const streamfromFileSync = Stream.fromArrayBuffer(fileData);
@@ -18,7 +18,7 @@ export default async function fit2labradar(fileData,ofilename) {
       showError("Error: " + ofilename + ' is not a working fit file.');
       return;
     }
-    const unit_velocity = "m/s";
+    const unit_velocity:string = "m/s";
     const unit_distance = "m";
     const unit_energy = "j";
     const unit_weight = "grains (grs)"
@@ -33,7 +33,7 @@ export default async function fit2labradar(fileData,ofilename) {
         includeUnknownData: true,
         //mergeHeartRates: true
     });
-    if (!(Object.hasOwn(messages,'chronoShotSessionMesgs') & Object.hasOwn(messages,'chronoShotDataMesgs') & Object.hasOwn(messages,'deviceInfoMesgs'))) {
+    if (!(Object.hasOwn(messages,'chronoShotSessionMesgs') && Object.hasOwn(messages,'chronoShotDataMesgs') && Object.hasOwn(messages,'deviceInfoMesgs'))) {
       console.error(ofilename + ' does not contain shot sessions file.');
       showError("Error: " + ofilename + ' does not contain shot sessions file.');
       return;
@@ -45,30 +45,31 @@ export default async function fit2labradar(fileData,ofilename) {
       const sd = StandardDeviation(speeds);
       const es = SessionData.maxSpeed - SessionData.minSpeed
       var stream = getLabradartemplate()
-      stream = stream.replace("{DEVICEID}", DeviceData.manufacturer +'-'+ DeviceData.serialNumber.toString());
-      stream = stream.replace("{SHOTS_TOTAL}",SessionData.shotCount.toString().padStart(4, '0'));
+      stream = stream.replaceAll("{DEVICEID}", DeviceData.manufacturer +'-'+ DeviceData.serialNumber.toString());
+      stream = stream.replaceAll("{SHOTS_TOTAL}",SessionData.shotCount.toString().padStart(4, '0'));
       stream = stream.replaceAll("{UNIT_VELOCITY}",unit_velocity);
-      stream = stream.replace("{UNIT_DISTANCE}",unit_distance);
-      stream = stream.replace("{UNIT_ENERGY}",unit_energy);
-      stream = stream.replace("{UNIT_WEIGHT}",unit_weight);
-      stream = stream.replace("{SPEED_AVG}",SessionData.avgSpeed);
-      stream = stream.replace("{SPEED_MAX}",SessionData.maxSpeed);
-      stream = stream.replace("{SPEED_MIN}",SessionData.minSpeed);
-      stream = stream.replace("{SPEED_ES}",es);
-      stream = stream.replace("{SPEED_SD}",sd);
+      stream = stream.replaceAll("{UNIT_DISTANCE}",unit_distance);
+      stream = stream.replaceAll("{UNIT_ENERGY}",unit_energy);
+      stream = stream.replaceAll("{UNIT_WEIGHT}",unit_weight);
+      stream = stream.replace("{SPEED_AVG}",SessionData.avgSpeed.toString());
+      stream = stream.replace("{SPEED_MAX}",SessionData.maxSpeed.toString());
+      stream = stream.replace("{SPEED_MIN}",SessionData.minSpeed.toString());
+      stream = stream.replace("{SPEED_ES}",es.toFixed(2).toString());
+      stream = stream.replace("{SPEED_SD}",sd.toFixed(2).toString());
   
       messages.chronoShotDataMesgs.forEach(function (item,index) {
           const [datestring,timestring] = getdatestring(item.timestamp);
-          //const datestring = item.timestamp.getDate().toString().padStart(2,'0') + "-" + (item.timestamp.getMonth()+1).toString().padStart(2,'0') + "-" + item.timestamp.getFullYear() 
-          //const timestring = item.timestamp.getHours().toString().padStart(2,'0') + ":" + item.timestamp.getMinutes().toString().padStart(2,'0')+ ":" + item.timestamp.getSeconds().toString().padStart(2,'0')
+          if (datestring == 'Invalid Date' || datestring == "01-01-1990" ) {
+            throw new Error("Date " + item.timestamp + " does not parse. Ping the dev on github.");
+          }
           stream+=item.shotNum.toString().padStart(4, '0') + ";" + item.shotSpeed +";" + get_ke(item.shotSpeed,SessionData.grainWeight) + ";"+ SessionData.grainWeight + ";" + datestring +";" + timestring  + ";\n";
       })
       console.log("parsed " + ofilename + " in " + (Date.now() - start) + " milliseconds." );
       download(stream,filename);
       return
     } catch(err) {
-      console.error(err)
-      showError(err.message);
+      console.error(err);
+      (err.message) ? showError(err.message) : showError(err);
       return
     } 
   }

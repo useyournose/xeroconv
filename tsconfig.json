@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "module": "nodenext",
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      //"outFile": "../../built/local/tsc.js",
+      "sourceMap": true,
+      "target": "ES2022",
+      //"allowImportingTsExtensions": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["**/*.spec.ts"]
+  }
