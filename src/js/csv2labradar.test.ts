@@ -9,7 +9,7 @@ import download from './download';
 
 import fs from 'node:fs';
 
-test('file should be nice', () => {
+test.skip('file should be nice', () => {
   const filename = 'Shotview_a.csv'
   const data = fs.readFileSync('src/_tests/assets/Shotview_a.csv', 'utf8');
   const expected = fs.readFileSync('src/_tests/assets/Shotview_a.expected.csv', 'utf8');

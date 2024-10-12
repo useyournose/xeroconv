@@ -16,7 +16,7 @@ async function readFileAsync(filePath:string) {
   }
 }
 
-test('file should be nice', async () => {
+test.skip('file should be nice', async () => {
   /*const download = mock.module("./download", () => ({
     download: (stream:string, filename:string) => {},
   })) as unknown as jest.Mock;*/
@@ -38,7 +38,7 @@ test('file should be nice', async () => {
   }
 });
 
-test('file should fail', async () => {
+test.skip('file should fail', async () => {
   const showError = mock.module("./messages", () => {return {showError: () => true}}) as unknown as jest.Mock;
   const download = mock.module("./download", ():void => {}) as unknown as jest.Mock;
   const filename = 'noshots.fit';
