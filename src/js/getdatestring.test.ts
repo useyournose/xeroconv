@@ -72,3 +72,13 @@ test('convert US time', () => {
     expect(resultdate).toBe(expected[0]);
     expect(resulttime).toBe(expected[1]);
 });
+
+test('convert fit stamp', () => {
+    const probe = "Tue Jul 02 2024 17:09:22 GMT+0200";
+    const expected = ["02-07-2024","15:09:22"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+
+

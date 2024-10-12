@@ -35,40 +35,48 @@ export default function getdatestring(datestring:string):string[] {
 
     console.log("trying to convert: "+ datestring);
 
-    //make it lowercase so the months will fetch it
-    datestring = datestring.toLocaleLowerCase();
     
     var culture = 'en'
     var validconversion = false
     let datedate = dayjs("1990-01-01")
     let phase = 0
-        
-    // try it the easy way
-    phase = 1
-    var cultures = culturearray.slice(0)
 
-    while (validconversion == false && cultures.length > 0) {
-        culture = cultures.pop()
-        dayjs.locale(culture)
+    if (dayjs(datestring).isValid()) {
+        validconversion = true
+    }
 
-        //validate culture
-        //console.log("supposed culture: " + culture)
-        //console.log("current culture: " + dayjs.locale());
-        if (culture !== dayjs.locale()) {
-            console.log("Culture " + culture + " missing.");
+    if (validconversion === false) {
+        //make it lowercase so the months will fetch it
+        datestring = datestring.toLowerCase();
+
+            
+        // try it the easy way
+        phase = 1
+        var cultures = culturearray.slice(0)
+
+        while (validconversion === false && cultures.length > 0) {
+            culture = cultures.pop()
+            dayjs.locale(culture)
+
+            //validate culture
+            //console.log("supposed culture: " + culture)
+            //console.log("current culture: " + dayjs.locale());
+            if (culture !== dayjs.locale()) {
+                console.log("Culture " + culture + " missing.");
+            }
+
+            // make all monthname lowercase
+            //console.log(dayjs.months());
+            dayjs.updateLocale(culture,{months: monthsToLower(dayjs.months())})
+            //console.log(dayjs.months());
+
+            validconversion = dayjs(datestring).isValid()
+            if (validconversion) {
+                console.log("phase 1 conversion worked with "+ dayjs.locale() + " and " + dayjs(datestring).format("DD-MM-YYYY") + ".")
+            /*} else {
+                console.log("default conversion didn't work "+ dayjs.locale() + ".")
+            */}
         }
-
-        // make all monthname lowercase
-        //console.log(dayjs.months());
-        dayjs.updateLocale(culture,{months: monthsToLower(dayjs.months())})
-        //console.log(dayjs.months());
-
-        validconversion = dayjs(datestring).isValid()
-        if (validconversion) {
-            console.log("phase 1 conversion worked with "+ dayjs.locale() + " and " + dayjs(datestring).format("DD-MM-YYYY") + ".")
-        /*} else {
-            console.log("default conversion didn't work "+ dayjs.locale() + ".")
-        */}
     }
 
     // go creative
@@ -85,7 +93,7 @@ export default function getdatestring(datestring:string):string[] {
         }
     }
     
-    if (validconversion === true && phase == 1) {
+    if (validconversion === true && phase in [0,1]) {
         // convert it
         datedate = dayjs(datestring)
     }
