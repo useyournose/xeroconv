@@ -1,10 +1,10 @@
 
   // Functions to open and close a modal
-export function openModal($el) {
+export function openModal($el:Element) {
   $el.classList.add('is-active');
 }
 
-export function closeModal($el) {
+export function closeModal($el:Element) {
   $el.classList.remove('is-active');
 }
 

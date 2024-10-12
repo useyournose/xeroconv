@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2024-10-12
+
+### Changed
+
+- moved from js to typescript
+- moved from npm to bun
+
+### Fixed
+
+- Added i18n and proper handling of months for supported languages of the shotview app to handle [#23](https://github.com/useyournose/xeroconv/issues/23) .
+
 ## 2024-07-30
 
 ### Added
@@ -12,6 +23,10 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 - added jest for testing
 - split functions into own files
 - added test files, assets, and mocks
+
+### Changed
+
+- moved from moment.js to day.js
 
 
 ## 2024-07-16

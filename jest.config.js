@@ -12,7 +12,7 @@ const config = {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ["**/src/index.js","**/src/js/*.mjs"],
+  collectCoverageFrom: ["**/src/index.ts","**/src/js/*.ts"],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
@@ -50,11 +50,11 @@ const config = {
 
   // An array of file extensions your modules use
    moduleFileExtensions: [
-     "js",
-     "mjs",
+    // "js",
+    // "mjs",
   //   "cjs",
   //   "jsx",
-  //   "ts",
+     "ts",
   //   "tsx",
   //   "json",
   //   "node"
@@ -62,8 +62,8 @@ const config = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    "^./download.mjs$": "<rootDir>/src/js/__mocks__/download.mjs",
-    "^./messages.mjs$": "<rootDir>/src/js/__mocks__/messages.mjs",
+    "^./download.ts$": "<rootDir>/src/js/__mocks__/download.ts",
+    "^./messages.ts$": "<rootDir>/src/js/__mocks__/messages.ts",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -95,7 +95,7 @@ transform: {},
 //  "^.+\\.mjs$": "babel-jest",
 //},
 testPathIgnorePatterns: [".+/node_modules/"],
-moduleFileExtensions: ["js", "jsx", "mjs"]
+moduleFileExtensions: ["ts"]
 
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
