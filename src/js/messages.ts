@@ -1,4 +1,4 @@
-let timeoutid:NodeJS.Timeout;
+let timeoutid:Timer;
 
 function showNotification(message:string,classlist:string) {
   // inspired from https://www.w3schools.com/howto/howto_js_snackbar.asp

@@ -1,4 +1,4 @@
-import { test, expect } from '@jest/globals';
+import { test, expect } from 'bun:test';
 import nnf from '../js/nnf';
 
 test('1,00 should become 1', () => {

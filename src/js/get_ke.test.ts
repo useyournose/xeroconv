@@ -1,4 +1,4 @@
-import {expect, jest, test} from '@jest/globals';
+import {expect, test} from 'bun:test';
 import get_ke from '../js/get_ke';
 
 test('300 m/s and 158grains become 460.73', () => {
