@@ -26,6 +26,7 @@ export default function getdatestring(datestring:string):string[] {
     const culturearray = ["tr","sv","es","ro","pl","it","de","fr","nl","da","en"]
     const STRING_US = 'MMMM D[,]YYYY [at] h:mm A'
     const STRING_EU = 'MMMM DD[,]YYYY HH:mm'
+    let cultures:string[]
 
     // make it a nice string
     if (typeof datestring == "string") {
@@ -33,11 +34,11 @@ export default function getdatestring(datestring:string):string[] {
         if (/[AP]M$/.test(datestring)) {datestring = datestring.replace(' at','')}
     }
 
-    console.log("trying to convert: "+ datestring);
+    console.debug("[_getdatestring]: trying to convert: "+ datestring);
 
     
-    var culture = 'en'
-    var validconversion = false
+    let culture = 'en'
+    let validconversion = false
     let datedate = dayjs("1990-01-01")
     let phase = 0
 
@@ -52,7 +53,7 @@ export default function getdatestring(datestring:string):string[] {
             
         // try it the easy way
         phase = 1
-        var cultures = culturearray.slice(0)
+        cultures = culturearray.slice(0)
 
         while (validconversion === false && cultures.length > 0) {
             culture = cultures.pop()
@@ -62,7 +63,7 @@ export default function getdatestring(datestring:string):string[] {
             //console.log("supposed culture: " + culture)
             //console.log("current culture: " + dayjs.locale());
             if (culture !== dayjs.locale()) {
-                console.log("Culture " + culture + " missing.");
+                console.warn("[_getdatestring]: Culture " + culture + " missing.");
             }
 
             // make all monthname lowercase
@@ -72,7 +73,7 @@ export default function getdatestring(datestring:string):string[] {
 
             validconversion = dayjs(datestring).isValid()
             if (validconversion) {
-                console.log("phase 1 conversion worked with "+ dayjs.locale() + " and " + dayjs(datestring).format("DD-MM-YYYY") + ".")
+                console.debug("[_getdatestring]: phase 1 conversion worked with "+ dayjs.locale() + " and " + dayjs(datestring).format("DD-MM-YYYY") + ".")
             /*} else {
                 console.log("default conversion didn't work "+ dayjs.locale() + ".")
             */}
@@ -88,7 +89,7 @@ export default function getdatestring(datestring:string):string[] {
             //console.log(culture)
             validconversion = dayjs(datestring, [STRING_US, STRING_EU], culture).isValid()
             if (validconversion) {
-              console.log("phase 2 conversion worked with " + culture)
+              console.debug("[_getdatestring]: phase 2 conversion worked with " + culture)
             }
         }
     }
@@ -101,13 +102,14 @@ export default function getdatestring(datestring:string):string[] {
         // convert it
         datedate = dayjs(datestring, [STRING_US, STRING_EU], culture)
     } else {
-        console.warn("No conversion found for " + datestring);
+        console.warn("[_getdatestring]: No conversion found for " + datestring);
     }
     
     //return it
     //return [datedate.getDate().toString().padStart(2,'0') + "-" + (datedate.getMonth()+1).toString().padStart(2,'0') + "-" + datedate.getFullYear(),datedate.getHours().toString().padStart(2,'0') + "-" + datedate.getMinutes().toString().padStart(2,'0') + "-" + datedate.getSeconds().toString().padStart(2,'0')];
     //const datestring = item.timestamp.getDate().toString().padStart(2,'0') + "-" + (item.timestamp.getMonth()+1).toString().padStart(2,'0') + "-" + item.timestamp.getFullYear() 
     //const timestring = item.timestamp.getHours().toString().padStart(2,'0') + ":" + item.timestamp.getMinutes().toString().padStart(2,'0')+ ":" + item.timestamp.getSeconds().toString().padStart(2,'0')
+    console.debug("[_getdatestring]: conversion done with " + culture + " to " + datedate.format("DD-MM-YYYY") + " " + datedate.format("HH:mm:ss"))
     dayjs.locale('en');
     return [
         datedate.format("DD-MM-YYYY"),
