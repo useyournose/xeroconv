@@ -5,7 +5,7 @@ function showNotification(message:string,classlist:string) {
   // Get the snackbar DIV
   const x = document.getElementById("snackbar");
   if (null != x) {
-    var elem = document.createElement("div");
+    const elem = document.createElement("div");
     elem.classList.value = classlist;
     elem.id=crypto.randomUUID();
     elem.innerText=message
