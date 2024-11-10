@@ -23,9 +23,10 @@ As Garmin is a big and funny company and my code is fragile, here are the tested
 ## techstack
 
 https://github.com/  
+https://bun.sh/  
 https://pages.github.com/  
 https://docs.github.com/en/actions  
-https://parceljs.org/
+https://parceljs.org/  
 
 ## third party tools
 
@@ -43,8 +44,8 @@ https://parceljs.org/
 
 ## building and updating
 
-1. install node.js https://nodejs.org/en/download/package-manager/current
-1. do the `npm install`
+1. install bun https://bun.sh
+1. do the `bun install`
   1. install parcel `npm install --save-dev parcel` https://parceljs.org/getting-started/webapp/
   1. install garmin fitsdk `npm install @garmin/fitsdk`
   1. install bulma `npm install bulma`

@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8"/>
+        <title>Convert Garmin Xero Stuff</title>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="google" content="nositelinkssearchbox">
-        <meta name="google-site-verification" content="qBVIJ43d0aUA3G6WnmGA7zVlDajaCGUmaq3yD9RK5KE" />
-        <meta name="description" content="Converts files from Garmin Xero od shotview to Labradar csv">
-        <title>Convert Garmin Xero Stuff</title>
+        <meta name="google-site-verification" content="qBVIJ43d0aUA3G6WnmGA7zVlDajaCGUmaq3yD9RK5KE">
+        <meta name="application-name" content="XeroConv">
+        <meta name="description" content="XeroConv - online converter for files from Garmin Xero to shotview to Labradar csv, what you can use in GRT - Gordons Reloading Tool">
+        <meta name="keywords" content="xeroconv, useyournose, garmin, xero, converter, garmin, grt, gordons reloading tool">
+        <meta name="author" content="Oliver Berger">
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-        <link rel="stylesheet" href='../node_modules/@fortawesome/fontawesome-free/css/all.css'>
+        <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
         <script src="index.ts" type="module"></script>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -80,18 +83,16 @@
                     <div class="content">
                         <h2 class="title">Convert a .fit file from the Garmin Xero C1 Pro device to labradar format</h2>
                         <p>This uses the <a href="https://developer.garmin.com/fit/overview/" target="_blank">FIT SDK from Garmin(c)</a>. Just select the file, and you'll find it as csv in your download folder, with <span class="tag is-primary">-xeroconv.csv</span> at the end.</p>
-                        <p>The files are located in the <span class="tag is-primary is-light">Garmin</span> <span class="icon">
-                            <i class="fas fa-arrow-right"></i>
-                          </span> <span class="tag is-primary is-light">Shot_Sessions</span> Folder on the Xero C1.</p>
+                        <p>The files are located in the <span class="tag is-primary is-light">Garmin</span> <span class="icon"> <i class="fas fa-arrow-right"></i> </span> <span class="tag is-primary is-light">Shot_Sessions</span> Folder on the Xero C1.</p>
                     </div>
                     <div class="file is-centered is-boxed">
                         <label class="file-label">
-                            <input class="file-input" type="file" id="fit2labradar" name="fit2labradar" accept=".fit" multiple/>
+                            <input class="file-input" type="file" id="fit2labradar" name="fit2labradar" accept=".fit" multiple>
                             <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fa-regular fa-file-code"></i>
-                            </span>
-                            <span class="file-label"> Select .fit File(s)… </span>
+                                <span class="file-icon">
+                                    <i class="fa-regular fa-file-code"></i>
+                                </span>
+                                <span class="file-label"> Select .fit File(s)… </span>
                             </span>
                         </label>
                     </div>
@@ -105,12 +106,10 @@
                     </div>
                     <div class="file is-centered is-boxed">
                         <label class="file-label">
-                            <input class="file-input" type="file" id="csv2labradar" name="csv2labradar" accept=".csv" multiple/>
+                            <input class="file-input" type="file" id="csv2labradar" name="csv2labradar" accept=".csv" multiple>
                             <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fa-regular fa-file-code"></i>
-                            </span>
-                            <span class="file-label"> Select .csv File(s)… </span>
+                                <span class="file-icon"> <i class="fa-regular fa-file-code"></i></span>
+                                <span class="file-label"> Select .csv File(s)… </span>
                             </span>
                         </label>
                     </div>
@@ -124,21 +123,21 @@
                     </div>
                     <div class="file is-centered is-boxed">
                         <label class="file-label">
-                            <input class="file-input" type="file" id="xls2labradar" name="xls2labradar" accept=".xls,.xlsx" multiple/>
+                            <input class="file-input" type="file" id="xls2labradar" name="xls2labradar" accept=".xls,.xlsx" multiple>
                             <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fa-regular fa-file-code"></i>
-                            </span>
-                            <span class="file-label"> Select .xls / .xlsx File(s)… </span>
+                                <span class="file-icon"><i class="fa-regular fa-file-code"></i></span>
+                                <span class="file-label"> Select .xls / .xlsx File(s)… </span>
                             </span>
                         </label>
                     </div>
                 </div>
             </div>
         </section>
-        <footer class="footer has-text-centered mt-auto" >
+        <footer class="footer has-text-centered mt-auto">
             <div class="columns">
-                <div class="column is-4"><h4>arranged by Oliver Berger 2024</h4></div>
+                <div class="column is-4">
+                    <h4>arranged by Oliver Berger 2024</h4>
+                </div>
                 <div class="column is-4">
                     <h4 class="footer-title">Contribute on Github</h4>
                     <span class="icon">
@@ -149,12 +148,10 @@
             </div>
             <div class="content has-text-centered">
                 <p>
-                This page is hosted on github pages.
-                The <a href="https://github.com/useyournose/xeroconv">source code</a> is licensed
-                <a href="https://opensource.org/license/mit">MIT</a>. The
-                website content is licensed
-                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//">CC BY NC SA 4.0</a>.
-                All trademarks are property of their respective owners.
+                    This page is hosted on github pages.<br>
+                    The <a href="https://github.com/useyournose/xeroconv" target="_blank">source code </a> is licensed <a href="https://opensource.org/license/mit" target="_blank">MIT</a>.<br>
+                    The website content is licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//" target="_blank">CC BY NC SA 4.0</a>.<br>
+                    All trademarks are property of their respective owners.
                 </p>
             </div>
         </footer>

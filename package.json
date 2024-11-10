@@ -13,7 +13,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js src",
     "buntest": "bun test",
     "predeploy": "rm -rf dist && rm -rf .parcel-cache && parcel build src/index.html --public-url ./",
-    "predeploy-win": "rmdir dist /s /q && rmdir .parcel-cache /s /q  && parcel build src/index.html --public-url https://useyournose.github.io/xeroconf/",
+    "predeploy-win": "rmdir dist /s /q && rmdir .parcel-cache /s /q  && parcel build src/index.html --public-url https://useyournose.github.io/xeroconv/",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
@@ -22,7 +22,8 @@
   },
   "keywords": [
     "garmin",
-    "xero"
+    "xero",
+    "xeroconv"
   ],
   "author": "Oliver Berger",
   "license": "MIT",
@@ -34,6 +35,8 @@
     "@babel/preset-env": "^7.24.8",
     "@eslint/js": "^9.12.0",
     "@happy-dom/global-registrator": "^15.7.4",
+    "@html-eslint/eslint-plugin": "^0.27.0",
+    "@html-eslint/parser": "^0.27.0",
     "@jest/globals": "^29.7.0",
     "@parcel/transformer-sass": "^2.12.0",
     "@types/bun": "^1.1.6",
