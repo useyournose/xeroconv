@@ -5,6 +5,8 @@ html, body { height: 100vh;}
     justify-content: center;
 }
 
+.navbar-start h1.navbar-item.is-active {font-weight: bold;}
+
 .box {
   background-color: rgb(68 113 86 / 33%);
 }

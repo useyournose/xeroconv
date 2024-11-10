@@ -1,7 +1,12 @@
 [test]
 preload = "./happydom.ts"
 
-    # always enable coverage
+[install.lockfile]
+
+save = true
+print = "yarn"
+
+# always enable coverage
 coverage = true
 coverageSkipTestFiles = true
 coverageReporter  = ["text", "lcov"]  # default ["text"]
