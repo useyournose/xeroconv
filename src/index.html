@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Convert Garmin Xero Stuff</title>
+        <title>XeroConv - Convert Garmin Xero files</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="google" content="nositelinkssearchbox">
-        <meta name="google-site-verification" content="qBVIJ43d0aUA3G6WnmGA7zVlDajaCGUmaq3yD9RK5KE">
         <meta name="application-name" content="XeroConv">
         <meta name="description" content="XeroConv - online converter for files from Garmin Xero to shotview to Labradar csv, what you can use in GRT - Gordons Reloading Tool">
         <meta name="keywords" content="xeroconv, useyournose, garmin, xero, converter, garmin, grt, gordons reloading tool">
         <meta name="author" content="Oliver Berger">
+        <meta name="language" content="en">
+        <meta name="robots" content="index,follow">
+        <meta name="revisit-After" content="30 days">
+        <meta name="distribution" content="global">
+        <meta http-equiv="content-security-policy" content="default-src 'self' 'unsafe-inline'; script-src 'self'">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="default-style" content="xeroconv-style">
+        <meta name="google" content="nositelinkssearchbox">
+        <meta name="google-site-verification" content="qBVIJ43d0aUA3G6WnmGA7zVlDajaCGUmaq3yD9RK5KE">
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
         <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
         <script src="index.ts" type="module"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css" title="xeroconv-style">        
     </head>
     <body>
         <section class="hero is-success">
@@ -23,9 +30,9 @@
             </div>
         </section>
         <nav class="navbar" role="navigation" aria-label="main navigation" style="display: block;">
-            <div id="navbar" class="navbar-menu">
+            <div id="navbar" class="navbar-menu is-active">
                 <div class="navbar-start">
-                    <a class="navbar-item is-active">Xero2Labradar</a>
+                    <h1 class="navbar-item is-active">Xero2Labradar</h1>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">More</a>
                         <div class="navbar-dropdown">
@@ -139,20 +146,20 @@
                     <h4>arranged by Oliver Berger 2024</h4>
                 </div>
                 <div class="column is-4">
+                    <div class="content has-text-centered">
+                        <p>
+                            This page is hosted on github pages.<br>
+                            The <a href="https://github.com/useyournose/xeroconv" target="_blank">source code</a> is licensed <a href="https://opensource.org/license/mit" target="_blank">MIT</a>. The website content is licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//" target="_blank">CC BY NC SA 4.0</a>.<br>
+                            All trademarks are property of their respective owners.
+                        </p>
+                    </div>
+                </div>
+                <div class="column is-4">
                     <h4 class="footer-title">Contribute on Github</h4>
                     <span class="icon">
                         <a href="https://github.com/useyournose/xeroconv/issues" target="_blank"><i class="fa-brands fa-github"></i></a>
                     </span>
                 </div>
-                <div class="column is-4"></div>
-            </div>
-            <div class="content has-text-centered">
-                <p>
-                    This page is hosted on github pages.<br>
-                    The <a href="https://github.com/useyournose/xeroconv" target="_blank">source code </a> is licensed <a href="https://opensource.org/license/mit" target="_blank">MIT</a>.<br>
-                    The website content is licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//" target="_blank">CC BY NC SA 4.0</a>.<br>
-                    All trademarks are property of their respective owners.
-                </p>
             </div>
         </footer>
         <container id="snackbar"></container>

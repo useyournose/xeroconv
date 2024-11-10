@@ -2,6 +2,13 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
+const { createDefaultPreset } = require('ts-jest')
+
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+module.exports = {
+  // [...]
+  ...createDefaultPreset(),
+}
 
 /** @type {import('jest').Config} */
 const config = {
@@ -50,7 +57,7 @@ const config = {
 
   // An array of file extensions your modules use
    moduleFileExtensions: [
-    // "js",
+    "js",
     // "mjs",
   //   "cjs",
   //   "jsx",
@@ -95,8 +102,6 @@ transform: {},
 //  "^.+\\.mjs$": "babel-jest",
 //},
 testPathIgnorePatterns: [".+/node_modules/"],
-moduleFileExtensions: ["ts"]
-
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,
@@ -109,6 +114,7 @@ moduleFileExtensions: ["ts"]
 
   // Whether to use watchman for file crawling
   // watchman: true,
+  preset: "ts-jest"
 };
 
 module.exports = config;

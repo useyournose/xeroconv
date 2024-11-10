@@ -46,11 +46,11 @@ https://parceljs.org/
 
 1. install bun https://bun.sh
 1. do the `bun install`
-  1. install parcel `npm install --save-dev parcel` https://parceljs.org/getting-started/webapp/
-  1. install garmin fitsdk `npm install @garmin/fitsdk`
-  1. install bulma `npm install bulma`
-  1. install papaparse `npm install papaparse`
-  1. install fontawesome free `npm install --save @fortawesome/fontawesome-free`
-  1. install sheetjs `npm i --save https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`
-  1. install dayjs `npm install dayjs`
+  1. install parcel `bun add --dev parcel` https://parceljs.org/getting-started/webapp/
+  1. install garmin fitsdk `bun add @garmin/fitsdk`
+  1. install bulma `bun add bulma`
+  1. install papaparse `bun add papaparse`
+  1. install fontawesome free `bun add @fortawesome/fontawesome-free`
+  1. install sheetjs `bun rm xlsx && bun add https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`  https://docs.sheetjs.com/docs/getting-started/installation/bun/ 
+  1. install dayjs `bun add dayjs`
 

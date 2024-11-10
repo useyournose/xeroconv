@@ -18,7 +18,6 @@ export default [
     rules: {
       ...html.configs["flat/recommended"].rules, // Must be defined. If not, all recommended rules will be lost
       "@html-eslint/attrs-newline": "off",
-      //"@html-eslint/element-newline": ["error", { "inline": ["$inline", "a"]}]
     },
   }
 ];
