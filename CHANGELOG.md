@@ -5,19 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2024-12-25
+
+### Changed
+
+- added navigation via tab key
+
 ## 2024-12-21
 
 ### Changed
 
 - updated dependencies, [FITSDK 21.158.00](https://forums.garmin.com/developer/fit-sdk/b/news-announcements/posts/fit-sdk-21-158-00-release)
 
-
 ## 2024-11-10
 
 ### Changed
 
 - more metadata fields to enhance SEO
-
 
 ## 2024-10-19
 
