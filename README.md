@@ -19,6 +19,14 @@ As Garmin is a big and funny company and my code is fragile, here are the tested
 | `*.xls` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Fmain%2Fversion_shotview_a.json)| |
 | `*.xlsx` | ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fuseyournose%2Fxeroconv%2Fmain%2Fversion_shotview_i.json)| |
 
+## run locally
+
+All commands are executed on the commandline in the folder.
+
+1. install bun https://bun.sh
+1. run `bun install`
+1. run `bun run start`
+Parcel will create a local webserver on `http://localhost:1234` where the complete website runs. 
 
 ## techstack
 
