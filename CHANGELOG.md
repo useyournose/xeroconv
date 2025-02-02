@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2025-02-02
+
+### Changed
+
+- updated dependencies:
+  - [FITSDK 21.161.00](https://github.com/garmin/fit-javascript-sdk/releases/tag/21.161.0)
+  - [Bulma 1.0.3](https://github.com/jgthms/bulma/releases/tag/1.0.3)
+  - Papaparse 5.5.2
+
+- CSV/XLS/XLSX conversion: On the average speed conversion, the number of decimals is now set to 3.
+
 ## 2024-12-25
 
 ### Changed

@@ -86,7 +86,7 @@ export default function csv2labradar(fileData:ArrayBuffer|string,ofilename:strin
         stream = stream.replaceAll("{UNIT_DISTANCE}",unit_distance);
         stream = stream.replaceAll("{UNIT_ENERGY}",unit_energy);
         stream = stream.replaceAll("{UNIT_WEIGHT}",unit_weight);
-        stream = stream.replace("{SPEED_AVG}",speed_avg.toString());
+        stream = stream.replace("{SPEED_AVG}",speed_avg.toFixed(3).toString());
         stream = stream.replace("{SPEED_MAX}",speed_max.toString());
         stream = stream.replace("{SPEED_MIN}",speed_min.toString());
         stream = stream.replace("{SPEED_ES}",nnf(stats.data[3][1]).toString());
