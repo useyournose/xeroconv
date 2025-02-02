@@ -9,7 +9,7 @@ Units distances;m;;
 Units kinetic energy;j;;
 Units weight;grains (grs);;
 
-Stats - Average;474.13;m/s;
+Stats - Average;474.130;m/s;
 Stats - Highest;488.3;m/s;
 Stats - Lowest;425.5;m/s;
 Stats - Ext. Spread;62.8;m/s;
