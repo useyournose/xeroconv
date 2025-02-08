@@ -73,6 +73,22 @@ test('convert US time', () => {
     expect(resulttime).toBe(expected[1]);
 });
 
+test('convert DE iphone time', () => {
+    const probe = '8. Februar 2025 um 10:26';
+    const expected = ["08-02-2025","10:26:00"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+
+test('convert crippled DE iphone time', () => {
+    const probe = ' "8. Februar 2025 um 10:26" ';
+    const expected = ["08-02-2025","10:26:00"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+
 test('convert fit stamp', () => {
     const probe = "Tue Jul 02 2024 17:09:22 GMT+0200";
     const expected = ["02-07-2024","15:09:22"];

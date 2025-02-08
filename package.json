@@ -31,11 +31,11 @@
   },
   "homepage": "https://github.com/useyournose/xeroconv#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.26.7",
-    "@eslint/js": "^9.19.0",
-    "@happy-dom/global-registrator": "^15.11.7",
-    "@html-eslint/eslint-plugin": "^0.31.1",
-    "@html-eslint/parser": "^0.31.0",
+    "@babel/preset-env": "^7.26.8",
+    "@eslint/js": "^9.20.0",
+    "@happy-dom/global-registrator": "^17.0.0",
+    "@html-eslint/eslint-plugin": "^0.34.0",
+    "@html-eslint/parser": "^0.34.0",
     "@jest/globals": "^29.7.0",
     "@parcel/transformer-sass": "^2.13.3",
     "@types/bun": "^1.2.2",
@@ -47,14 +47,15 @@
     "parcel": "^2.13.3",
     "ts-jest": "^29.2.5",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.22.0"
+    "typescript-eslint": "^8.23.0",
+    "bun": "^1.2.2"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@garmin/fitsdk": "^21.161.0",
     "bulma": "^1.0.3",
     "dayjs": "^1.11.13",
-    "eslint": "^9.19.0",
+    "eslint": "^9.20.0",
     "papaparse": "^5.5.2",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }

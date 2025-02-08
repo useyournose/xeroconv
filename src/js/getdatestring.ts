@@ -30,8 +30,11 @@ export default function getdatestring(datestring:string):string[] {
 
     // make it a nice string
     if (typeof datestring == "string") {
+        datestring = datestring.trim();
+        datestring = datestring.replace(/\"/g,'');
         datestring = datestring.replace(/\u202f/g,' ');
-        if (/[AP]M$/.test(datestring)) {datestring = datestring.replace(' at','')}
+        if (/[AP]M$/.test(datestring)) {datestring = datestring.replace(/ at /,' ')}
+        if (/ um /.test(datestring)) {datestring = datestring.replace(/ um /,' ')}
     }
 
     console.debug("[_getdatestring]: trying to convert: "+ datestring);

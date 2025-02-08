@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2025-02-08
+
+### Fixed
+
+- Fixed issue with shotview on iOS csv exports and german language settings, where "um" is used in the date.
+
+### Changed
+
+- updated DevDependencies
+  - Bun 1.2.2
+  - Happy Dom
+  - ESLint
+
 ## 2025-02-02
 
 ### Changed
