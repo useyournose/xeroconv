@@ -93,7 +93,7 @@ export default function csv2labradar(fileData:ArrayBuffer|string,ofilename:strin
         stream = stream.replace("{SPEED_SD}",nnf(stats.data[2][1]).toString());
     
         shots.data.forEach(function (item,index) { 
-            stream+=item[0].toString().padStart(4, '0') + ";" + nnf(item[1]) +";" + nnf(item[3]) + ";" + nnf(item[4]) + ";"+ nnf(stats.data[4][1]) + ";" + datestring +";" + item[5]  + ";\n";
+            stream+=item[0].toString().padStart(4, '0') + ";" + nnf(item[1]) +";" + nnf(item[3]) + ";" + nnf(stats.data[4][1]) + ";" + datestring +";" + item[5]  + ";\n";
         })
         console.log("[csv2labradar]: parsed " + title + " in " + (Date.now() - start) + " milliseconds.")
         const downloadstatus:Promise<string|boolean> = download(stream,filename)
