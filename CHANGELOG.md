@@ -11,6 +11,11 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 
 - Fixed csv/xls converter, where the columns didn't match the header. Now the note field GRT should be populated properly with a timestamp.
 
+### Changed
+
+- The XLS converter now uses the sheetnames for filenaming.
+- Filenames with less timestamps for csv/xls converters.
+
 ## 2025-02-08
 
 ### Fixed

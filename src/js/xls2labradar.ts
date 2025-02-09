@@ -7,7 +7,8 @@ export default async function xls2labradar(fileData:ArrayBuffer,ofilename:string
     for (const sheetname of xlsfile.SheetNames) {
       const worksheet = xlsfile.Sheets[sheetname]
       const csvdata = XLSX.utils.sheet_to_csv(worksheet);
-      const title = csvdata.split('\n')[0].replace(',','');
+      //const title = csvdata.split('\n')[0].replace(/,/g,'').replace(/"/g,'');
+      const title = sheetname;
       const result:Promise<string> = csv2labradar(csvdata,title+'.csv')
       result
       .then((value) => {console.log("[xls2labradar]: "+value)})
