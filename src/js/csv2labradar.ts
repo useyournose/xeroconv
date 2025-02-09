@@ -59,7 +59,7 @@ export default function csv2labradar(fileData:ArrayBuffer|string,ofilename:strin
           return
         }
         
-        if (ofilename.includes(datestring)) {
+        if (ofilename.includes(datestring) || ofilename.includes((datestring.split('-').reverse().join('-'))) ) {
           filename = ofilename.replace(/\.csv$/, '-xeroconv.csv');
         } else {
           filename = ofilename.replace(/\.csv$/,'')+'_'+datestring + '_' + hourstring.replaceAll(':','-') + '-xeroconv.csv'
