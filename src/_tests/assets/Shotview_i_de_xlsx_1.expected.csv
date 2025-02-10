@@ -1,0 +1,23 @@
+sep=;
+Device ID;useyournose-xeroconv;;
+
+Series No;0001;;
+Total number of shots;0005;;
+
+Units velocity;m/s;;
+Units distances;m;;
+Units kinetic energy;j;;
+Units weight;grains (grs);;
+
+Stats - Average;941.780;m/s;
+Stats - Highest;958;m/s;
+Stats - Lowest;933.5;m/s;
+Stats - Ext. Spread;3.4;m/s;
+Stats - Std. Dev;24.5;m/s;
+
+Shot ID;V0;Ke0;Proj. Weight;Date;Time
+0001;958;1635.6;55;08-02-2025;10:26:39;
+0002;937.2;1565.1;55;08-02-2025;10:26:57;
+0003;933.5;1552.8;55;08-02-2025;10:27:16;
+0004;940;1574.6;55;08-02-2025;10:27:33;
+0005;940.2;1575.2;55;08-02-2025;10:27:55;

@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2025-02-10
+
+### Fixed
+
+- fixed csv/xls converter: shotview xlsx exports from german iOS devices use lower metricnames in the column headers.
+
+### Changed
+
+- The XLS converter is now promissing
+- The XLS converter now uses the cleaned up first line of a sheet for the filename.
+
 ## 2025-02-09
 
 ### Fixed

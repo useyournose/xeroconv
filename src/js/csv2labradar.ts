@@ -69,10 +69,10 @@ export default function csv2labradar(fileData:ArrayBuffer|string,ofilename:strin
           stats.data.splice(1,0,["AVERAGE POWER FACTOR",'','','','','',]);
           stats.data.splice(4,0,["Gewicht des Projektils (GRAN)",'','','','','']);
         }
-        const unit_velocity = /\(MPS\)/.test(header[1]) ? "m/s":"fps";
-        const unit_distance = /\(MPS\)/.test(header[1])  ? "m":"yrds";
+        const unit_velocity = /\(MPS\)/i.test(header[1]) ? "m/s":"fps";
+        const unit_distance = /\(MPS\)/i.test(header[1])  ? "m":"yrds";
         const unit_energy = /\(J\)/.test(header[3]) ? "j": "ft-lbs";
-        const unit_weight = /\(GRAN\)/.test(stats.data[4][0]) ? "grains (grs)":"gram (g)";
+        const unit_weight = /\(GRAN\)*/.test(stats.data[4][0]) ? "grains (grs)":"gram (g)";
         
         const speeds = shots.data.map(row => nnf(row[1]));
         const speed_max = Math.max(...speeds);
