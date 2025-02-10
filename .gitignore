@@ -6,3 +6,4 @@ dist
 coverage
 .vscode
 out
+src/_tests/assets/~*.xls*
