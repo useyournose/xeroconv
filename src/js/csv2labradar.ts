@@ -10,7 +10,7 @@ export default function csv2labradar(fileData:ArrayBuffer|string,ofilename:strin
     const start = Date.now();
     const dec = new TextDecoder("utf-8")
     const source:string = typeof fileData != 'string' /* 'object'*/ ? dec.decode(fileData as ArrayBuffer) : fileData
-    const cleansource = source.replace(', ',',')
+    const cleansource = source.replace(/, /g,',')
     let sourceparts = cleansource.split(/-,{3,}[\n]/)
     let fallback = false
     if (sourceparts.length == 1) {

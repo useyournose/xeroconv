@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2025-03-02
+
+### Fixes
+
+- fixed csv/xls converter: issue with dates on ios exported csvs. PapaParse only accepts textqualifiers, when they are succeeding a comma immediately. 
+
+### Changed
+
+- updated dependecies
+
 ## 2025-02-10
 
 ### Fixed
