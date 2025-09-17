@@ -2,9 +2,8 @@
 preload = "./happydom.ts"
 
 [install.lockfile]
-
 save = true
-print = "yarn"
+exact = true
 
 # always enable coverage
 coverage = true

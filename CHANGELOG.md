@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2025-09-17
+
+### Changed
+
+- updated devDependencies
+  - bun 1.2.22 & @types/bun 1.2.22
+  - parcel 2.15.4
+- updated dependencies
+  - [dayjs 1.11.18](https://github.com/iamkun/dayjs/releases/tag/v1.11.18)
+  - [FITSDK 21.178.00](https://github.com/garmin/fit-javascript-sdk/releases/tag/21.178.0)
+  - [Bulma 1.0.5](https://github.com/jgthms/bulma/releases/tag/1.0.5)
+  - Papaparse 5.5.3
+  - [FontawesomeFree 7.0.1](https://github.com/FortAwesome/Font-Awesome/releases/tag/7.0.1)
+- switched to readable bun.lock
+
+### Security
+
+- enabled dependabot
+- pinned versions
+- vendored xlsx
+
 ## 2025-03-02
 
 ### Fixes
