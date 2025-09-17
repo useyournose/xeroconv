@@ -10,16 +10,21 @@ on:
     paths: ['src/**',.github/workflows/*]
 jobs:
   build:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      security-events: write
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: oven-sh/setup-bun@v2
+    - uses: actions/checkout@v5.0.0
+    - uses: oven-sh/setup-bun@v2.0.2
     - run: bun install
     - run: bun test
     - run: bun run --if-present predeploy
     - name: Upload artifact
       if: github.ref  == 'refs/heads/main'
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v4.0.0
       with:
         path: dist/
   deploy:
@@ -37,4 +42,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4.0.5

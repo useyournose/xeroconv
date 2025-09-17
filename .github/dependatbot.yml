@@ -1,0 +1,27 @@
+---
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "actions/*"
+          - "oven-sh/*"
+
+  - package-ecosystem: bun
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      jest:
+        patterns:
+          - "jest"
+          - "jest-environment-jsdom"
+          - "babel-jest"
+      parcel-core:
+        patterns:
+          - "parcel"
+          - "parcel-transformer-sass"
