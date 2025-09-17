@@ -1,0 +1,80 @@
+{
+  "short_name": "XeroConv",
+  "name": "XeroConv - Converter for Garmin Xero files",
+  "icons": [
+    {
+      "src": "assets/windows-44x44.png",
+      "sizes": "44x44",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/maskable_icon_x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+      }
+  ],
+  "file_handlers": [
+    {
+      "action": ".",
+      "accept": {
+        "text/csv": [
+          ".csv"
+        ],
+        "application/vnd.ms-excel" : [
+          ".xls"
+        ],
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+          ".xlsx"
+        ],
+        "application/vnd.ant.fit": [
+          ".fit"
+        ]
+      },
+      "launch_type": "single-client"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": ["focus-existing", "auto"]
+  },
+  "screenshots": [
+    {
+      "src": "assets/screenshot_wide.png",
+      "sizes": "1442x961",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Wide view"
+    },
+    {
+      "src": "assets/screenshot.png",
+      "sizes": "605x951",
+      "type": "image/png",
+      "label": "Long view"
+    }
+  ]
+  ,
+  "start_url": ".",
+  "scope": "https://useyournose.github.io/xeroconv/",
+  "background_color": "#ffffff",
+  "display": "minimal-ui",
+  "theme_color": "#ffffff"
+}

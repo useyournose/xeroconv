@@ -17,10 +17,18 @@
         <meta http-equiv="default-style" content="xeroconv-style">
         <meta name="google" content="nositelinkssearchbox">
         <meta name="google-site-verification" content="qBVIJ43d0aUA3G6WnmGA7zVlDajaCGUmaq3yD9RK5KE">
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <link rel="canonical" href="https://useyournose.github.io/xeroconv/">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+        <link rel="android-chrome-192x192" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
+        <link rel="android-chrome-512x512" type="image/png" sizes="512x512" href="assets/android-chrome-512x512.png">
         <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+        <link rel="manifest" href="manifest.json">
         <script src="index.ts" type="module"></script>
-        <link rel="stylesheet" href="style.css" title="xeroconv-style">        
+        <script src="js/service-worker-reg.ts" type="module"></script>
+        <link rel="stylesheet" href="style.css" title="xeroconv-style">
+        <meta name="pwa-capable" content="yes">
     </head>
     <body>
         <section class="hero is-success">
@@ -29,20 +37,41 @@
                 <p class="subtitle">to something usable for GRT</p>
             </div>
         </section>
-        <nav class="navbar" role="navigation" aria-label="main navigation" style="display: block;">
-            <div id="navbar" class="navbar-menu is-active">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">                
+                <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="navbar">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-menu">
                 <div class="navbar-start">
                     <h1 class="navbar-item is-active">Xero2Labradar</h1>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">More</a>
                         <div class="navbar-dropdown">
                             <a class="navbar-item js-modal-trigger" id="help_button" data-target="modal-help">Help</a>
+                            <a class="navbar-item js-modal-trigger" id="pwainfo_button" data-target="modal-pwa">Download or not</a>
                             <a class="navbar-item js-modal-trigger" id="versions_button" data-target="modal-versions">Tested Versions</a>
                             <a class="navbar-item" href="https://github.com/useyournose/xeroconv/blob/main/CHANGELOG.md" target="_blank">Change Log</a>
                             <a class="navbar-item" href="https://github.com/useyournose/xeroconv" target="_blank">Source Code</a>
                             <hr class="navbar-divider">
                             <a class="navbar-item" href="https://github.com/useyournose/xeroconv/issues" target="_blank">Report an issue</a>
                         </div>
+                    </div>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <p class="control" id="install" hidden>
+                            <a class="button is-primary">
+                                <span class="icon">
+                                    <i class="fas fa-download"></i>
+                                </span>
+                                <span>Download</span>
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -59,6 +88,40 @@
                         <div class="block">This is a Web App and there is no "Backend". All data and files will stay on your device. The conversion is solely done by your computers resources.</div>
                         <div class="block">Just click on the button to upload the files you want to convert, select the files and pick them up from your download directory.</div>
                         <div class="block">Due to the nature of software development, and that I'm not related to Garmin in any way, it might happen, that future Xero Firmwares or Shotview versions will produce incompatible files. If you have created files with a newer version, or your file just doesn't work, just let me know on <a href="https://github.com/useyournose/xeroconv/issues" target="_blank">Github: Report an issue</a>.</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="modal" id="modal-pwa">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">To download or not to download</p>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="content">
+                        <p>
+                            This web app is downloadable, using "progressive web app" or "PWA" features.
+                            Due to it's nature to bridge from an app for ios and android to an app build on windows, that may or may not be cool for you.
+                            Unluckily, features differ from browser to browser and os to os. Here's a quick breakdown of features.
+                        </p>
+                        <h2>Offline Use</h2>
+                        <p>
+                            A PWA is basically a local copy of the site and and opens it in your browser when needed.
+                            It regularly checks for updates, when in use, so you don't need to uninstall and install manually.
+                        </p>
+                        <h2>OS integration - File association</h2>
+                        <p>
+                            Depending on the browser and os, this app can act as file share target. Once installed you can actually right-click a desired file, and the app will be listed in the "Open with ..." dialog.
+                            You can read more about the compatibility on <a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/file_handlers#browser_compatibility">MDN: PWA - file handlers</a>.
+                        </p>
+                        <h2>OS integration - File Handler</h2>
+                        <p>
+                            Depending on the browser and os, this app can share files with other apps and not just store it into the download folder. You can read more about that on <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API">Web Share API</a>.
+                        </p>
+                        <h2>share tartget</h2>
+                        <p>https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/share_target#browser_compatibility</p>
                     </div>
                 </section>
             </div>
