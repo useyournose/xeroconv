@@ -36,7 +36,7 @@
     "@happy-dom/global-registrator": "18.0.1",
     "@html-eslint/eslint-plugin": "0.46.2",
     "@html-eslint/parser": "0.46.2",
-    "@jest/globals": "30.1.2",
+    "@jest/globals": "30.2.0",
     "@parcel/transformer-sass": "2.16.0",
     "@types/bun": "1.2.22",
     "@types/papaparse": "5.3.16",
