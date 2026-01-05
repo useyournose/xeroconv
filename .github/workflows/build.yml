@@ -17,8 +17,8 @@ jobs:
       security-events: write
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5.0.0
-    - uses: oven-sh/setup-bun@v2.0.2
+    - uses: actions/checkout@v6.0.1
+    - uses: oven-sh/setup-bun@v2.1.0
     - run: bun install
     - run: bun test
     - run: bun run --if-present predeploy
