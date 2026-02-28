@@ -1,0 +1,57 @@
+{
+    "file": {
+        "checksum": "c8b3593f",
+        "deviceid": "useyournose-xeroconv",
+        "name": "55grs FOX - 24,20 D073.4.csv",
+        "title": "55grs FOX - 24,20 D073.4.csv"
+    },
+    "shots": [
+        {
+            "energy": 1635.6,
+            "shotnumber": 1,
+            "timestamp": 1739010399,
+            "velocity": 958
+        },
+        {
+            "energy": 1565.1,
+            "shotnumber": 2,
+            "timestamp": 1739010417,
+            "velocity": 937.2
+        },
+        {
+            "energy": 1552.8,
+            "shotnumber": 3,
+            "timestamp": 1739010436,
+            "velocity": 933.5
+        },
+        {
+            "energy": 1574.6,
+            "shotnumber": 4,
+            "timestamp": 1739010453,
+            "velocity": 940
+        },
+        {
+            "energy": 1575.2,
+            "shotnumber": 5,
+            "timestamp": 1739010475,
+            "velocity": 940.2
+        }
+    ],
+    "stats": {
+        "projectile": 55,
+        "shots_total": 5,
+        "speed_avg": 941.78,
+        "speed_es": 3.4,
+        "speed_max": 958,
+        "speed_min": 933.5,
+        "speed_sd": 24.5,
+        "timestamp": 1739010360,
+        "timezone": 0
+    },
+    "units": {
+        "distance": false,
+        "energy": false,
+        "velocity": false,
+        "weight": true
+    }
+}

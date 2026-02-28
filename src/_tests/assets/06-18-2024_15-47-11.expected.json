@@ -1,0 +1,87 @@
+{
+    "file": {
+        "checksum": "ffbc9ad7",
+        "deviceid": "garmin-3479405784",
+        "name": "06-18-2024_15-47-11.fit",
+        "title": "06-18-2024_15-47-11.fit"
+    },
+    "shots": [
+        {
+            "energy": 410.76,
+            "shotnumber": 1,
+            "timestamp": 1718718481000,
+            "velocity": 265.391
+        },
+        {
+            "energy": 378.71,
+            "shotnumber": 2,
+            "timestamp": 1718718487000,
+            "velocity": 254.826
+        },
+        {
+            "energy": 376.06,
+            "shotnumber": 3,
+            "timestamp": 1718718494000,
+            "velocity": 253.934
+        },
+        {
+            "energy": 400.9,
+            "shotnumber": 4,
+            "timestamp": 1718718498000,
+            "velocity": 262.184
+        },
+        {
+            "energy": 428.32,
+            "shotnumber": 5,
+            "timestamp": 1718718518000,
+            "velocity": 271.003
+        },
+        {
+            "energy": 446.31,
+            "shotnumber": 6,
+            "timestamp": 1718718522000,
+            "velocity": 276.637
+        },
+        {
+            "energy": 454.24,
+            "shotnumber": 7,
+            "timestamp": 1718718525000,
+            "velocity": 279.081
+        },
+        {
+            "energy": 436.93,
+            "shotnumber": 8,
+            "timestamp": 1718718543000,
+            "velocity": 273.712
+        },
+        {
+            "energy": 466.15,
+            "shotnumber": 9,
+            "timestamp": 1718718545000,
+            "velocity": 282.719
+        },
+        {
+            "energy": 490.09,
+            "shotnumber": 10,
+            "timestamp": 1718718548000,
+            "velocity": 289.885
+        }
+    ],
+    "stats": {
+        "projectile": 180,
+        "shots_total": 10,
+        "speed_avg": 270.937,
+        "speed_es": 35.951,
+        "speed_max": 289.885,
+        "speed_min": 253.934,
+        "speed_sd": 11.227,
+        "timestamp": 1718718431000,
+        "timezone": 0
+    },
+    "units": {
+        "distance": false,
+        "energy": false,
+        "velocity": false,
+        "weight": false
+    }
+}

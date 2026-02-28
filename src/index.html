@@ -12,15 +12,24 @@
         <meta name="robots" content="index,follow">
         <meta name="revisit-After" content="30 days">
         <meta name="distribution" content="global">
-        <meta http-equiv="content-security-policy" content="default-src 'self' 'unsafe-inline'; script-src 'self'">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
+        <meta http-equiv="Permission-Policy" content="web-share=(self)">
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta http-equiv="default-style" content="xeroconv-style">
         <meta name="google" content="nositelinkssearchbox">
         <meta name="google-site-verification" content="qBVIJ43d0aUA3G6WnmGA7zVlDajaCGUmaq3yD9RK5KE">
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <link rel="canonical" href="https://useyournose.github.io/xeroconv/">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+        <link rel="android-chrome-192x192" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
+        <link rel="android-chrome-512x512" type="image/png" sizes="512x512" href="assets/android-chrome-512x512.png">
         <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+        <link rel="manifest" href="manifest.json">
         <script src="index.ts" type="module"></script>
-        <link rel="stylesheet" href="style.css" title="xeroconv-style">        
+        <script src="js/service-worker-reg.ts" type="module"></script>
+        <link rel="stylesheet" href="style.css" title="xeroconv-style">
+        <meta name="pwa-capable" content="yes">
     </head>
     <body>
         <section class="hero is-success">
@@ -29,10 +38,19 @@
                 <p class="subtitle">to something usable for GRT</p>
             </div>
         </section>
-        <nav class="navbar" role="navigation" aria-label="main navigation" style="display: block;">
-            <div id="navbar" class="navbar-menu is-active">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">                
+                <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="navbar">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-menu">
                 <div class="navbar-start">
-                    <h1 class="navbar-item is-active">Xero2Labradar</h1>
+                    <a class="navbar-item js-page-trigger is-active" data-target="x2l">Xero2Labradar</a>
+                    <a class="navbar-item js-page-trigger is-hidden" data-target="analysis" id="NavAnalyse">Visuals</a>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">More</a>
                         <div class="navbar-dropdown">
@@ -43,6 +61,18 @@
                             <hr class="navbar-divider">
                             <a class="navbar-item" href="https://github.com/useyournose/xeroconv/issues" target="_blank">Report an issue</a>
                         </div>
+                    </div>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <p class="control" id="install" hidden>
+                            <a class="button is-primary">
+                                <span class="icon">
+                                    <i class="fas fa-download"></i>
+                                </span>
+                                <span>Download</span>
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -88,54 +118,82 @@
             <div class="container block">
                 <div class="box">
                     <div class="content">
-                        <h2 class="title">Convert a .fit file from the Garmin Xero C1 Pro device to labradar format</h2>
+                        <h2 class="title">Convert a *.fit, *.csv, *.xlsx, *.xls file</h2>
+                        <p> Just select the file, and you'll find it as csv in your download folder, with a <span class="tag is-primary">-xeroconv.csv</span> at the end.</p></p>
+                        <p>The <u>fit</u> files are located in the <span class="tag is-primary is-light">Garmin</span> <span class="icon"> <i class="fas fa-arrow-right"></i> </span> <span class="tag is-primary is-light">Shot_Sessions</span> Folder on the Xero C1.</p>
+                        <p>The <u>csv, xls and xlsx</u> files, can be exported in Garmins Shotview App in different places.</p>
                         <p>This uses the <a href="https://developer.garmin.com/fit/overview/" target="_blank" tabindex="-1">FIT SDK from Garmin(c)</a>. Just select the file, and you'll find it as csv in your download folder, with <span class="tag is-primary">-xeroconv.csv</span> at the end.</p>
-                        <p>The files are located in the <span class="tag is-primary is-light">Garmin</span> <span class="icon"> <i class="fas fa-arrow-right"></i> </span> <span class="tag is-primary is-light">Shot_Sessions</span> Folder on the Xero C1.</p>
                     </div>
                     <div class="file is-centered is-boxed">
                         <label class="file-label">
-                            <input class="file-input" type="file" id="fit2labradar" name="fit2labradar" accept=".fit" multiple tabindex="0">
+                            <input class="file-input" type="file" id="xero2labradar" name="xero2labradar" accept=".fit,.xls,.xlsx,.csv" multiple tabindex="0">
                             <span class="file-cta">
                                 <span class="file-icon">
                                     <i class="fa-regular fa-file-code"></i>
                                 </span>
-                                <span class="file-label"> Select .fit File(s)… </span>
+                                <span class="file-label"> Select File(s)… </span>
                             </span>
                         </label>
                     </div>
                 </div>
             </div>
+        </section>
+        <section id="analysis" class="is-hidden">
             <div class="container block">
                 <div class="box">
-                    <div class="content">
-                        <h2>Convert a .csv file from the Garmin Shotview app to labradar format</h2>
-                        <p>This converts the csv file, you can export in Garmins Shotview App. Just select the file, and you'll find it as csv in your download folder, with a <span class="tag is-primary">-xeroconv.csv</span> at the end.</p>
-                    </div>
-                    <div class="file is-centered is-boxed">
-                        <label class="file-label">
-                            <input class="file-input" type="file" id="csv2labradar" name="csv2labradar" accept=".csv" multiple tabindex="0">
-                            <span class="file-cta">
-                                <span class="file-icon"> <i class="fa-regular fa-file-code"></i></span>
-                                <span class="file-label"> Select .csv File(s)… </span>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="container block">
-                <div class="box">
-                    <div class="content">
-                        <h2>Convert a .xls / .xlsx file from the Garmin Shotview app to labradar format</h2>
-                        <p>This converts the xls(x) file, you can export in Garmins Shotview App. Just select the file, and you'll find it as separate csv in your download folder, with a <span class="tag is-primary">-xeroconv.csv</span> at the end.</p>
-                    </div>
-                    <div class="file is-centered is-boxed">
-                        <label class="file-label">
-                            <input class="file-input" type="file" id="xls2labradar" name="xls2labradar" accept=".xls,.xlsx" multiple tabindex="0">
-                            <span class="file-cta">
-                                <span class="file-icon"><i class="fa-regular fa-file-code"></i></span>
-                                <span class="file-label"> Select .xls / .xlsx File(s)… </span>
-                            </span>
-                        </label>
+                    <div class="container block">
+                        <div class="box">
+                            <div class="content">
+                                <h1>Sessions*</h1>
+                                <table id="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <!--input type="checkbox" id="table-select-all"-->
+                                            </th>
+                                            <th>Id</th>
+                                            <th>Topic</th>
+                                            <th>Shots</th>
+                                            <th>avg</th>
+                                            <th>sd</th>
+                                            <th>es</th>
+                                            <th>Projectile</th>
+                                            <th>Recorded</th>
+                                            <th>Added</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>1</th>
+                                            <td>Here could be your Session</td>
+                                            <td>0</td>
+                                            <td>1</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>2025-10-12 12:01:05</td>
+                                            <td>2025-10-12 12:01:05</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                * The values in this list are "as recorded". If you have international settings you need to rely on the conversion below. Just add your session in the "xero2labradar" Tab, to see them here.
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="content">
+                                <div class="control" id="units-radio">
+                                    <label class="radio">
+                                        <input type="radio" id="units-metric" name="units" checked>
+                                        metric
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" id="units-imperial" name="units">
+                                        imperial
+                                    </label>
+                                </div>
+                                <canvas id="histogramCanvas"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -19,24 +19,45 @@ declare module '@garmin/fitsdk' {
         deviceInfoMesgs:deviceInfoMesg[];
         chronoShotSessionMesgs:chronoShotSessionMesg[];
         chronoShotDataMesgs:chronoShotDataMesg[];
+        fileIdMesgs: fileIdMesgs[];
+        fileCreatorMesgs: fileCreatorMesgs[]
     }
 
     type chronoShotSessionMesg = {
-        shotCount:number;
+        shotCount: number;
         maxSpeed: number;
         minSpeed: number;
         avgSpeed: number;
         grainWeight: number;
+        projectileType: string;
+        timestamp: Date;
     }
     type deviceInfoMesg = {
-        manufacturer:string;
-        serialNumber:number;
+        garminProduct: 4053;
+        product: 4053;
+        manufacturer: "garmin" ;
+        serialNumber: number;
+        softwareVersion: number;
+        timestamp: Date;
     }
     
     type chronoShotDataMesg = {
         shotNum: number;
         shotSpeed: number;
-        timestamp: string;
+        timestamp: Date;
+    }
+
+    type fileIdMesgs = {
+        garminProduct: 4053;
+        product: 4053;
+        manufacturer: "garmin" ;
+        serialNumber: number;
+        type: number;
+        timeCreated: Date;
+    }
+
+    type fileCreatorMesgs = {
+        softwareVersion: number
     }
   
     export interface decoderOptions {
