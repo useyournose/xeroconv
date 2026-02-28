@@ -62,3 +62,10 @@ https://parceljs.org/
   1. install sheetjs `bun rm xlsx && bun add https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`  https://docs.sheetjs.com/docs/getting-started/installation/bun/ 
   1. install dayjs `bun add dayjs`
 
+## test with https
+
+if you have git installed
+
+"C:\Program Files\Git\usr\bin\openssl.exe" req  -nodes -new -x509  -keyout localhost.key -out localhost.crt
+
+

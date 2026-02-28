@@ -1,0 +1,141 @@
+{
+    "file": {
+        "checksum": "42f08cb9",
+        "deviceid": "useyournose-xeroconv",
+        "name": "Shotview_i.csv",
+        "title": "Shotview_i.csv"
+    },
+    "shots": [
+        {
+            "energy": 0,
+            "shotnumber": 1,
+            "timestamp": 1712410886,
+            "velocity": 2808.2
+        },
+        {
+            "energy": 0,
+            "shotnumber": 2,
+            "timestamp": 1712410912,
+            "velocity": 2790.7
+        },
+        {
+            "energy": 0,
+            "shotnumber": 3,
+            "timestamp": 1712410931,
+            "velocity": 2806.2
+        },
+        {
+            "energy": 0,
+            "shotnumber": 4,
+            "timestamp": 1712410953,
+            "velocity": 2800.3
+        },
+        {
+            "energy": 0,
+            "shotnumber": 5,
+            "timestamp": 1712410973,
+            "velocity": 2789.8
+        },
+        {
+            "energy": 0,
+            "shotnumber": 6,
+            "timestamp": 1712410989,
+            "velocity": 2790.1
+        },
+        {
+            "energy": 0,
+            "shotnumber": 7,
+            "timestamp": 1712411007,
+            "velocity": 2805.4
+        },
+        {
+            "energy": 0,
+            "shotnumber": 8,
+            "timestamp": 1712411021,
+            "velocity": 2778
+        },
+        {
+            "energy": 0,
+            "shotnumber": 9,
+            "timestamp": 1712411042,
+            "velocity": 2790.1
+        },
+        {
+            "energy": 0,
+            "shotnumber": 10,
+            "timestamp": 1712411058,
+            "velocity": 2789.1
+        },
+        {
+            "energy": 0,
+            "shotnumber": 11,
+            "timestamp": 1712411072,
+            "velocity": 2804.4
+        },
+        {
+            "energy": 0,
+            "shotnumber": 12,
+            "timestamp": 1712411228,
+            "velocity": 2795.1
+        },
+        {
+            "energy": 0,
+            "shotnumber": 13,
+            "timestamp": 1712411242,
+            "velocity": 2776.5
+        },
+        {
+            "energy": 0,
+            "shotnumber": 14,
+            "timestamp": 1712411286,
+            "velocity": 2797
+        },
+        {
+            "energy": 0,
+            "shotnumber": 15,
+            "timestamp": 1712411303,
+            "velocity": 2795.7
+        },
+        {
+            "energy": 0,
+            "shotnumber": 16,
+            "timestamp": 1712411323,
+            "velocity": 2786.9
+        },
+        {
+            "energy": 0,
+            "shotnumber": 17,
+            "timestamp": 1712411339,
+            "velocity": 2797.8
+        },
+        {
+            "energy": 0,
+            "shotnumber": 18,
+            "timestamp": 1712411357,
+            "velocity": 2793
+        },
+        {
+            "energy": 0,
+            "shotnumber": 19,
+            "timestamp": 1712411378,
+            "velocity": 2797.3
+        }
+    ],
+    "stats": {
+        "projectile": 0,
+        "shots_total": 19,
+        "speed_avg": 2794.295,
+        "speed_es": 31.7,
+        "speed_max": 2808.2,
+        "speed_min": 2776.5,
+        "speed_sd": 8.5,
+        "timestamp": 1712410560,
+        "timezone": 0
+    },
+    "units": {
+        "distance": true,
+        "energy": true,
+        "velocity": true,
+        "weight": true
+    }
+}

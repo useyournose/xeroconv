@@ -1,0 +1,51 @@
+{
+    "file": {
+        "checksum": "42177104",
+        "deviceid": "useyournose-xeroconv",
+        "name": "Shotview_i_de.csv",
+        "title": "Shotview_i_de.csv"
+    },
+    "shots": [
+        {
+            "energy": 1522.4,
+            "shotnumber": 1,
+            "timestamp": 1739009339,
+            "velocity": 924.3
+        },
+        {
+            "energy": 1504.2,
+            "shotnumber": 2,
+            "timestamp": 1739009354,
+            "velocity": 918.7
+        },
+        {
+            "energy": 1496.2,
+            "shotnumber": 3,
+            "timestamp": 1739009369,
+            "velocity": 916.3
+        },
+        {
+            "energy": 1492.1,
+            "shotnumber": 4,
+            "timestamp": 1739009389,
+            "velocity": 915
+        }
+    ],
+    "stats": {
+        "projectile": 55,
+        "shots_total": 4,
+        "speed_avg": 918.575,
+        "speed_es": 3.3,
+        "speed_max": 924.3,
+        "speed_min": 915,
+        "speed_sd": 9.2,
+        "timestamp": 1739009280,
+        "timezone": 0
+    },
+    "units": {
+        "distance": false,
+        "energy": false,
+        "velocity": false,
+        "weight": true
+    }
+}

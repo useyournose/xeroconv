@@ -6,7 +6,8 @@
       "preserveConstEnums": true,
       //"outFile": "../../built/local/tsc.js",
       "sourceMap": true,
-      "target": "ES2022",
+      "target": "ESNext",
+      "lib": ["webworker","DOM","ESNext"],
       //"allowImportingTsExtensions": true
     },
     "include": ["src/**/*.ts"],
