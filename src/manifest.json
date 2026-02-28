@@ -53,7 +53,7 @@
   ]
   ,
   "start_url": ".",
-  "scope": "https://useyournose.github.io/xeroconv-dev/",
+  "scope": "https://useyournose.github.io/xeroconv/",
   "background_color": "#ffffff",
   "display": "minimal-ui",
   "theme_color": "#ffffff"
