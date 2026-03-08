@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>XeroConv - Convert Garmin Xero files</title>
+        <title>XeroConv - Convert Garmin Xero and Athlon Rnagecraft files</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="application-name" content="XeroConv">
         <meta name="description" content="XeroConv - online converter for files from Garmin Xero to shotview to Labradar csv, what you can use in GRT - Gordons Reloading Tool">
-        <meta name="keywords" content="xeroconv, useyournose, garmin, xero, converter, garmin, grt, gordons reloading tool">
+        <meta name="keywords" content="xeroconv, useyournose, garmin, xero, converter, garmin, grt, gordons reloading tool, rangecraft">
         <meta name="author" content="Oliver Berger">
         <meta name="language" content="en">
         <meta name="robots" content="index,follow">
@@ -34,8 +34,8 @@
     <body>
         <section class="hero is-success">
             <div class="hero-body">
-                <p class="title">Convert Garmin Xero Files</p>
-                <p class="subtitle">to something usable for GRT</p>
+                <p class="title">Convert Garmin Xero files</p>
+                <p class="subtitle">(and Athlon Rangecraft files)<br>to something usable for GRT</p>
             </div>
         </section>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -50,7 +50,8 @@
             <div id="navbar" class="navbar-menu">
                 <div class="navbar-start">
                     <a class="navbar-item js-page-trigger is-active" data-target="x2l">Xero2Labradar</a>
-                    <a class="navbar-item js-page-trigger is-hidden" data-target="analysis" id="NavAnalyse">Visuals</a>
+                    <a class="navbar-item js-page-trigger" data-target="r2l">Rangecraft2Labradar (BETA)</a>
+                    <a class="navbar-item js-page-trigger is-hidden" data-target="analysis" id="NavAnalyse">Visuals (Beta)</a>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">More</a>
                         <div class="navbar-dropdown">
@@ -118,7 +119,7 @@
             <div class="container block">
                 <div class="box">
                     <div class="content">
-                        <h2 class="title">Convert a *.fit, *.csv, *.xlsx, *.xls file</h2>
+                        <h2 class="title">Convert your Xero file</h2>
                         <p> Just select the file, and you'll find it as csv in your download folder, with a <span class="tag is-primary">-xeroconv.csv</span> at the end.</p></p>
                         <p>The <u>fit</u> files are located in the <span class="tag is-primary is-light">Garmin</span> <span class="icon"> <i class="fas fa-arrow-right"></i> </span> <span class="tag is-primary is-light">Shot_Sessions</span> Folder on the Xero C1.</p>
                         <p>The <u>csv, xls and xlsx</u> files, can be exported in Garmins Shotview App in different places.</p>
@@ -127,6 +128,29 @@
                     <div class="file is-centered is-boxed">
                         <label class="file-label">
                             <input class="file-input" type="file" id="xero2labradar" name="xero2labradar" accept=".fit,.xls,.xlsx,.csv" multiple tabindex="0">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fa-regular fa-file-code"></i>
+                                </span>
+                                <span class="file-label"> Select File(s)… </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="r2l" class="is-hidden">
+            <div class="container block">
+                <div class="box">
+                    <div class="content">
+                        <h2 class="title">BETA - Convert youe Rangecraft file - BETA</h2>
+                        <p> THIS IS BETA - I need more files.</p>
+                        <p> Just select the file, and you'll find it as csv in your download folder, with a <span class="tag is-primary">-xeroconv-rangecraft.csv</span> at the end.</p>
+                        <p>The <u>xlsx</u> file, can be exported from your Athlon Ballistics App.</p>
+                    </div>
+                    <div class="file is-centered is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" id="rangecraft2labradar" name="rangecraft2labradar" accept=".xlsx" multiple tabindex="0">
                             <span class="file-cta">
                                 <span class="file-icon">
                                     <i class="fa-regular fa-file-code"></i>
@@ -201,7 +225,7 @@
         <footer class="footer has-text-centered mt-auto">
             <div class="columns">
                 <div class="column is-4">
-                    <h4>arranged by Oliver Berger 2024 - 2025</h4>
+                    <h4>arranged by Oliver Berger 2024 - 2026</h4>
                 </div>
                 <div class="column is-4">
                     <div class="content has-text-centered">

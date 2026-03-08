@@ -24,9 +24,10 @@ function monthsToLower(months:string[]):string[] {
 
 export function gettimestamp(timestamp: number, hourstring: string) {
     const STRING_US = 'h:mm:ss A'
+    const STRING_US_SHORT = 'h:mm A'
     const STRING_EU = 'HH:mm:ss'
     const day = dayjs.unix(timestamp).startOf('day')
-    const time = dayjs(hourstring, [STRING_US, STRING_EU])
+    const time = dayjs(hourstring, [STRING_US, STRING_EU, STRING_US_SHORT])
 
     return (
         day
@@ -38,10 +39,13 @@ export function gettimestamp(timestamp: number, hourstring: string) {
 
 }
 
+
+
 export default function getdatestring(datestring:string):[string,string,number] {
     const culturearray = ["tr","sv","es","ro","pl","it","de","fr","nl","da","en"]
     const STRING_US = 'MMMM D[,]YYYY [at] h:mm A'
     const STRING_EU = 'MMMM DD[,]YYYY HH:mm'
+    const STRING_RANGECRAFT = 'YYMMDDHHmmssSSS'
     let cultures:string[]
 
     // make it a nice string
@@ -60,6 +64,11 @@ export default function getdatestring(datestring:string):[string,string,number] 
     let validconversion = false
     let datedate = dayjs("1990-01-01")
     let phase = 0
+
+    if (/^\d{15}$/.test(datestring)) {
+        validconversion = dayjs(datestring, STRING_RANGECRAFT).isValid()
+        phase = -1
+    }
 
     if (dayjs(datestring).isValid()) {
         validconversion = true
@@ -113,7 +122,9 @@ export default function getdatestring(datestring:string):[string,string,number] 
         }
     }
     
-    if (validconversion === true && phase in [0,1]) {
+    if (validconversion === true && phase == -1) {
+        datedate = dayjs(datestring, STRING_RANGECRAFT)
+    } else if (validconversion === true && phase in [0,1]) {
         // convert it
         datedate = dayjs(datestring)
     }

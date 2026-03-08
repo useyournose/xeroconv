@@ -104,6 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
       .finally(() => {(event.target as HTMLInputElement).value = ''})
   }, false);
 
+  (document.getElementById('rangecraft2labradar') as HTMLFormElement)
+  .addEventListener("change",(event) => {
+      handleFiles((event.target as HTMLInputElement).files, feature_IndexedDB,1)
+      .finally(() => {(event.target as HTMLInputElement).value = ''})
+  }, false);
+
   renderTable;
 
   (document.getElementById('table'))

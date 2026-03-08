@@ -111,3 +111,36 @@ test('gettimestamp us', () => {
     const expected = 1758740125
     expect(gettimestamp(timestamp, hourstring)).toBe(expected)
 })
+
+test('gettimestamp us short', () => {
+    const hourstring = "6:55 PM"
+    const timestamp:number = 1758708000
+    const expected = 1758740100
+    expect(gettimestamp(timestamp, hourstring)).toBe(expected)
+})
+
+test('gettimestamp rangecraft 1', () => {
+    const probe = '251108092125877';
+    const expected = ["08-11-2025","09:21:25"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+
+test('gettimestamp rangecraft 1', () => {
+    const probe = '251213121505681';
+    const expected = ["13-12-2025","12:15:05"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+
+
+test('gettimestamp rangecraft 3', () => {
+    const probe = '260213140630061';
+    const expected = ["13-02-2026","14:06:30"];
+    const [resultdate,resulttime] = getdatestring(probe);
+    expect(resultdate).toBe(expected[0]);
+    expect(resulttime).toBe(expected[1]);
+});
+

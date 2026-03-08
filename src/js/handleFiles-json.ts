@@ -1,5 +1,6 @@
 import fit2json from "./fit2json"
 import xls2json from "./xls2json";
+import rxls2json from "./rxls2json"
 import download from "./downloadhandler";
 import { showError } from "./messages";
 import csv2json from "./csv2json";
@@ -29,7 +30,8 @@ function fileToArrayBuffer(file:File):Promise<ArrayBuffer> {
   })
 }
 
-export async function handleFiles(files:readonly FileSystemFileHandle[] | FileList | File[], indexedDBavailable:boolean ):Promise<boolean> {
+export async function handleFiles(files:readonly FileSystemFileHandle[] | FileList | File[], indexedDBavailable:boolean,mode:0|1 = 0 ):Promise<boolean> {
+  // mode: 0 = xero, 1 = rangecraft
   return new Promise(async (resolve,reject) => {
     var localstoragecount = Number(localStorage.total) || 0
     var outfiles:File[] = []
@@ -60,8 +62,17 @@ export async function handleFiles(files:readonly FileSystemFileHandle[] | FileLi
                     }
                 )                
                 .then((blob) => {outfiles.push(blob);return Promise.resolve(true)})
-        } else if (/\.xlsx?$/g.test(file.name)) {
+        } else if (/\.xlsx?$/g.test(file.name) && mode == 0) {
             return xls2json(fileData, file.name)
+                .then(sessions => Promise.all(sessions.map(async session => {
+                    if (indexedDBavailable) {const fid = await AddSession(session as ShotSession)}
+                    return json2Labradar(session)
+                    }
+                )))
+                .then(blobs => outfiles = [...outfiles,...blobs])
+                .then(() => {return Promise.resolve(true)})
+         }else if (/\.xlsx?$/g.test(file.name) && mode == 1) {
+            return rxls2json(fileData, file.name)
                 .then(sessions => Promise.all(sessions.map(async session => {
                     if (indexedDBavailable) {const fid = await AddSession(session as ShotSession)}
                     return json2Labradar(session)
