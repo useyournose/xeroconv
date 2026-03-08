@@ -1,0 +1,45 @@
+{
+    "file": {
+        "checksum": "99834c56",
+        "deviceid": "useyournose-xeroconv(rangecraft)",
+        "name": "Rifle_178.0 gr_08-11-2025_09-21-25-xeroconv.csv",
+        "title": "Rifle_178.0 gr_08-11-2025_09-21-25"
+    },
+    "shots": [
+        {
+            "energy": 3476.4,
+            "shotnumber": 1,
+            "timestamp": 1762593900,
+            "velocity": 776.4
+        },
+        {
+            "energy": 3507.8,
+            "shotnumber": 2,
+            "timestamp": 1762593900,
+            "velocity": 779.9
+        },
+        {
+            "energy": 3505.1,
+            "shotnumber": 3,
+            "timestamp": 1762593900,
+            "velocity": 779.6
+        }
+    ],
+    "stats": {
+        "projectile": 178,
+        "shots_total": 3,
+        "speed_avg": 778.633,
+        "speed_es": 3.5,
+        "speed_max": 779.9,
+        "speed_min": 776.4,
+        "speed_sd": 1.6,
+        "timestamp": 1762593685,
+        "timezone": 0
+    },
+    "units": {
+        "distance": false,
+        "energy": false,
+        "velocity": false,
+        "weight": true
+    }
+}

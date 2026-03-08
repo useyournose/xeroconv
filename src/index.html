@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>XeroConv - Convert Garmin Xero files</title>
+        <title>XeroConv - Convert Garmin Xero and Athlon Rnagecraft files</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="application-name" content="XeroConv">
         <meta name="description" content="XeroConv - online converter for files from Garmin Xero to shotview to Labradar csv, what you can use in GRT - Gordons Reloading Tool">
-        <meta name="keywords" content="xeroconv, useyournose, garmin, xero, converter, garmin, grt, gordons reloading tool">
+        <meta name="keywords" content="xeroconv, useyournose, garmin, xero, converter, garmin, grt, gordons reloading tool, rangecraft">
         <meta name="author" content="Oliver Berger">
         <meta name="language" content="en">
         <meta name="robots" content="index,follow">
@@ -34,8 +34,8 @@
     <body>
         <section class="hero is-success">
             <div class="hero-body">
-                <p class="title">Convert Garmin Xero Files</p>
-                <p class="subtitle">to something usable for GRT</p>
+                <p class="title">Convert Garmin Xero files</p>
+                <p class="subtitle">(and Athlon Rangecraft files)<br>to something usable for <a href="https://www.metriccustom.de/doku.php?id=grtools:download">GRT</a></p>
             </div>
         </section>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -50,12 +50,14 @@
             <div id="navbar" class="navbar-menu">
                 <div class="navbar-start">
                     <a class="navbar-item js-page-trigger is-active" data-target="x2l">Xero2Labradar</a>
-                    <a class="navbar-item js-page-trigger is-hidden" data-target="analysis" id="NavAnalyse">Visuals</a>
+                    <a class="navbar-item js-page-trigger" data-target="r2l">Rangecraft2Labradar (BETA)</a>
+                    <a class="navbar-item js-page-trigger is-hidden" data-target="analysis" id="NavAnalyse">Visuals (Beta)</a>
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">More</a>
                         <div class="navbar-dropdown">
                             <a class="navbar-item js-modal-trigger" id="help_button" data-target="modal-help">Help</a>
                             <a class="navbar-item js-modal-trigger" id="versions_button" data-target="modal-versions">Tested Versions</a>
+                            <a class="navbar-item js-modal-trigger" id="coins_button" data-target="modal-coins">Support me</a>
                             <a class="navbar-item" href="https://github.com/useyournose/xeroconv/blob/main/CHANGELOG.md" target="_blank">Change Log</a>
                             <a class="navbar-item" href="https://github.com/useyournose/xeroconv" target="_blank">Source Code</a>
                             <hr class="navbar-divider">
@@ -88,7 +90,7 @@
                     <div class="content">
                         <div class="block">This is a Web App and there is no "Backend". All data and files will stay on your device. The conversion is solely done by your computers resources.</div>
                         <div class="block">Just click on the button to upload the files you want to convert, select the files and pick them up from your download directory.</div>
-                        <div class="block">Due to the nature of software development, and that I'm not related to Garmin in any way, it might happen, that future Xero Firmwares or Shotview versions will produce incompatible files. If you have created files with a newer version, or your file just doesn't work, just let me know on <a href="https://github.com/useyournose/xeroconv/issues" target="_blank">Github: Report an issue</a>.</div>
+                        <div class="block">Due to the nature of software development, and that I'm not related to Garmin or Rangecraft in any way, it might happen, that future Xero Firmwares, Shotview or Rangecraft versions will produce incompatible files. If you have created files with a newer version, or your file just doesn't work, just let me know on <a href="https://github.com/useyournose/xeroconv/issues" target="_blank">Github: Report an issue</a>.</div>
                     </div>
                 </section>
             </div>
@@ -114,11 +116,25 @@
                 </section>
             </div>
         </div>
+        <div class="modal" id="modal-coins">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Like what you see?</p>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="content">
+                        <div class="block">If you like my work, you can send me a small tip, using the coindrop button at the bottom of the page or by following this <a href="https://linkcoindrop.to/useyournose">coindrop.to/useyournose</a></a>.</div>
+                    </div>
+                </section>
+            </div>
+        </div>
         <section id="x2l">
             <div class="container block">
                 <div class="box">
                     <div class="content">
-                        <h2 class="title">Convert a *.fit, *.csv, *.xlsx, *.xls file</h2>
+                        <h2 class="title">Convert your Xero file</h2>
                         <p> Just select the file, and you'll find it as csv in your download folder, with a <span class="tag is-primary">-xeroconv.csv</span> at the end.</p></p>
                         <p>The <u>fit</u> files are located in the <span class="tag is-primary is-light">Garmin</span> <span class="icon"> <i class="fas fa-arrow-right"></i> </span> <span class="tag is-primary is-light">Shot_Sessions</span> Folder on the Xero C1.</p>
                         <p>The <u>csv, xls and xlsx</u> files, can be exported in Garmins Shotview App in different places.</p>
@@ -127,6 +143,29 @@
                     <div class="file is-centered is-boxed">
                         <label class="file-label">
                             <input class="file-input" type="file" id="xero2labradar" name="xero2labradar" accept=".fit,.xls,.xlsx,.csv" multiple tabindex="0">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fa-regular fa-file-code"></i>
+                                </span>
+                                <span class="file-label"> Select File(s)… </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="r2l" class="is-hidden">
+            <div class="container block">
+                <div class="box">
+                    <div class="content">
+                        <h2 class="title">BETA - Convert youe Rangecraft file - BETA</h2>
+                        <p> THIS IS BETA - I need more files. Drop me an <a href="https://github.com/useyournose/xeroconv/issues" target="_blank">Issue</a>.</p>
+                        <p> Just select the file, and you'll find it as csv in your download folder, with a <span class="tag is-primary">-xeroconv-rangecraft.csv</span> at the end.</p>
+                        <p>The <u>xlsx</u> file, can be exported from your Athlon Ballistics App.</p>
+                    </div>
+                    <div class="file is-centered is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" id="rangecraft2labradar" name="rangecraft2labradar" accept=".xlsx" multiple tabindex="0">
                             <span class="file-cta">
                                 <span class="file-icon">
                                     <i class="fa-regular fa-file-code"></i>
@@ -201,7 +240,12 @@
         <footer class="footer has-text-centered mt-auto">
             <div class="columns">
                 <div class="column is-4">
-                    <h4>arranged by Oliver Berger 2024 - 2025</h4>
+                    <h4>arranged by Oliver Berger 2024 - 2026</h4>
+                    <span>
+                        <a href="https://coindrop.to/useyournose" target="_blank">
+                            <img src="assets/embed-button.png" style="border-radius: 10px; height: 57px !important;width: 229px !important;" alt="Coindrop.to me"></img>
+                        </a>
+                    </span>
                 </div>
                 <div class="column is-4">
                     <div class="content has-text-centered">

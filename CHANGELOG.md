@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) in the format `YYYY-0M-0D`.
 
+## 2026-03-08
+
+### Added
+
+- Athlon Rangecraft support (BETA)
+- Coindrop link
+
+### Updated
+
+- added licenses for Dexie, chart.js and Fake-IndexedDB
+
 ## 2026-02-28
 
 ### Changed
