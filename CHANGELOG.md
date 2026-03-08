@@ -10,6 +10,11 @@ and this project adheres to [Calendar Versioning](https://calver.org/) in the fo
 ### Added
 
 - Athlon Rangecraft support (BETA)
+- Coindrop link
+
+### Updated
+
+- added licenses for Dexie, chart.js and Fake-IndexedDB
 
 ## 2026-02-28
 

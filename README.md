@@ -49,22 +49,21 @@ https://parceljs.org/
 | https://fontawesome.com/ | ![NPM Version](https://img.shields.io/npm/v/%40fortawesome%2Ffontawesome-free) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/%40fortawesome%2Ffontawesome-free) |
 | https://parceljs.org/ | ![NPM Version](https://img.shields.io/npm/v/parcel) | ![GitHub package.json dev/peer/optional dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/dev/parcel) |
 | https://github.com/iamkun/dayjs | ![NPM Version](https://img.shields.io/npm/v/dayjs) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/dayjs) |
+| https://github.com/dexie/Dexie.js | ![NPM Version](https://img.shields.io/npm/v/dexie) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/dexie) |
+| https://github.com/chartjs/Chart.js | ![NPM Version](https://img.shields.io/npm/v/chart.js) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/chart.js) |
+| https://github.com/dumbmatter/fakeIndexedDB | ![NPM Version](https://img.shields.io/npm/v/fake-indexeddb) | ![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/useyournose/xeroconv/dev/fake-indexeddb) |
+
 
 ## building and updating
 
 1. install bun https://bun.sh
 1. do the `bun install`
-  1. install parcel `bun add --dev parcel` https://parceljs.org/getting-started/webapp/
-  1. install garmin fitsdk `bun add @garmin/fitsdk`
-  1. install bulma `bun add bulma`
-  1. install papaparse `bun add papaparse`
-  1. install fontawesome free `bun add @fortawesome/fontawesome-free`
-  1. install sheetjs `bun rm xlsx && bun add https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`  https://docs.sheetjs.com/docs/getting-started/installation/bun/ 
-  1. install dayjs `bun add dayjs`
+1. do the `bun run build`
+1. do the `bun run start`
 
-## test with https
+## test with https (required for progressive web apps and filesharing)
 
-if you have git installed
+If you have git installed
 
 "C:\Program Files\Git\usr\bin\openssl.exe" req  -nodes -new -x509  -keyout localhost.key -out localhost.crt
 
