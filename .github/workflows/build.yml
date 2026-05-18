@@ -2,12 +2,12 @@ name: build
 on:
   pull_request: 
     types: [opened,synchronize,reopened]
-    paths: ['src/**',.github/workflows/*]
+    paths: ['src/**',.github/workflows/*, bun.lock, package.json]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['src/**',.github/workflows/*]
+    paths: ['src/**',.github/workflows/*, bun.lock, package.json]
 jobs:
   build:
     permissions:
