@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/useyournose/xeroconv#readme",
   "devDependencies": {
-    "@babel/preset-env": "7.29.0",
+    "@babel/preset-env": "7.29.5",
     "@eslint/js": "10.0.1",
     "@happy-dom/global-registrator": "20.9.0",
     "@html-eslint/eslint-plugin": "0.60.0",
