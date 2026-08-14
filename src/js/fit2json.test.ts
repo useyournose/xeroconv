@@ -34,6 +34,20 @@ test('file should be nice', async () => {
 
 });
 
+test('file should be nice 2', async () => {
+  expect.hasAssertions();
+  const filename = '06-18-2024_15-47-11.fit';
+  const probepath = 'src/_tests/assets/08-10-2026_10-44-31.fit'
+  const expectationpath = 'src/_tests/assets/08-10-2026_10-44-31.expected.json'
+  await Promise.all([
+      fit2json((await readFileAsync(probepath)).buffer as ArrayBuffer,filename),
+      Bun.file(expectationpath).json()
+    ]).then(([probe,expected]) => {
+      expect(probe).toEqual(expected)
+    })
+
+});
+
 test('file should fail - currupt', async () => {
   expect.hasAssertions();
   const filename = 'broken.fit';
