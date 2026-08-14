@@ -1,0 +1,23 @@
+sep=;
+Device ID;garmin-3486871502;;
+
+Series No;0001;;
+Total number of shots;5;;
+
+Units velocity;m/s;;
+Units distances;m;;
+Units kinetic energy;j;;
+Units weight;grains (grs);;
+
+Stats - Average;977.623;m/s;
+Stats - Highest;980.506;m/s;
+Stats - Lowest;974.34;m/s;
+Stats - Ext. Spread;6.166;m/s;
+Stats - Std. Dev;2.573;m/s;
+
+Shot ID;V0;Ke0;Proj. Weight;Date;Time
+1;980.278;0;0;10-08-2026;08:48:39;
+2;975.011;0;0;10-08-2026;08:48:51;
+3;977.98;0;0;10-08-2026;08:49:11;
+4;980.506;0;0;10-08-2026;08:49:25;
+5;974.34;0;0;10-08-2026;08:49:40;

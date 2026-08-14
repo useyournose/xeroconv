@@ -32,7 +32,11 @@ function jsonconverter(file:FileInfo,units:SessionUnits,stats:SessionStats,shots
   
   shots.forEach(function (item,index) { 
     //Shot ID;V0;Ke0;Proj. Weight;Date;Time\n`
-    stream+=item.shotnumber.toString() +";"+ item.velocity.toString() +";"+ item.energy.toString() + ";" + (stats.projectile?.toString() ?? "") + ";" + dayjs.unix(item.timestamp).format('DD-MM-YYYY') +";" + dayjs.unix(item.timestamp).format('HH:mm:ss')   + ";\n";
+    if (item.timestamp > 9999999999) {
+      stream+=item.shotnumber.toString() +";"+ item.velocity.toString() +";"+ item.energy.toString() + ";" + (stats.projectile?.toString() ?? "") + ";" + dayjs(item.timestamp).format('DD-MM-YYYY') +";" + dayjs(item.timestamp).format('HH:mm:ss')   + ";\n";
+    } else {
+      stream+=item.shotnumber.toString() +";"+ item.velocity.toString() +";"+ item.energy.toString() + ";" + (stats.projectile?.toString() ?? "") + ";" + dayjs.unix(item.timestamp).format('DD-MM-YYYY') +";" + dayjs.unix(item.timestamp).format('HH:mm:ss')   + ";\n";
+    }
   })
 
   return stream
