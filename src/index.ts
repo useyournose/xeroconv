@@ -12,21 +12,27 @@ document.addEventListener('DOMContentLoaded', () => {
   if (feature_IndexedDB) {
     //wipe indexedDB
     (db.delete().then(async () => await db.open()));
-    (document.getElementById('NavAnalyse')).classList.remove('is-hidden');
+    (document.getElementById('NavAnalyse') as HTMLElement).classList.remove('is-hidden');
   }
   
   // Add a click event on buttons to open a specific modal
-  (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-    const modal = $trigger.dataset.target;
-    const $target = document.getElementById(modal);
+  document.querySelectorAll<HTMLElement>('.js-modal-trigger').forEach(($trigger) => {
+    const modalId = $trigger.dataset.target;
+    if (!modalId) return;
+
+    const $target = document.getElementById(modalId);
+    if (!$target) return;
+
     $trigger.addEventListener('click', () => {
       openModal($target);
     });
   });
 
   // Add a click event on various child elements to close the parent modal
-  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-    const $target = $close.closest('.modal');
+  document.querySelectorAll<HTMLElement>('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button').forEach(($close) => {
+    const $target = $close.closest('.modal') as HTMLElement | null;
+    if (!$target) return;
+
     $close.addEventListener('click', () => {
       closeModal($target);
     });
@@ -40,11 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Get all "navbar-burger" elements
-  (document.querySelectorAll('.navbar-burger') || []).forEach( el => {
+  document.querySelectorAll<HTMLElement>('.navbar-burger').forEach((el) => {
     el.addEventListener('click', () => {
       // Get the target from the "data-target" attribute
       const target = el.dataset.target;
+      if (!target) return;
+
       const $target = document.getElementById(target);
+      if (!$target) return;
+
       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
       el.classList.toggle('is-active');
       $target.classList.toggle('is-active');
@@ -52,16 +62,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   //install button handling https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt
-  let installPrompt :BeforeInstallPromptEvent = null;
-  const installButton = document.querySelector("#install");
+  let installPrompt: BeforeInstallPromptEvent | null = null;
+  const installButton = document.querySelector<HTMLElement>('#install');
 
-  window.addEventListener("beforeinstallprompt", (event) => {
+  if (!installButton) {
+    return;
+  }
+
+  window.addEventListener("beforeinstallprompt", (event: Event) => {
+    const beforeInstallEvent = event as BeforeInstallPromptEvent;
     event.preventDefault();
-    installPrompt = event;
+    installPrompt = beforeInstallEvent;
     installButton.removeAttribute("hidden");
     //return false;
   });
-  
+
   installButton.addEventListener("click", async () => {
     if (!installPrompt) {
       return;
@@ -75,22 +90,29 @@ document.addEventListener('DOMContentLoaded', () => {
     disableInAppInstallPrompt();
     installPrompt = null;*/
   });
-  
+
   function disableInAppInstallPrompt() {
     installPrompt = null;
     installButton.setAttribute("hidden", "");
   }
 
-  (document.querySelectorAll('.js-page-trigger') || []).forEach( el => {
+  document.querySelectorAll<HTMLElement>('.js-page-trigger').forEach((el) => {
     el.addEventListener('click', () => {
       const target = el.dataset.target;
+      if (!target) return;
+
       const $target = document.getElementById(target);
-      (document.querySelectorAll('.js-page-trigger') || []).forEach( elem =>  {
-        elem.classList.remove("is-active")
-        const target = elem.dataset.target;
-        const $target = document.getElementById(target);
-        $target.classList.add("is-hidden")
-      })
+      if (!$target) return;
+
+      document.querySelectorAll<HTMLElement>('.js-page-trigger').forEach((elem) => {
+        elem.classList.remove("is-active");
+        const elemTarget = elem.dataset.target;
+        const $elemTarget = elemTarget ? document.getElementById(elemTarget) : null;
+        if ($elemTarget) {
+          $elemTarget.classList.add("is-hidden");
+        }
+      });
+
       el.classList.toggle('is-active');
       $target.classList.remove("is-hidden");
     });
@@ -98,93 +120,115 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   //register Eventlisteners
-  (document.getElementById('xero2labradar') as HTMLFormElement)
-  .addEventListener("change",(event) => {
-      handleFiles((event.target as HTMLInputElement).files, feature_IndexedDB)
-      .finally(() => {(event.target as HTMLInputElement).value = ''})
+  const xeroInput = document.getElementById('xero2labradar') as HTMLInputElement | null;
+  xeroInput?.addEventListener("change", (event) => {
+      const input = event.target as HTMLInputElement;
+      const files = input.files ?? [];
+      handleFiles(files, feature_IndexedDB)
+      .finally(() => { input.value = ''; });
   }, false);
 
-  (document.getElementById('rangecraft2labradar') as HTMLFormElement)
-  .addEventListener("change",(event) => {
-      handleFiles((event.target as HTMLInputElement).files, feature_IndexedDB,1)
-      .finally(() => {(event.target as HTMLInputElement).value = ''})
+  const rangecraftInput = document.getElementById('rangecraft2labradar') as HTMLInputElement | null;
+  rangecraftInput?.addEventListener("change", (event) => {
+      const input = event.target as HTMLInputElement;
+      const files = input.files ?? [];
+      handleFiles(files, feature_IndexedDB, 1)
+      .finally(() => { input.value = ''; });
   }, false);
 
-  renderTable;
-
-  (document.getElementById('table'))
-  .addEventListener('change', (e) => {
+  const renderTableButton = document.getElementById('table');
+  renderTableButton?.addEventListener('change', (e) => {
     const target = e.target as HTMLElement | null;
-    const targetunits = (document.getElementById('units-imperial') as HTMLFormElement).checked
+    const unitsImperial = (document.getElementById('units-imperial') as HTMLInputElement | null)?.checked ?? false;
     if (!target) return;
     if (target instanceof HTMLInputElement && target.type === 'checkbox') {
       const checked = target.checked;
-      let check
+      const row = target.closest('tr');
+      const fileId = row?.dataset.fileid;
+      if (!fileId) return;
+
+      let check;
       if (checked) {
-        check = MarkFileAsChecked( Number(target.parentElement.parentElement.dataset.fileid))
+        check = MarkFileAsChecked(Number(fileId));
       } else {
-        check = MarkFileAsUnchecked( Number(target.parentElement.parentElement.dataset.fileid))
+        check = MarkFileAsUnchecked(Number(fileId));
       }
       check
-      .then(() => renderTable)
-      .then(() => GetCheckedShots(targetunits))
+      .then(() => renderTable())
+      .then(() => GetCheckedShots(unitsImperial))
       //.then( shots => autoBinDatasets(shots))
       //.then( result => renderHistogramOverlay('histogramCanvas', result.labels, result.datasets))
-      .then(shots => renderKDEOverlay('histogramCanvas', shots))
+      .then(shots => renderKDEOverlay('histogramCanvas', shots));
     }
-  })
+  });
 
   //radio button to switch units
-  document.getElementById('units-radio').addEventListener('change', () => {
-    const targetunits = (document.getElementById('units-imperial') as HTMLFormElement).checked
+  const unitsRadio = document.getElementById('units-radio');
+  unitsRadio?.addEventListener('change', () => {
+    const targetunits = (document.getElementById('units-imperial') as HTMLInputElement | null)?.checked ?? false;
     GetCheckedShots(targetunits)
-    .then(shots => renderKDEOverlay('histogramCanvas', shots))
+    .then(shots => renderKDEOverlay('histogramCanvas', shots));
     //.then( shots => autoBinDatasets(shots))
     //.then( result => renderHistogramOverlay('histogramCanvas', result.labels, result.datasets))
   });
 
 
   // drag and drop files
-
-  document.getElementById("x2l").addEventListener("drop", (event) => {
+  const x2l = document.getElementById("x2l");
+  x2l?.addEventListener("drop", (event) => {
       event.preventDefault();
-      const files = [...event.dataTransfer.items]
+      const dataTransfer = event.dataTransfer;
+      if (!dataTransfer) return;
+
+      const files = [...dataTransfer.items]
       .map((item) => item.getAsFile())
-      .filter((file) => allowedFileTypes.includes(file.type) || allowedFileExtensions.includes(file.name.split('.').pop()))
+      .filter((file): file is File => !!file)
+      .filter((file) => allowedFileTypes.includes(file.type) || allowedFileExtensions.includes(file.name.split('.').pop() ?? ''));
       handleFiles(files, feature_IndexedDB)
-      .finally(() => {(event.target as HTMLInputElement).value = ''})
+      .finally(() => {
+        const input = event.target as HTMLInputElement | null;
+        if (input) input.value = '';
+      });
   });
 
-  document.getElementById("x2l").addEventListener("dragover", (e) => {
-  const fileItems = [...e.dataTransfer.items].filter(
-    (item) => item.kind === "file",
-  );
-  if (fileItems.length > 0) {
-    e.preventDefault();
-    //if (fileItems.some((item) => allowedFileTypes.includes(item.type))) {
-      e.dataTransfer.dropEffect = "copy";
-    //} else {
-    //  fileItems.some((item) => console.log(item.kind))
-    //  e.dataTransfer.dropEffect = "none";
-    //}
-  }
-  });
+  x2l?.addEventListener("dragover", (e) => {
+    const dataTransfer = e.dataTransfer;
+    if (!dataTransfer) return;
 
-  window.addEventListener("dragover", (e) => {
-    const fileItems = [...e.dataTransfer.items].filter(
+    const fileItems = [...dataTransfer.items].filter(
       (item) => item.kind === "file",
     );
     if (fileItems.length > 0) {
       e.preventDefault();
-      if (!(document.getElementById("x2l")).contains(e.target as HTMLInputElement)) {
-        e.dataTransfer.dropEffect = "none";
+      //if (fileItems.some((item) => allowedFileTypes.includes(item.type))) {
+      dataTransfer.dropEffect = "copy";
+      //} else {
+      //  fileItems.some((item) => console.log(item.kind))
+      //  dataTransfer.dropEffect = "none";
+      //}
+    }
+  });
+
+  window.addEventListener("dragover", (e) => {
+    const dataTransfer = e.dataTransfer;
+    if (!dataTransfer) return;
+
+    const fileItems = [...dataTransfer.items].filter(
+      (item) => item.kind === "file",
+    );
+    if (fileItems.length > 0) {
+      e.preventDefault();
+      const x2lTarget = document.getElementById("x2l");
+      if (x2lTarget && !x2lTarget.contains(e.target as Node)) {
+        dataTransfer.dropEffect = "none";
       }
     }
   });
 
   // prevent the browser from it's default bahaviour of downloading drag&dropped files
   window.addEventListener("drop", (e) => {
-    if ([...e.dataTransfer.items].some((item) => item.kind === "file")) {
+    const dataTransfer = e.dataTransfer;
+    if (dataTransfer && [...dataTransfer.items].some((item) => item.kind === "file")) {
       e.preventDefault();
     }
   });

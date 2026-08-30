@@ -9,61 +9,61 @@
         {
             "energy": 410.76,
             "shotnumber": 1,
-            "timestamp": 1718718481000,
+            "timestamp": 1718718481,
             "velocity": 265.391
         },
         {
             "energy": 378.71,
             "shotnumber": 2,
-            "timestamp": 1718718487000,
+            "timestamp": 1718718487,
             "velocity": 254.826
         },
         {
             "energy": 376.06,
             "shotnumber": 3,
-            "timestamp": 1718718494000,
+            "timestamp": 1718718494,
             "velocity": 253.934
         },
         {
             "energy": 400.9,
             "shotnumber": 4,
-            "timestamp": 1718718498000,
+            "timestamp": 1718718498,
             "velocity": 262.184
         },
         {
             "energy": 428.32,
             "shotnumber": 5,
-            "timestamp": 1718718518000,
+            "timestamp": 1718718518,
             "velocity": 271.003
         },
         {
             "energy": 446.31,
             "shotnumber": 6,
-            "timestamp": 1718718522000,
+            "timestamp": 1718718522,
             "velocity": 276.637
         },
         {
             "energy": 454.24,
             "shotnumber": 7,
-            "timestamp": 1718718525000,
+            "timestamp": 1718718525,
             "velocity": 279.081
         },
         {
             "energy": 436.93,
             "shotnumber": 8,
-            "timestamp": 1718718543000,
+            "timestamp": 1718718543,
             "velocity": 273.712
         },
         {
             "energy": 466.15,
             "shotnumber": 9,
-            "timestamp": 1718718545000,
+            "timestamp": 1718718545,
             "velocity": 282.719
         },
         {
             "energy": 490.09,
             "shotnumber": 10,
-            "timestamp": 1718718548000,
+            "timestamp": 1718718548,
             "velocity": 289.885
         }
     ],
@@ -75,7 +75,7 @@
         "speed_max": 289.885,
         "speed_min": 253.934,
         "speed_sd": 11.227,
-        "timestamp": 1718718431000,
+        "timestamp": 1718718431,
         "timezone": 0
     },
     "units": {

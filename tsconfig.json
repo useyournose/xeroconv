@@ -1,15 +1,18 @@
 {
     "compilerOptions": {
-      "module": "nodenext",
+      "module": "ESNext",
+      "moduleResolution": "bundler",
       "noImplicitAny": true,
       "removeComments": true,
       "preserveConstEnums": true,
-      //"outFile": "../../built/local/tsc.js",
       "sourceMap": true,
-      "target": "ESNext",
-      "lib": ["webworker","DOM","ESNext"],
-      //"allowImportingTsExtensions": true
+      "target": "ES2022",
+      "lib": ["DOM", "DOM.Iterable", "ES2022","WebWorker"],
+      "types": ["bun"],
+      "skipLibCheck": true,
+      "allowImportingTsExtensions": false,
+      "resolveJsonModule": true
     },
-    "include": ["src/**/*.ts"],
+    "include": ["src/**/*"],
     "exclude": ["**/*.spec.ts"]
   }
