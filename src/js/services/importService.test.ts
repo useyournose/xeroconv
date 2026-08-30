@@ -4,6 +4,7 @@ import "fake-indexeddb/auto";
 import {expect, test, afterEach,beforeEach,  beforeAll, afterAll, describe} from 'bun:test';
 //import {nameddb} from '../db'
 import { AddFile, AddStats } from './importService';
+import { normalizeUnixTimestamp } from '../helper/normalizeUnixTimestamp';
 //import Dexie from "dexie";
 import { FileInfoEntry, SessionStats } from '../_types'
 import { AppDB, createDB } from "../Appdb";
@@ -43,6 +44,12 @@ describe("DB (Dexie + fake-indexeddb)", async () => {
         });
         console.log("isuffen?" + db.isOpen())
         expect(await db.shots.toArray()).toHaveLength(0);
+    });
+
+    test('normalizeUnixTimestamp converts millisecond values to seconds', () => {
+        expect(normalizeUnixTimestamp(1718718481000)).toBe(1718718481);
+        expect(normalizeUnixTimestamp(1718718481)).toBe(1718718481);
+        expect(normalizeUnixTimestamp(0)).toBe(0);
     });
 
     test.todo('fileimport', async () => {

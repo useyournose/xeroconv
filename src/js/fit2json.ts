@@ -5,6 +5,7 @@ import nnf from "./helper/nnf";
 import { crc32Hex } from "./helper/crc32";
 
 import { FileInfo, SessionStats, SessionUnits, ShotSession} from "./_types";
+import { normalizeUnixTimestamp } from "./helper/normalizeUnixTimestamp";
 
 
 export default async function fit2json(fileData:ArrayBuffer,ofilename:string):Promise<ShotSession | string> {
@@ -36,17 +37,25 @@ export default async function fit2json(fileData:ArrayBuffer,ofilename:string):Pr
       console.error("[fit2json]: " + ofilename + " - Error found during reading.");
       return reject("Error" + ofilename + " - Error found during reading.");
     }
-    if (!(Object.hasOwn(messages,'chronoShotSessionMesgs') && Object.hasOwn(messages,'chronoShotDataMesgs') && Object.hasOwn(messages,'deviceInfoMesgs'))) {
-      //showError("Error: " + ofilename + ' does not contain shot sessions file.');
+    const deviceInfoMesgs = messages.deviceInfoMesgs ?? [];
+    const chronoShotSessionMesgs = messages.chronoShotSessionMesgs ?? [];
+    const chronoShotDataMesgs = messages.chronoShotDataMesgs ?? [];
+
+    if (deviceInfoMesgs.length === 0 || chronoShotSessionMesgs.length === 0 || chronoShotDataMesgs.length === 0) {
       console.error("[fit2json]: " + ofilename + ' does not contain shot sessions.');
       return reject('Error: ' + ofilename + ' does not contain shot sessions.');
     }
     try {
-      const DeviceData = messages.deviceInfoMesgs[0]
-      const SessionData = messages.chronoShotSessionMesgs[0]
-      const speeds = messages.chronoShotDataMesgs.map(row => row.shotSpeed)
+      const DeviceData = deviceInfoMesgs[0];
+      const SessionData = chronoShotSessionMesgs[0];
+      const speeds = chronoShotDataMesgs
+        .map((row) => row.shotSpeed)
+        .filter((speed): speed is number => typeof speed === 'number');
       const sd = StandardDeviation(speeds);
-      const es = SessionData.maxSpeed - SessionData.minSpeed
+      const maxSpeed = SessionData.maxSpeed ?? 0;
+      const minSpeed = SessionData.minSpeed ?? 0;
+      const grainWeight = SessionData.grainWeight ?? 0;
+      const es = maxSpeed - minSpeed;
 
       const unit_velocity= false;
       const unit_distance = false;
@@ -60,18 +69,18 @@ export default async function fit2json(fileData:ArrayBuffer,ofilename:string):Pr
         file: {
           name: ofilename,
           title: ofilename,
-          deviceid: DeviceData.manufacturer +'-'+ DeviceData.serialNumber.toString(),
+          deviceid: `${String(DeviceData.manufacturer ?? 'unknown')}-${String(DeviceData.serialNumber ?? 0)}`,
           checksum: checksum
         } as FileInfo,
         stats: {
-          shots_total: SessionData.shotCount,
-          speed_avg: SessionData.avgSpeed,
-          speed_max: SessionData.maxSpeed,
-          speed_min: SessionData.minSpeed,
+          shots_total: SessionData.shotCount ?? 0,
+          speed_avg: SessionData.avgSpeed ?? 0,
+          speed_max: maxSpeed,
+          speed_min: minSpeed,
           speed_es: Math.round(es * 1000) / 1000 ,
           speed_sd: Math.round(sd * 1000) / 1000 ,
-          projectile: SessionData.grainWeight,
-          timestamp: SessionData.timestamp.getTime(),
+          projectile: grainWeight,
+          timestamp: normalizeUnixTimestamp(SessionData.timestamp?.getTime() ?? 0),
           timezone: 0
         } as SessionStats,
         units: {
@@ -80,11 +89,11 @@ export default async function fit2json(fileData:ArrayBuffer,ofilename:string):Pr
           energy: unit_energy,
           weight: unit_weight ,
         } as SessionUnits,
-        shots: messages.chronoShotDataMesgs.map((row) => ({
-            shotnumber: row.shotNum as number,
-            velocity: row.shotSpeed,
-            energy: nnf(get_ke(row.shotSpeed,SessionData.grainWeight)),
-            timestamp: row.timestamp.getTime()
+        shots: chronoShotDataMesgs.map((row) => ({
+            shotnumber: row.shotNum ?? 0,
+            velocity: row.shotSpeed ?? 0,
+            energy: nnf(get_ke(row.shotSpeed ?? 0, grainWeight)),
+            timestamp: normalizeUnixTimestamp(row.timestamp?.getTime() ?? 0)
         }))
       } as ShotSession)
     } catch(err) {

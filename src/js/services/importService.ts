@@ -1,6 +1,6 @@
 import db from "../db";
 import { Shot, SessionStats,SessionUnits, SessionUnitsEntry, FileInfoEntry, SessionStatsEntry, ShotEntry, ShotSession } from "../_types"
-
+import { normalizeUnixTimestamp } from "../helper/normalizeUnixTimestamp";
 
 export async function AddFile(name: string, title: string, deviceid: string, checksum?: string):Promise<number> {
   if (await db.files.where('checksum').equals(checksum).count() == 0 ) {
@@ -14,9 +14,7 @@ export async function AddStats(
   fileid: number,
   Stat: SessionStats
   ) {
-    if (Stat.timestamp > 9999999999) {
-      Stat.timestamp = Stat.timestamp / 1000
-    };
+    Stat.timestamp = normalizeUnixTimestamp(Stat.timestamp);
     return await db.stats.add(
         {...{fileid: fileid}, ...Stat} as SessionStatsEntry
   )
@@ -32,14 +30,11 @@ export async function AddUnits(
 }
 
 export async function AddShots(fileid: number, shots:Shot[]) {
-  const FShots:ShotEntry[] = shots.map(shot => ({...shot, fileid: fileid}))
-  FShots.map(shot =>
-    {
-      if (shot.timestamp > 9999999999) {
-        shot.timestamp = shot.timestamp / 1000
-      };
-    }
-  )
+  const FShots:ShotEntry[] = shots.map(shot => ({
+    ...shot,
+    fileid: fileid,
+    timestamp: normalizeUnixTimestamp(shot.timestamp)
+  }))
   return await db.shots.bulkAdd(FShots)
 }
 

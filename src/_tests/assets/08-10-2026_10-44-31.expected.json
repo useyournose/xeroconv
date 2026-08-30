@@ -9,31 +9,31 @@
     {
       "energy": 0,
       "shotnumber": 1,
-      "timestamp": 1786351719000,
+      "timestamp": 1786351719,
       "velocity": 980.278
     },
     {
       "energy": 0,
       "shotnumber": 2,
-      "timestamp": 1786351731000,
+      "timestamp": 1786351731,
       "velocity": 975.011
     },
     {
       "energy": 0,
       "shotnumber": 3,
-      "timestamp": 1786351751000,
+      "timestamp": 1786351751,
       "velocity": 977.98
     },
     {
       "energy": 0,
       "shotnumber": 4,
-      "timestamp": 1786351765000,
+      "timestamp": 1786351765,
       "velocity": 980.506
     },
     {
       "energy": 0,
       "shotnumber": 5,
-      "timestamp": 1786351780000,
+      "timestamp": 1786351780,
       "velocity": 974.34
     }
   ],
@@ -45,7 +45,7 @@
     "speed_max": 980.506,
     "speed_min": 974.34,
     "speed_sd": 2.573,
-    "timestamp": 1786351471000,
+    "timestamp": 1786351471,
     "timezone": 0
   },
   "units": {
