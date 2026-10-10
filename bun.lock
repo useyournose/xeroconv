@@ -6,7 +6,7 @@
       "name": "xeroconv",
       "dependencies": {
         "@fortawesome/fontawesome-free": "7.3.1",
-        "@garmin/fitsdk": "21.214.0",
+        "@garmin/fitsdk": "21.218.0",
         "bulma": "1.0.4",
         "chart.js": "4.5.1",
         "dayjs": "1.11.23",
@@ -289,7 +289,7 @@
 
     "@fortawesome/fontawesome-free": ["@fortawesome/fontawesome-free@7.3.1", "", {}, "sha512-wmglKKPDIkgV3aWlZzWECCPoGIkYCulzBwxG9+w7rc5BGapZ6cPMpoPOT8k36J0Ni7PPX6c/rsoMWfS4d1MUMg=="],
 
-    "@garmin/fitsdk": ["@garmin/fitsdk@21.214.0", "", {}, "sha512-c3ydrRYD0kPnX8USl+JEyJ9smhol3/JRxcU9QVZUvmb7ZBoGwhsqCAe7wXhwMJnMba97x4x+9J/yXr6WYUVaYQ=="],
+    "@garmin/fitsdk": ["@garmin/fitsdk@21.218.0", "", {}, "sha512-Jbhedp3AJ/xJBSuiPBlPpwH5QISXd+GYtfnAUZ3u68hUqkzHiRWUhla8xj4tW/05w6gKsErEt+7GQCFap+a2kQ=="],
 
     "@happy-dom/global-registrator": ["@happy-dom/global-registrator@20.12.0", "", { "dependencies": { "@types/node": ">=20.0.0", "happy-dom": "^20.12.0" } }, "sha512-BUE55Rew3oMwBzwCwmUnV+Oxk51V3xolM39Ts6kGiBXNELjujiESwk9qc99JRr6cVrj3OTd9MJ5zQ2fpn+jy6g=="],
 
