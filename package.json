@@ -45,7 +45,7 @@
   "devDependencies": {
     "@babel/preset-env": "8.0.7",
     "@eslint/js": "10.0.1",
-    "@happy-dom/global-registrator": "20.12.0",
+    "@happy-dom/global-registrator": "20.14.6",
     "@html-eslint/eslint-plugin": "0.66.1",
     "@html-eslint/parser": "0.65.0",
     "@jest/globals": "30.5.0",
