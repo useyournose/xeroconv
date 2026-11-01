@@ -9,11 +9,11 @@ import dayjs from "dayjs";
 
 
 function cleanup(input:string[]):string[] {
-  let dump = ""
+  let dump:string | undefined = ""
   while (dump == "" && input.length > 0) {
     dump = input.pop()
   }
-  input.push(dump)
+  input.push(dump as string)
 
   while (input[0] == "" && input.length > 0) {
     dump = input.shift()
@@ -51,7 +51,7 @@ export default function csv2json(fileData:ArrayBuffer|string,ofilename:string):P
     }
 
     try {
-      let dump:string = "";
+      let dump:string | undefined = "";
       //cartridge
       const sourceparts0:string[] = cleanup(sourceparts[0].split('\n'))
       // tool name
@@ -90,7 +90,7 @@ export default function csv2json(fileData:ArrayBuffer|string,ofilename:string):P
 
         // prep stats
         // # get title line
-        let statstitle = statstable.shift().replaceAll(',','')
+        let statstitle = statstable.shift()?.replaceAll(',','')
         stats = Papa.parse(statstable.join('\n'),{newline:"\n",skipEmtpyLines:true,dynamicTyping:true} as Papa.ParseConfig)
 
         //extending the stats array for missing values when no bullet weight is available

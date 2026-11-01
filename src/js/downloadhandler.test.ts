@@ -3,8 +3,6 @@ import download from './downloadhandler';
 //import csv2labradar from './csv2labradar';
 import * as Messages from './messages';
 
-import * as fs from 'fs';
-
 const messagespy = spyOn(Messages, "showSuccess")
 const logspy = spyOn(global.console,'log')
 
@@ -12,10 +10,12 @@ afterEach(function() {
   mock.restore();
 })
 
-test.todo('file should be nice - android', () => {
+test.todo('file should be nice - android', async () => {
   const filename = 'Shotview_a.csv'
-  const data = fs.readFileSync('src/_tests/assets/Shotview_a.csv', 'utf8');
-  const expected = fs.readFileSync('src/_tests/assets/Shotview_a.expected.csv', 'utf8');
+  const [data, expected] = await Promise.all([
+    Bun.file('src/_tests/assets/Shotview_a.csv').text(),
+    Bun.file('src/_tests/assets/Shotview_a.expected.csv').text(),
+  ]);
   const buffer = Buffer.from(data);
 
   const results:File[] = []

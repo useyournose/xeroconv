@@ -2,7 +2,6 @@ import { test, expect, spyOn, afterEach, mock, beforeEach } from "bun:test";
 import xls2json from './rxls2json';
 import * as csv2json from './rcsv2json';
 
-import * as fs from 'fs';
 import { ShotEntry, ShotSession } from "./_types";
 
 afterEach(function() {
@@ -18,13 +17,7 @@ test('file should be nice - ios - de', async () => {
   const expectationpath_1 = 'src/_tests/assets/Rangecraft_i_de_xlsx_1.expected.json'
   const expectationpath_2 = 'src/_tests/assets/Rangecraft_i_de_xlsx_2.expected.json'
 
-  //const data = fs.readFileSync(, 'utf8');
-  //const expected1 = fs.readFileSync('src/_tests/assets/Shotview_i_de_xlsx_1.expected.csv', 'utf8');
-  //const expected2 = fs.readFileSync('src/_tests/assets/Shotview_i_de_xlsx_2.expected.csv', 'utf8');
-  //const buffer = Buffer.from(data);
-
   await Promise.all([
-    //xls2json(buffer.buffer as ArrayBuffer,filename),
     xls2json((await Bun.file(probepath).arrayBuffer()), filename),
     Bun.file(expectationpath_1).json(),
     Bun.file(expectationpath_2).json(),
