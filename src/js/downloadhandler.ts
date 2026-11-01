@@ -58,7 +58,16 @@ export default function download(files:File[]):Promise<boolean|string> {
     } else {
       console.info('Sharing files is not supported');*/
       //inspired from https://stackoverflow.com/a/18197341
-      return downloadFiles(files).then(() => {cleanfiles;true})
+      return downloadFiles(files).then(
+        (result) => {
+          cleanfiles();
+          resolve(result);
+        },
+        (error) => {
+          cleanfiles();
+          reject(error);
+        }
+      )
     //}
   })
 }
