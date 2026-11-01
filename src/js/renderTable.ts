@@ -54,7 +54,7 @@ export async function renderTable() {
         tr.appendChild(tdProjectile);
 
         const tdCreated = document.createElement("td");
-        tdCreated.textContent = new Date(elem.stats?.timestamp * 1000).toLocaleString() ?? "";
+        tdCreated.textContent = new Date((elem.stats?.timestamp ?? 0) * 1000).toLocaleString();
         tr.appendChild(tdCreated);
         tbody.appendChild(tr)
 

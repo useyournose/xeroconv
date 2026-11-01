@@ -16,6 +16,7 @@ type HistogramData = number[];
 
 const newLegendClickHandler = function (e: ChartEvent, legendItem: LegendItem, legend: any) {
     const index = legendItem.datasetIndex;
+    if (index === undefined) return;
     const type = legend.chart.config.type;
 
     let ci = legend.chart;
@@ -32,7 +33,7 @@ const newLegendClickHandler = function (e: ChartEvent, legendItem: LegendItem, l
 function binData(data: HistogramData, binSize: number): { labels: string[]; counts: number[] } {
   const min = Math.min(...data);
   const max = Math.max(...data);
-  const bins = Math.ceil((max - min) / binSize);
+  const bins = Math.max(1, Math.ceil((max - min) / binSize));
   const counts = new Array(bins).fill(0);
   const labels = new Array(bins).fill("").map((_, i) => {
     const start = min + i * binSize;
@@ -41,8 +42,8 @@ function binData(data: HistogramData, binSize: number): { labels: string[]; coun
   });
 
   data.forEach(value => {
-    const index = Math.floor((value - min) / binSize);
-    counts[index]++;
+    const index = Math.min(Math.floor((value - min) / binSize), bins - 1);
+    counts[index] = (counts[index] ?? 0) + 1;
   });
 
   return { labels, counts };
@@ -364,7 +365,7 @@ export function renderKDEOverlay(canvasId:string, RawData:RawDataset[]): Chart |
           labels: {
             filter: (legendItem, chart) => {
               const ds = chart.datasets[legendItem.datasetIndex!];
-              return ds.type !== 'scatter' && !ds.label.endsWith(" - AVG");
+              return ds.type !== 'scatter' && !(ds.label ?? "").endsWith(" - AVG");
             },
             color: bulmaTextColor
           },

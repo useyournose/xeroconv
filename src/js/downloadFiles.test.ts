@@ -22,6 +22,6 @@ test('download test', () => {
   result.then((result) => {
     expect(messagespy).toHaveBeenCalledTimes(1);
     expect(logspy).toHaveBeenCalledTimes(1);
-    expect(logspy.mock.calls.at(0).toString()).toBe(testarg);
+    expect(logspy.mock.calls.at(0)?.toString()).toBe(testarg);
   })
 });

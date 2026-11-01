@@ -68,16 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!installButton) {
     return;
   }
+  const button = installButton;
 
   window.addEventListener("beforeinstallprompt", (event: Event) => {
     const beforeInstallEvent = event as BeforeInstallPromptEvent;
     event.preventDefault();
     installPrompt = beforeInstallEvent;
-    installButton.removeAttribute("hidden");
+    button.removeAttribute("hidden");
     //return false;
   });
 
-  installButton.addEventListener("click", async () => {
+  button.addEventListener("click", async () => {
     if (!installPrompt) {
       return;
     }
@@ -93,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function disableInAppInstallPrompt() {
     installPrompt = null;
-    installButton.setAttribute("hidden", "");
+    button.setAttribute("hidden", "");
   }
 
   document.querySelectorAll<HTMLElement>('.js-page-trigger').forEach((el) => {
@@ -234,6 +235,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
-
 
 

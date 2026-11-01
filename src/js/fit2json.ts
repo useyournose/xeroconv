@@ -80,7 +80,13 @@ export default async function fit2json(fileData:ArrayBuffer,ofilename:string):Pr
           speed_es: Math.round(es * 1000) / 1000 ,
           speed_sd: Math.round(sd * 1000) / 1000 ,
           projectile: grainWeight,
-          timestamp: normalizeUnixTimestamp(SessionData.timestamp?.getTime() ?? 0),
+          timestamp: normalizeUnixTimestamp(
+            SessionData.timestamp instanceof Date
+              ? SessionData.timestamp.getTime()
+              : typeof SessionData.timestamp === 'number'
+                ? SessionData.timestamp
+                : 0
+          ),
           timezone: 0
         } as SessionStats,
         units: {
@@ -93,12 +99,18 @@ export default async function fit2json(fileData:ArrayBuffer,ofilename:string):Pr
             shotnumber: row.shotNum ?? 0,
             velocity: row.shotSpeed ?? 0,
             energy: nnf(get_ke(row.shotSpeed ?? 0, grainWeight)),
-            timestamp: normalizeUnixTimestamp(row.timestamp?.getTime() ?? 0)
+            timestamp: normalizeUnixTimestamp(
+              row.timestamp instanceof Date
+                ? row.timestamp.getTime()
+                : typeof row.timestamp === 'number'
+                  ? row.timestamp
+                  : 0
+            )
         }))
       } as ShotSession)
     } catch(err) {
       console.error(err);
-      if (Object.hasOwn(err,'message')) {
+      if (err instanceof Error) {
         return reject(err.message)
       } else {
         return reject(err);

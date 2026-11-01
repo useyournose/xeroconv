@@ -6,13 +6,14 @@ import fs_to_ms from "../helper/fs_to_ms";
 export async function GetFiles():Promise<TFileInfoEntry[]>{
 
     const files:TFileInfoEntry[] = await db.files.toArray()
-    const result = await Promise.all(files.map(async file => {
+    await Promise.all(files.map(async file => {
+        if (file.id === undefined) return
         const stats = await db.stats.where('fileid').equals(file.id).first()
         file.stats = stats
 
-        if (file.stats.speed_es != file.stats.speed_max - file.stats.speed_min) {
-            console.log("spread " + file.stats.speed_es.toString() + " not matching, updating.")
-            file.stats.speed_es = Math.round((file.stats.speed_max - file.stats.speed_min) * 1000) / 1000
+        if (stats && stats.speed_es != stats.speed_max - stats.speed_min) {
+            console.log("spread " + stats.speed_es.toString() + " not matching, updating.")
+            stats.speed_es = Math.round((stats.speed_max - stats.speed_min) * 1000) / 1000
         }
 
     }))
@@ -52,15 +53,10 @@ export function bulmaColorRGBA(alpha = 1): string {
 }
 
 function convvelo(velocity: number, su: boolean, tu: boolean) {
-    if (su == tu) {
+    if (su === tu) {
         return velocity
     }
-    if (su == true && tu == false) {
-        return ms_to_fs(velocity)
-    }
-    if (su == false && tu == true) {
-        return fs_to_ms(velocity)
-    }
+    return su ? ms_to_fs(velocity) : fs_to_ms(velocity)
 }
 
 export async function GetCheckedShots(targetunits: boolean = false):Promise<RawDataset[]> {
@@ -68,8 +64,11 @@ export async function GetCheckedShots(targetunits: boolean = false):Promise<RawD
     const files = await db.files.where('checked').equals(1).toArray()
     
     const speeds = await Promise.all(files.map(async (file,ix,arr) => {
-        const shots = await db.shots.where('fileid').equals(file.id).toArray()
+        if (file.id === undefined) throw new Error(`File ${file.name} does not have an id`)
         const units = await db.units.where('fileid').equals(file.id).first()
+        if (!units) throw new Error(`Units for file ${file.id} were not found`)
+        if (file.checksum === undefined) throw new Error(`File ${file.id} does not have a checksum`)
+        const shots = await db.shots.where('fileid').equals(file.id).toArray()
         const velocities = shots.map(s => convvelo(s.velocity,units.velocity,targetunits ));
         speedDatasets.push(
             { 

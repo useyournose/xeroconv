@@ -147,7 +147,7 @@ export default function csv2json(fileData:ArrayBuffer|string,ofilename:string):P
       }
     } catch(err) {
       console.error("[rcsv2db]: " + err);
-      if (Object.hasOwn(err,'message')) {
+      if (err instanceof Error) {
         reject(err.message)
       } else {
         reject(err);
