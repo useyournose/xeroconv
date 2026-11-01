@@ -80,8 +80,5 @@
     "dexie": "4.4.7",
     "papaparse": "5.7.0",
     "xlsx": "file:vendor/xlsx-0.20.3.tgz"
-  },
-  "module": "src/index.ts",
-  "type": "module",
-  "private": true
+  }
 }
