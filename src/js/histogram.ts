@@ -3,8 +3,6 @@ import {ChartConfiguration, Colors, Legend, LegendElement, LegendItem, LegendOpt
 import {HistogramDatasetBinned, RawDataset, BinnedDataset, BinningResult } from "./_types"
 import { bulmaTextColor } from './helper/getComputedStyle';
 import { mean } from './helper/mean'
-import { stddev } from './helper/StandardDeviation'
-import { normalPDF } from './helper/NormalDistribution';
 import { kde } from './helper/KernelDensityEstimation';
 import { std } from './helper/SampleStandardDeviation';
 import { sturgesCount } from './helper/SturgesCount';
@@ -16,6 +14,7 @@ type HistogramData = number[];
 
 const newLegendClickHandler = function (e: ChartEvent, legendItem: LegendItem, legend: any) {
     const index = legendItem.datasetIndex;
+    if (index === undefined) return;
     const type = legend.chart.config.type;
 
     let ci = legend.chart;
@@ -32,7 +31,7 @@ const newLegendClickHandler = function (e: ChartEvent, legendItem: LegendItem, l
 function binData(data: HistogramData, binSize: number): { labels: string[]; counts: number[] } {
   const min = Math.min(...data);
   const max = Math.max(...data);
-  const bins = Math.ceil((max - min) / binSize);
+  const bins = Math.max(1, Math.ceil((max - min) / binSize));
   const counts = new Array(bins).fill(0);
   const labels = new Array(bins).fill("").map((_, i) => {
     const start = min + i * binSize;
@@ -41,8 +40,8 @@ function binData(data: HistogramData, binSize: number): { labels: string[]; coun
   });
 
   data.forEach(value => {
-    const index = Math.floor((value - min) / binSize);
-    counts[index]++;
+    const index = Math.min(Math.floor((value - min) / binSize), bins - 1);
+    counts[index] = (counts[index] ?? 0) + 1;
   });
 
   return { labels, counts };
@@ -239,55 +238,18 @@ export function renderKDEOverlay(canvasId:string, RawData:RawDataset[]): Chart |
   // Datasets sammeln
   const datasets: any[] = [];
 
-  RawData.forEach((s, idx) => {
+  RawData.forEach(s => {
     const mu = mean(s.values);
-    const sigma = stddev(s.values, mu);
 
-    // Histogramm
-    const binCount = 10;
-    const binWidth = (globalMax - globalMin) / binCount;
-    const bins = Array(binCount).fill(0);
-    s.values.forEach(v => {
-      const i = Math.min(Math.floor((v - globalMin) / binWidth), binCount - 1);
-      bins[i]++;
-    });
-    const binCenters = bins.map((_, i) => globalMin + (i + 0.5) * binWidth);
-
-    // Normalverteilung
-    const normalValues = xValues.map(x => normalPDF(x, mu, sigma));
-
-    // KDE
-    const h = 1.06 * sigma * Math.pow(s.values.length, -1 / 5);
-    //const kdeValues = kde(xValues, s.values, h);
+    // KDE values are probability densities, so each curve has an area of about 1
+    // regardless of the number of shots in its dataset.
     const kdeValues = kde(xValues, s.values, pooledh);
-
-    // Histogramm-Dataset
-    /*datasets.push({
-      type: "bar",
-      label: `${s.label} Histogramm`,
-      data: bins,
-      backgroundColor: s.color,
-      xAxisID: "xBins" + idx,
-      yAxisID: "y"
-    });*/
-
-    // Normalverteilung
-    /*datasets.push({
-      type: "line",
-      label: `${s.label} Normal`,
-      data: normalValues.map(v => v * s.values.length * binWidth),
-      borderColor: s.color,
-      fill: false,
-      tension: 0.2,
-      xAxisID: "xDensity",
-      yAxisID: "y"
-    });*/
 
     // KDE
     datasets.push({
       type: 'line',
       label: s.label, 
-      data: kdeValues.map(v => v * s.values.length * binWidth).map(value => value === 0 ? null : value),
+      data: kdeValues.map(value => value === 0 ? null : value),
       borderColor: s.color,
       backgroundColor: s.color + 'AA',
       fill: false,
@@ -298,7 +260,7 @@ export function renderKDEOverlay(canvasId:string, RawData:RawDataset[]): Chart |
       order: 1
     });
 
-    const maxY = Math.max(...kdeValues.flatMap(v => v * s.values.length * binWidth));
+    const maxY = Math.max(...kdeValues);
 
     // shots
     datasets.push({
@@ -354,7 +316,7 @@ export function renderKDEOverlay(canvasId:string, RawData:RawDataset[]): Chart |
           ticks: {color: bulmaTextColor}
         },
         y: {
-          title: { display: true, text: "Density", color: bulmaTextColor },
+          title: { display: true, text: "Probability density", color: bulmaTextColor },
           grid: {color: bulmaTextColor},
           ticks: {color: bulmaTextColor}
         }
@@ -364,7 +326,7 @@ export function renderKDEOverlay(canvasId:string, RawData:RawDataset[]): Chart |
           labels: {
             filter: (legendItem, chart) => {
               const ds = chart.datasets[legendItem.datasetIndex!];
-              return ds.type !== 'scatter' && !ds.label.endsWith(" - AVG");
+              return ds.type !== 'scatter' && !(ds.label ?? "").endsWith(" - AVG");
             },
             color: bulmaTextColor
           },

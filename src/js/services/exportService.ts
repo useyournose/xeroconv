@@ -2,15 +2,21 @@ import db from "../db";
 import { ShotEntry, FileInfoEntry, SessionStatsEntry, SessionUnitsEntry} from "../_types"
 
 export async function GetFile(fileid:number):Promise<FileInfoEntry> {
-  return await db.files.get(fileid)
+  const file = await db.files.get(fileid)
+  if (!file) throw new Error(`File ${fileid} was not found`)
+  return file
 }
 
 export async function GetStats(fileid: number):Promise<SessionStatsEntry> {
-  return await db.stats.where('fileid').equals(fileid).first()
+  const stats = await db.stats.where('fileid').equals(fileid).first()
+  if (!stats) throw new Error(`Stats for file ${fileid} were not found`)
+  return stats
 }
 
 export async function GetUnits(fileid: number):Promise<SessionUnitsEntry> {
-  return await db.units.where('fileid').equals(fileid).first()
+  const units = await db.units.where('fileid').equals(fileid).first()
+  if (!units) throw new Error(`Units for file ${fileid} were not found`)
+  return units
 }
 
 export async function GetShots(fileid: number):Promise<ShotEntry[]> {

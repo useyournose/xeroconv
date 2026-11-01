@@ -3,11 +3,13 @@ import { Shot, SessionStats,SessionUnits, SessionUnitsEntry, FileInfoEntry, Sess
 import { normalizeUnixTimestamp } from "../helper/normalizeUnixTimestamp";
 
 export async function AddFile(name: string, title: string, deviceid: string, checksum?: string):Promise<number> {
-  if (await db.files.where('checksum').equals(checksum).count() == 0 ) {
-    return await db.files.add({name: name, title: title, deviceid: deviceid, exported: 0, added: Date.now(), checked: 0, checksum: checksum} as FileInfoEntry)
-  } else {
+  if (checksum !== undefined && await db.files.where('checksum').equals(checksum).count() > 0) {
     return Promise.reject("File with the same checksum already exists in IndexedDB")
   }
+
+  const fileid = await db.files.add({name: name, title: title, deviceid: deviceid, exported: 0, added: Date.now(), checked: 0, checksum: checksum} as FileInfoEntry)
+  if (fileid === undefined) throw new Error("IndexedDB did not return an id for the added file")
+  return fileid
 }
 
 export async function AddStats(

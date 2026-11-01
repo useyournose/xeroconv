@@ -1,20 +1,6 @@
-import {test,expect, mock, spyOn, afterEach, beforeAll, setSystemTime} from 'bun:test';
+import {test,expect, mock, beforeAll, setSystemTime} from 'bun:test';
 import { json2Labradar } from './json2labradar';
-import * as fs from 'fs';
-import * as download from './download';
-import * as Messages from './messages';
-import { arrayBuffer } from 'stream/consumers';
 import { ShotSession } from './_types';
-
-async function readFileAsync(filePath:string) {
-  try {
-      const data = await fs.promises.readFile(filePath, null);
-      return new Uint8Array(data)
-  } catch (error) {
-      console.error('Error reading file:', error.message);
-      return null;
-  }
-}
 
 beforeAll(() => {
   setSystemTime(new Date("2024-01-01T00:00:00.000B"));

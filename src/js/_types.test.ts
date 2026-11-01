@@ -10,12 +10,12 @@ test('imperial unit', () => {
 });
 
 test('imperial velocity', () => {
-    expect(Unit_Velocity.imperial).toBe('fps')
+    expect(Unit_Velocity.imperial.toString()).toBe('fps')
 })
 test('imperial velocity from system', () => {
-    expect(Unit_Velocity[Unit_System[1] as keyof typeof Unit_Velocity]).toBe('fps')
+    expect(Unit_Velocity[Unit_System[1] as keyof typeof Unit_Velocity].toString()).toBe('fps')
 })
 
 test('metric velocity', () => {
-    expect(Unit_Velocity[Unit_System[0] as keyof typeof Unit_Velocity]).toBe('m/s')
+    expect(Unit_Velocity[Unit_System[0] as keyof typeof Unit_Velocity].toString()).toBe('m/s')
 })

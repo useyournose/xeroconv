@@ -36,7 +36,7 @@ async function cacheFirstWithRefresh(request:Request) {
 
 
 // Try network first and fallback on cache
-async function networkRevalidateAndCache(ev:FetchEvent) {
+async function networkRevalidateAndCache(ev:FetchEvent): Promise<Response> {
   try {
     const fetchResponse = await fetch(ev.request);
     if (fetchResponse.ok) {
@@ -47,22 +47,17 @@ async function networkRevalidateAndCache(ev:FetchEvent) {
       return fetchResponse;
     } else {
       const cacheResponse = await caches.match(ev.request);
-      return cacheResponse;
+      return cacheResponse ?? fetchResponse;
     }
   } catch (err) {
-    console.log("Could not return cache or fetch NF", err);
+    const cacheResponse = await caches.match(ev.request);
+    if (cacheResponse) return cacheResponse
+    throw err
   }
 }
 
 self.addEventListener("fetch", (ev) => {
-  ev.respondWith((async () => {
-    try {
-      const response = await networkRevalidateAndCache(ev);
-      return response;
-    } catch (err) {
-      console.log("Could not return cache or fetch NF", err);
-    }
-  })());
+  ev.respondWith(networkRevalidateAndCache(ev));
 })
 
 /*self.addEventListener("fetch", async (event) => {

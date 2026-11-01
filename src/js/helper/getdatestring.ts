@@ -84,7 +84,9 @@ export default function getdatestring(datestring:string):[string,string,number] 
         cultures = culturearray.slice(0)
 
         while (validconversion === false && cultures.length > 0) {
-            culture = cultures.pop()
+            const nextCulture = cultures.pop()
+            if (nextCulture === undefined) break
+            culture = nextCulture
             dayjs.locale(culture)
 
             //validate culture
@@ -113,7 +115,9 @@ export default function getdatestring(datestring:string):[string,string,number] 
         phase = 2
         cultures = culturearray.slice(0)
         while (validconversion == false && cultures.length > 0) {
-            culture = cultures.pop()
+            const nextCulture = cultures.pop()
+            if (nextCulture === undefined) break
+            culture = nextCulture
             //console.log(culture)
             validconversion = dayjs(datestring, [STRING_US, STRING_EU], culture).isValid()
             if (validconversion) {

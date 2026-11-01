@@ -40,7 +40,7 @@ export default function csv2json(fileData:ArrayBuffer|string,ofilename:string):P
         const shots = Papa.parse(shotlist as string,{newline:"\n",skipEmtpyLines:true,dynamicTyping:true} as Papa.ParseConfig)
         let dump:string = "";
         let stats:ParseResult<any>;
-        let dt;
+        let dt: { data: any[] };
         let filename;
         dump = shots.data.pop();
         if (dump !== "") {shots.data.push()};
@@ -161,7 +161,7 @@ export default function csv2json(fileData:ArrayBuffer|string,ofilename:string):P
     }
     } catch(err) {
       console.error("[csv2db]: " + err);
-      if (Object.hasOwn(err,'message')) {
+      if (err instanceof Error) {
         reject(err.message)
       } else {
         reject(err);

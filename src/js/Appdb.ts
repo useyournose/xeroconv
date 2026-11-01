@@ -9,7 +9,7 @@ export class AppDB extends Dexie {
   units!: EntityTable<SessionUnitsEntry>;
   shots!: EntityTable<ShotEntry>;
   opts?: {indexedDB?: IDBFactory; IDBKeyRange?: any;}
-  constructor(name?: string, options?: DexieOptions) {
+  constructor(name: string = "xeroconv-db", options?: DexieOptions) {
     super(name, options);
     this.version(1).stores({
         files: '++id, name, checked, checksum',
