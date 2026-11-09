@@ -73,7 +73,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "7.3.1",
-    "@garmin/fitsdk": "21.218.0",
+    "@garmin/fitsdk": "21.221.0",
     "bulma": "1.0.4",
     "chart.js": "4.6.1",
     "dayjs": "1.11.23",
